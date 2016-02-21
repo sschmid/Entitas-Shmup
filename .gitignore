@@ -17,3 +17,6 @@ Temp
 obj
 *.userprefs
 test-results
+
+# Custom
+Entitas Schmup.sln
