@@ -1,0 +1,19 @@
+# Windows
+Thumbs.db
+
+# Mac
+.DS_Store
+
+# Unity
+Library
+Temp
+*.unitypackage
+*-CSharp-vs.csproj
+*-CSharp.csproj
+*-CSharp-Editor.csproj
+*-CSharp-Editor-vs.csproj
+
+# Xamarin
+obj
+*.userprefs
+test-results
