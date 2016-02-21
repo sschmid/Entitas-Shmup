@@ -5,8 +5,7 @@ public class ProcessMoveInputSystem : IReactiveSystem, ISetPool {
 
     public TriggerOnEvent trigger { get { return InputMatcher.MoveInput.OnEntityAdded();}}
 
-    // TODO
-    readonly Group _todoGroup;
+    readonly Group _players;
 
     Pool _inputPool;
 
@@ -15,14 +14,17 @@ public class ProcessMoveInputSystem : IReactiveSystem, ISetPool {
     }
 
     public ProcessMoveInputSystem(Pool corePool) {
-        _todoGroup = corePool.GetGroup(CoreMatcher.Position);
+        _players = corePool.GetGroup(Matcher.AllOf(CoreMatcher.Player, CoreMatcher.Position));
     }
 
     public void Execute(List<Entity> entities) {
         var input = entities.SingleEntity();
+        var ownerId = input.inputOwner.playerId;
         
-        foreach (var e in _todoGroup.GetEntities()) {
-            e.ReplacePosition(e.position.value + input.moveInput.direction);
+        foreach (var e in _players.GetEntities()) {
+            if (e.player.id == ownerId) {
+                e.ReplaceVelocity(input.moveInput.direction);
+            }
         }
 
         _inputPool.DestroyEntity(input);

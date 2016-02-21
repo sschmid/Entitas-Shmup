@@ -12,7 +12,8 @@ public class CreatePlayerSystem : IInitializeSystem, ISetPool {
     public void Initialize() {
         _pool.CreateEntity()
             .AddResource(Res.Spaceship)
-            .AddPosition(Vector3.zero);
+            .AddPosition(Vector3.zero)
+            .AddPlayer("Player1");
     }
 }
 

@@ -2,6 +2,7 @@
 using UnityEngine;
 
 [Core, Bullets]
-public class PositionComponent : IComponent {
+public class VelocityComponent : IComponent {
     public Vector3 value;
 }
+

@@ -5,8 +5,12 @@ public class GameController : MonoBehaviour {
 
     Systems _systems;
 
+    void Awake() {
+        Application.targetFrameRate = 60;
+    }
+
     void Start() {
-        _systems = createSystems(Pools.core, Pools.input);
+        _systems = createSystems(Pools.core, Pools.input, Pools.bullets);
         _systems.Initialize();
     }
 
@@ -14,7 +18,7 @@ public class GameController : MonoBehaviour {
         _systems.Execute();
     }
 
-    Systems createSystems(Pool corePool, Pool inputPool) {
+    Systems createSystems(Pool corePool, Pool inputPool, Pool bulletsPool) {
         #if (!ENTITAS_DISABLE_VISUAL_DEBUGGING && UNITY_EDITOR)
         return new Entitas.Unity.VisualDebugging.DebugSystems()
         #else
@@ -24,9 +28,22 @@ public class GameController : MonoBehaviour {
         // Initialize
         .Add(corePool.CreateSystem<CreatePlayerSystem>())
 
-        // Update
+        // Input
         .Add(inputPool.CreateSystem(new ProcessMoveInputSystem(corePool)))
+        .Add(inputPool.CreateSystem(new ProcessShootInputSystem(corePool, bulletsPool)))
+
+        // Update core
+        .Add(corePool.CreateSystem<VelocitySystem>())
+
+        // Update bullets
+        .Add(bulletsPool.CreateSystem<VelocitySystem>())
+
+        // Render core
         .Add(corePool.CreateSystem<AddViewSystem>())
-        .Add(corePool.CreateSystem<RenderPositionSystem>());
+        .Add(corePool.CreateSystem<RenderPositionSystem>())
+
+        // Render bullets
+        .Add(bulletsPool.CreateSystem<AddViewSystem>())
+        .Add(bulletsPool.CreateSystem<RenderPositionSystem>());
     }
 }

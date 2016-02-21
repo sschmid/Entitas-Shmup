@@ -2,30 +2,46 @@ using Entitas;
 
 namespace Entitas {
     public partial class Entity {
-        public PositionComponent position { get { return (PositionComponent)GetComponent(CoreComponentIds.Position); } }
+        public PositionComponent position { get { return (PositionComponent)GetComponent(BulletsComponentIds.Position); } }
 
-        public bool hasPosition { get { return HasComponent(CoreComponentIds.Position); } }
+        public bool hasPosition { get { return HasComponent(BulletsComponentIds.Position); } }
 
         public Entity AddPosition(UnityEngine.Vector3 newValue) {
-            var componentPool = GetComponentPool(CoreComponentIds.Position);
+            var componentPool = GetComponentPool(BulletsComponentIds.Position);
             var component = (PositionComponent)(componentPool.Count > 0 ? componentPool.Pop() : new PositionComponent());
             component.value = newValue;
-            return AddComponent(CoreComponentIds.Position, component);
+            return AddComponent(BulletsComponentIds.Position, component);
         }
 
         public Entity ReplacePosition(UnityEngine.Vector3 newValue) {
-            var componentPool = GetComponentPool(CoreComponentIds.Position);
+            var componentPool = GetComponentPool(BulletsComponentIds.Position);
             var component = (PositionComponent)(componentPool.Count > 0 ? componentPool.Pop() : new PositionComponent());
             component.value = newValue;
-            ReplaceComponent(CoreComponentIds.Position, component);
+            ReplaceComponent(BulletsComponentIds.Position, component);
             return this;
         }
 
         public Entity RemovePosition() {
-            return RemoveComponent(CoreComponentIds.Position);;
+            return RemoveComponent(BulletsComponentIds.Position);;
         }
     }
 }
+
+    public partial class BulletsMatcher {
+        static IMatcher _matcherPosition;
+
+        public static IMatcher Position {
+            get {
+                if (_matcherPosition == null) {
+                    var matcher = (Matcher)Matcher.AllOf(BulletsComponentIds.Position);
+                    matcher.componentNames = BulletsComponentIds.componentNames;
+                    _matcherPosition = matcher;
+                }
+
+                return _matcherPosition;
+            }
+        }
+    }
 
     public partial class CoreMatcher {
         static IMatcher _matcherPosition;
@@ -33,8 +49,8 @@ namespace Entitas {
         public static IMatcher Position {
             get {
                 if (_matcherPosition == null) {
-                    var matcher = (Matcher)Matcher.AllOf(CoreComponentIds.Position);
-                    matcher.componentNames = CoreComponentIds.componentNames;
+                    var matcher = (Matcher)Matcher.AllOf(BulletsComponentIds.Position);
+                    matcher.componentNames = BulletsComponentIds.componentNames;
                     _matcherPosition = matcher;
                 }
 

@@ -1,9 +1,9 @@
-public static class CoreComponentIds {
+public static class BulletsComponentIds {
     public const int Position = 0;
     public const int Resource = 1;
     public const int Velocity = 2;
     public const int View = 3;
-    public const int Player = 4;
+    public const int Bullet = 4;
 
     public const int TotalComponents = 5;
 
@@ -12,7 +12,7 @@ public static class CoreComponentIds {
         "Resource",
         "Velocity",
         "View",
-        "Player"
+        "Bullet"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -20,6 +20,6 @@ public static class CoreComponentIds {
         typeof(ResourceComponent),
         typeof(VelocityComponent),
         typeof(ViewComponent),
-        typeof(PlayerComponent)
+        typeof(BulletComponent)
     };
 }
