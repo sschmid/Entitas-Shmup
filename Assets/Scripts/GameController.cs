@@ -32,18 +32,21 @@ public class GameController : MonoBehaviour {
         .Add(inputPool.CreateSystem(new ProcessMoveInputSystem(corePool)))
         .Add(inputPool.CreateSystem(new ProcessShootInputSystem(corePool, bulletsPool)))
 
-        // Update core
+        // Core
         .Add(corePool.CreateSystem<VelocitySystem>())
-
-        // Update bullets
-        .Add(bulletsPool.CreateSystem<VelocitySystem>())
-
-        // Render core
         .Add(corePool.CreateSystem<AddViewSystem>())
         .Add(corePool.CreateSystem<RenderPositionSystem>())
 
-        // Render bullets
+        .Add(corePool.CreateSystem<DestroyViewSystem>())
+        .Add(corePool.CreateSystem<DestroySystem>())
+
+        // Bullets
+        .Add(bulletsPool.CreateSystem<VelocitySystem>())
+        .Add(bulletsPool.CreateSystem<DestroyBulletSystem>())
         .Add(bulletsPool.CreateSystem<AddViewSystem>())
-        .Add(bulletsPool.CreateSystem<RenderPositionSystem>());
+        .Add(bulletsPool.CreateSystem<RenderPositionSystem>())
+        
+        .Add(bulletsPool.CreateSystem<DestroyViewSystem>())
+        .Add(bulletsPool.CreateSystem<DestroySystem>());
     }
 }
