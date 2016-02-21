@@ -1,7 +1,7 @@
 ﻿using Entitas;
 using NUnit.Framework;
 
-public class AddViewSystemTest {
+public class AddViewSystemTests {
 
     [Test]
     public void AddsView()

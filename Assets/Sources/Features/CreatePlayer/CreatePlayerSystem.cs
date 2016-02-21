@@ -1,4 +1,5 @@
 ﻿using Entitas;
+using UnityEngine;
 
 public class CreatePlayerSystem : IInitializeSystem, ISetPool {
 
@@ -10,7 +11,8 @@ public class CreatePlayerSystem : IInitializeSystem, ISetPool {
 
     public void Initialize() {
         _pool.CreateEntity()
-            .AddResource(Res.Spaceship);
+            .AddResource(Res.Spaceship)
+            .AddPosition(Vector3.zero);
     }
 }
 
