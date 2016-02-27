@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Entitas;
 
 public class ProcessCollisionSystem : IReactiveSystem, ISetPool {
@@ -14,7 +15,8 @@ public class ProcessCollisionSystem : IReactiveSystem, ISetPool {
     public void Execute(List<Entity> entities) {
         foreach (var e in entities) {
             e.collision.bullet.flagDestroy = true;
-            e.collision.target.flagDestroy = true;
+            var newHealth = Math.Max(0, e.collision.target.health.value - e.collision.bullet.damage.value);
+            e.collision.target.ReplaceHealth(newHealth);
             _pool.DestroyEntity(e);
         }
     }

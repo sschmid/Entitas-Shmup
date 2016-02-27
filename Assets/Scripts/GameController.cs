@@ -43,6 +43,9 @@ public class GameController : MonoBehaviour {
 
             // Update
             .Add(corePool.CreateSystem<VelocitySystem>())
+            .Add(corePool.CreateSystem<CheckHealthSystem>())
+
+            // Render
             .Add(corePool.CreateSystem<AddViewSystem>())
             .Add(corePool.CreateSystem<RenderPositionSystem>())
 

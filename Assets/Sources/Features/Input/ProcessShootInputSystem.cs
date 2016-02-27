@@ -27,11 +27,7 @@ public class ProcessShootInputSystem : IReactiveSystem, ISetPool {
 
         foreach (var e in _players.GetEntities()) {
             if (e.player.id == ownerId) {
-                _bulletsPool.CreateEntity()
-                    .IsBullet(true)
-                    .AddPosition(e.position.value)
-                    .AddVelocity(new Vector3(0, 0.3f, 0))
-                    .AddGameObjectObjectPool(_bulletsObjectPool);
+                _bulletsPool.CreateBullet(e.position.value, new Vector3(0, 0.3f, 0), _bulletsObjectPool);
             }
         }
 

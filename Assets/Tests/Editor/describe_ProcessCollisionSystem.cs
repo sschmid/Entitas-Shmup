@@ -1,34 +1,62 @@
 ﻿using NSpec;
-using UnityEngine;
 using Entitas;
 
 class describe_ProcessCollisionSystem : nspec {
 
     void when_executing() {
 
+        Pool corePool = null;
+        Pool inputPool = null;
+        Pool bulletPool = null;
+        IExecuteSystem system = null;
 
-        it["destroys both entities in CollisionComponent"] = () => {
+        before = () => {
+            corePool = new Pool(CoreComponentIds.TotalComponents);
+            inputPool = new Pool(InputComponentIds.TotalComponents);
+            bulletPool = new Pool(BulletsComponentIds.TotalComponents);
+            system = (IExecuteSystem)inputPool.CreateSystem<ProcessCollisionSystem>();
+        };
+
+        it["destroys bullet and damages target in CollisionComponent"] = () => {
             
             // given
-            var corePool = new Pool(CoreComponentIds.TotalComponents);
-            var inputPool = new Pool(InputComponentIds.TotalComponents);
-            var bulletPool = new Pool(BulletsComponentIds.TotalComponents);
-            var system = (IExecuteSystem)inputPool.CreateSystem<ProcessCollisionSystem>();
+            var bullet = bulletPool.CreateEntity()
+                .AddDamage(5);
 
-            var bullet = bulletPool.CreateEntity();
-            var enemy = corePool.CreateEntity();
+            var enemy = corePool.CreateEntity()
+                .AddHealth(10);
 
             var collision = inputPool.CreateEntity()
-            .AddCollision(bullet, enemy);
+                .AddCollision(bullet, enemy);
 
             // when
             system.Execute();
 
             // then
             bullet.flagDestroy.should_be_true();
-            enemy.flagDestroy.should_be_true();
+            enemy.flagDestroy.should_be_false();
+            enemy.health.value.should_be(5);
 
             inputPool.GetEntities(InputMatcher.Collision).Length.should_be(0);
+        };
+
+        it["doesn't set target health less than 0"] = () => {
+            
+            // given
+            var bullet = bulletPool.CreateEntity()
+                .AddDamage(20);
+
+            var enemy = corePool.CreateEntity()
+                .AddHealth(10);
+
+            var collision = inputPool.CreateEntity()
+                .AddCollision(bullet, enemy);
+
+            // when
+            system.Execute();
+
+            // then
+            enemy.health.value.should_be(0);
         };
     }
 }

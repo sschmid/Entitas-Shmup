@@ -10,9 +10,7 @@ public class CreateEnemySystem : IInitializeSystem, ISetPool {
     }
 
     public void Initialize() {
-        _pool.CreateEntity()
-            .AddResource(Res.Enemy0)
-            .AddPosition(new Vector3(0f, 3f, 0f));
+        _pool.CreateEnemy0(new Vector3(0f, 3f, 0f));
     }
 }
 
