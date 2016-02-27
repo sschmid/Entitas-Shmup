@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using UnityEngine;
 
+#if !ENTITAS_FAST_AND_UNSAFE
 public class DestroyViewSystemTests {
 
     [Test]
@@ -47,3 +48,4 @@ public class DestroyViewSystemTests {
     }
 }
 
+#endif

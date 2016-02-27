@@ -1,7 +1,7 @@
 ﻿using Entitas;
 using NUnit.Framework;
 using UnityEngine;
-
+#if !ENTITAS_FAST_AND_UNSAFE
 public class AddViewFromObjectPoolSystemTests {
 
 
@@ -71,3 +71,4 @@ public class AddViewFromObjectPoolSystemTests {
         Assert.IsTrue(entity.owners.Contains(newLink));
     }
 }
+#endif
