@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour {
     }
 
     void Start() {
-        _systems = createSystems(Pools.core, Pools.input, Pools.bullets);
+        _systems = createAllSystems(Pools.core, Pools.input, Pools.bullets);
         _systems.Initialize();
     }
 
@@ -18,35 +18,51 @@ public class GameController : MonoBehaviour {
         _systems.Execute();
     }
 
-    Systems createSystems(Pool corePool, Pool inputPool, Pool bulletsPool) {
-        #if (!ENTITAS_DISABLE_VISUAL_DEBUGGING && UNITY_EDITOR)
-        return new Entitas.Unity.VisualDebugging.DebugSystems()
-        #else
-        return new Systems()
-        #endif
+    Systems createAllSystems(Pool corePool, Pool inputPool, Pool bulletsPool) {
+        return new Feature("Systems")
+            .Add(createCoreSystem(corePool))
+            .Add(createInputSystem(inputPool, corePool, bulletsPool))
+            .Add(createBulletsSystem(bulletsPool));
+    }
 
-        // Initialize
-        .Add(corePool.CreateSystem<CreatePlayerSystem>())
+    Systems createCoreSystem(Pool corePool) {
+        return new Feature(corePool.metaData.poolName + " Systems")
 
-        // Input
-        .Add(inputPool.CreateSystem(new ProcessMoveInputSystem(corePool)))
-        .Add(inputPool.CreateSystem(new ProcessShootInputSystem(corePool, bulletsPool)))
+            // Initialize
+            .Add(corePool.CreateSystem<CreatePlayerSystem>())
 
-        // Core
-        .Add(corePool.CreateSystem<VelocitySystem>())
-        .Add(corePool.CreateSystem<AddViewSystem>())
-        .Add(corePool.CreateSystem<RenderPositionSystem>())
+            // Update
+            .Add(corePool.CreateSystem<VelocitySystem>())
+            .Add(corePool.CreateSystem<AddViewSystem>())
+            .Add(corePool.CreateSystem<RenderPositionSystem>())
 
-        .Add(corePool.CreateSystem<DestroyViewSystem>())
-        .Add(corePool.CreateSystem<DestroySystem>())
+            // Destroy
+            .Add(corePool.CreateSystem<DestroyViewSystem>())
+            .Add(corePool.CreateSystem<DestroySystem>());
+    }
+    
+    Systems createInputSystem(Pool inputPool, Pool corePool, Pool bulletsPool) {
+        return new Feature(inputPool.metaData.poolName + " Systems")
 
-        // Bullets
-        .Add(bulletsPool.CreateSystem<VelocitySystem>())
-        .Add(bulletsPool.CreateSystem<DestroyBulletSystem>())
-        .Add(bulletsPool.CreateSystem<AddViewSystem>())
-        .Add(bulletsPool.CreateSystem<RenderPositionSystem>())
-        
-        .Add(bulletsPool.CreateSystem<DestroyViewSystem>())
-        .Add(bulletsPool.CreateSystem<DestroySystem>());
+            // Update
+            .Add(inputPool.CreateSystem(new ProcessMoveInputSystem(corePool)))
+            .Add(inputPool.CreateSystem(new ProcessShootInputSystem(corePool, bulletsPool)));
+    }
+
+    Systems createBulletsSystem(Pool bulletsPool) {
+        return new Feature(bulletsPool.metaData.poolName + " Systems")
+
+            // Update
+            .Add(bulletsPool.CreateSystem<VelocitySystem>())
+            .Add(bulletsPool.CreateSystem<DestroyBulletOutOfScreenSystem>())
+
+            // Render
+            .Add(bulletsPool.CreateSystem<AddViewFromObjectPoolSystem>())
+            .Add(bulletsPool.CreateSystem<RenderPositionSystem>())
+
+            // Destroy
+            .Add(bulletsPool.CreateSystem<DestroyViewSystem>())
+            .Add(bulletsPool.CreateSystem<DestroySystem>());
     }
 }
+

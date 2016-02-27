@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Entitas;
-using UnityEngine;
 
 public class DestroyViewSystem : IReactiveSystem, IEnsureComponents {
     public TriggerOnEvent trigger { get { return CoreMatcher.Destroy.OnEntityAdded(); } }
@@ -9,7 +8,13 @@ public class DestroyViewSystem : IReactiveSystem, IEnsureComponents {
 
     public void Execute(List<Entity> entities) {
         foreach (var e in entities) {
-            Object.Destroy(e.view.gameObject);
+            if (e.hasGameObjectObjectPool) {
+                var gameObject = e.view.gameObject;
+                gameObject.SetActive(false);
+                e.gameObjectObjectPool.pool.Push(gameObject);
+            } else {
+                Assets.Destroy(e.view.gameObject);
+            }
         }
     }
 }

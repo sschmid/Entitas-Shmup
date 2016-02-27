@@ -21,7 +21,7 @@ public class describe_ProcessShootInputSystem : nspec {
                 .AddPosition(new Vector3(1, 1, 1))
                 .AddPlayer("Player1");
 
-            var player2 = corePool.CreateEntity()
+            corePool.CreateEntity()
                 .AddPosition(new Vector3(2, 2, 2))
                 .AddPlayer("Player2");
 
@@ -36,7 +36,7 @@ public class describe_ProcessShootInputSystem : nspec {
             var bullet = bulletsPool.GetEntities(BulletsMatcher.Bullet).SingleEntity();
             bullet.should_not_be_null();
             bullet.position.value.should_be(player1.position.value);
-            bullet.resource.name.should_be(Res.Bullet);
+            bullet.gameObjectObjectPool.pool.should_not_be_null();
             bullet.hasVelocity.should_be_true();
 
             inputPool.GetEntities(InputMatcher.ShootInput).Length.should_be(0);

@@ -14,7 +14,7 @@ class describe_DestroyBulletsSystem : nspec {
                 .IsBullet(true)
                 .AddPosition(Vector3.one);
 
-            var system = (IExecuteSystem)pool.CreateSystem<DestroyBulletSystem>();
+            var system = (IExecuteSystem)pool.CreateSystem<DestroyBulletOutOfScreenSystem>();
 
             system.Execute();
             bullet.flagDestroy.should_be_false();

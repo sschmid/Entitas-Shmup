@@ -1,6 +1,6 @@
 ﻿using Entitas;
 
-public class DestroyBulletSystem : IExecuteSystem, ISetPool {
+public class DestroyBulletOutOfScreenSystem : IExecuteSystem, ISetPool {
 
     Group _bullets;
 
