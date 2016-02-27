@@ -20,16 +20,26 @@ public class GameController : MonoBehaviour {
 
     Systems createAllSystems(Pool corePool, Pool inputPool, Pool bulletsPool) {
         return new Feature("Systems")
-            .Add(createCoreSystem(corePool))
             .Add(createInputSystem(inputPool, corePool, bulletsPool))
+            .Add(createCoreSystem(corePool))
             .Add(createBulletsSystem(bulletsPool));
     }
 
-    Systems createCoreSystem(Pool corePool) {
+    static Systems createInputSystem(Pool inputPool, Pool corePool, Pool bulletsPool) {
+        return new Feature(inputPool.metaData.poolName + " Systems")
+
+            // Update
+            .Add(inputPool.CreateSystem(new ProcessMoveInputSystem(corePool)))
+            .Add(inputPool.CreateSystem(new ProcessShootInputSystem(corePool, bulletsPool)))
+            .Add(inputPool.CreateSystem<ProcessCollisionSystem>());
+    }
+
+    static Systems createCoreSystem(Pool corePool) {
         return new Feature(corePool.metaData.poolName + " Systems")
 
             // Initialize
             .Add(corePool.CreateSystem<CreatePlayerSystem>())
+            .Add(corePool.CreateSystem<CreateEnemySystem>())
 
             // Update
             .Add(corePool.CreateSystem<VelocitySystem>())
@@ -40,16 +50,8 @@ public class GameController : MonoBehaviour {
             .Add(corePool.CreateSystem<DestroyViewSystem>())
             .Add(corePool.CreateSystem<DestroySystem>());
     }
-    
-    Systems createInputSystem(Pool inputPool, Pool corePool, Pool bulletsPool) {
-        return new Feature(inputPool.metaData.poolName + " Systems")
 
-            // Update
-            .Add(inputPool.CreateSystem(new ProcessMoveInputSystem(corePool)))
-            .Add(inputPool.CreateSystem(new ProcessShootInputSystem(corePool, bulletsPool)));
-    }
-
-    Systems createBulletsSystem(Pool bulletsPool) {
+    static Systems createBulletsSystem(Pool bulletsPool) {
         return new Feature(bulletsPool.metaData.poolName + " Systems")
 
             // Update

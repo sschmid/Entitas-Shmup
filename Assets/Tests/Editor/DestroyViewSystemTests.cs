@@ -33,6 +33,8 @@ public class DestroyViewSystemTests {
             .AddGameObjectObjectPool(objectPool)
             .FlagDestroy(true);
 
+        gameObject.AddComponent<EntityLink>().Link(entity, pool);
+
         // when 
         system.Execute();
 
@@ -40,6 +42,8 @@ public class DestroyViewSystemTests {
         Assert.IsFalse(gameObject == null);
         Assert.IsFalse(gameObject.activeSelf);
         Assert.AreSame(gameObject, entity.gameObjectObjectPool.pool.Get());
+       
+        Assert.AreEqual(2, entity.owners.Count);
     }
 }
 

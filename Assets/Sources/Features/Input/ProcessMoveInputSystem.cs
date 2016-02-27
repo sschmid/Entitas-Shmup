@@ -7,6 +7,8 @@ public class ProcessMoveInputSystem : IReactiveSystem, ISetPool {
 
     readonly Group _players;
 
+    public const float SPEED = 0.3f;
+
     Pool _inputPool;
 
     public void SetPool(Pool pool) {
@@ -23,7 +25,9 @@ public class ProcessMoveInputSystem : IReactiveSystem, ISetPool {
         
         foreach (var e in _players.GetEntities()) {
             if (e.player.id == ownerId) {
-                e.ReplaceVelocity(input.moveInput.direction);
+
+                // TODO Player speed should be configurable
+                e.ReplaceVelocity(input.moveInput.direction.normalized * SPEED);
             }
         }
 

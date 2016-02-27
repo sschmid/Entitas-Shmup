@@ -30,7 +30,7 @@ public class ProcessShootInputSystem : IReactiveSystem, ISetPool {
                 _bulletsPool.CreateEntity()
                     .IsBullet(true)
                     .AddPosition(e.position.value)
-                    .AddVelocity(new Vector3(0, 1f, 0))
+                    .AddVelocity(new Vector3(0, 0.3f, 0))
                     .AddGameObjectObjectPool(_bulletsObjectPool);
             }
         }

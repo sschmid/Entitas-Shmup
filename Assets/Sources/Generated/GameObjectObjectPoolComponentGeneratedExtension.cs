@@ -42,3 +42,19 @@ namespace Entitas {
             }
         }
     }
+
+    public partial class CoreMatcher {
+        static IMatcher _matcherGameObjectObjectPool;
+
+        public static IMatcher GameObjectObjectPool {
+            get {
+                if (_matcherGameObjectObjectPool == null) {
+                    var matcher = (Matcher)Matcher.AllOf(BulletsComponentIds.GameObjectObjectPool);
+                    matcher.componentNames = BulletsComponentIds.componentNames;
+                    _matcherGameObjectObjectPool = matcher;
+                }
+
+                return _matcherGameObjectObjectPool;
+            }
+        }
+    }

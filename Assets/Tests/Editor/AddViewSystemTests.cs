@@ -19,5 +19,9 @@ public class AddViewSystemTests {
         Assert.IsTrue(entity.hasView);
         Assert.IsNotNull(entity.view.gameObject);
         Assert.AreEqual(resourceName + "(Clone)", entity.view.gameObject.name);
+
+        var link = entity.view.gameObject.GetComponent<EntityLink>();
+        Assert.AreSame(entity, link.entity);
+        Assert.AreSame(pool, link.pool);
     }
 }

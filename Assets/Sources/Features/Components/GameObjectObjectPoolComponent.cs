@@ -1,7 +1,7 @@
 ﻿using Entitas;
 using UnityEngine;
 
-[Bullets]
+[Core, Bullets]
 public class GameObjectObjectPoolComponent : IComponent {
     public ObjectPool<GameObject> pool;
 }

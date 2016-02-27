@@ -16,7 +16,7 @@ public class describe_ProcessMoveInputSystem : nspec {
 
             var player1 = corePool.CreateEntity()
                 .AddPosition(Vector3.one)
-                .AddVelocity(new Vector3(2, 2, 2))
+                .AddVelocity(new Vector3(2f, 2f, 2f))
                 .AddPlayer("Player1");
 
             var player2 = corePool.CreateEntity()
@@ -24,16 +24,18 @@ public class describe_ProcessMoveInputSystem : nspec {
                 .AddVelocity(new Vector3(2, 2, 2))
                 .AddPlayer("Player2");
 
+            var inputVelocity = new Vector3(3f, 4f, 5f);
             inputPool.CreateEntity()
-                .AddMoveInput(new Vector3(3, 4, 5))
+                .AddMoveInput(inputVelocity)
                 .AddInputOwner("Player1");
 
             // when
             system.Execute();
 
             // then
+            var expectedVelocity = inputVelocity.normalized * ProcessMoveInputSystem.SPEED;
             player1.position.value.should_be(Vector3.one);
-            player1.velocity.value.should_be(new Vector3(3, 4, 5));
+            player1.velocity.value.should_be(expectedVelocity);
 
             player2.position.value.should_be(Vector3.one);
             player2.velocity.value.should_be(new Vector3(2, 2, 2));

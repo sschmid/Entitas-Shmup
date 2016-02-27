@@ -10,8 +10,9 @@ public class DestroyViewSystem : IReactiveSystem, IEnsureComponents {
         foreach (var e in entities) {
             if (e.hasGameObjectObjectPool) {
                 var gameObject = e.view.gameObject;
-                gameObject.SetActive(false);
                 e.gameObjectObjectPool.pool.Push(gameObject);
+                gameObject.GetComponent<EntityLink>().Unlink();
+                gameObject.SetActive(false);
             } else {
                 Assets.Destroy(e.view.gameObject);
             }
