@@ -1,5 +1,6 @@
 ﻿using Entitas;
 using NUnit.Framework;
+using UnityEngine;
 
 public class AddViewSystemTests {
 
@@ -7,8 +8,9 @@ public class AddViewSystemTests {
     public void AddsView()
     {
         // given
-        var pool = new Pool(CoreComponentIds.TotalComponents);
+        var pool = TestHelper.CreateCorePool();
         var system = (IExecuteSystem)pool.CreateSystem<AddViewSystem>();
+
         var resourceName = Res.Spaceship;
         var entity = pool.CreateEntity().AddResource(resourceName);
 
@@ -18,9 +20,11 @@ public class AddViewSystemTests {
         // then
         Assert.IsTrue(entity.hasView);
         Assert.IsNotNull(entity.view.controller);
-        Assert.AreEqual(resourceName + "(Clone)", entity.view.controller.name);
 
-        var link = entity.view.controller.entityLink;
+        var gameObject = Object.FindObjectOfType<GameObject>();
+        Assert.AreEqual(resourceName + "(Clone)", gameObject.name);
+
+        var link = gameObject.GetEntityLink();
         Assert.AreSame(entity, link.entity);
         Assert.AreSame(pool, link.pool);
     }

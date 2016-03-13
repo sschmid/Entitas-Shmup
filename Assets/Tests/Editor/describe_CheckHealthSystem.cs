@@ -5,12 +5,17 @@ class describe_CheckHealthSystem : nspec {
 
     void when_executing() {
 
-        it["flags entities destroy when health 0 or less"] = () => {
+        Pool pool = null;
+        Entity entity = null;
+        IExecuteSystem system = null;
 
-            // given
-            var pool = new Pool(CoreComponentIds.TotalComponents);
-            var entity = pool.CreateEntity().AddHealth(1);
-            var system = (IExecuteSystem)pool.CreateSystem<CheckHealthSystem>();
+        before = () => {
+            pool = TestHelper.CreateCorePool();
+            entity = pool.CreateEntity().AddHealth(1);
+            system = (IExecuteSystem)pool.CreateSystem<CheckHealthSystem>();
+        };
+
+        it["flags entities destroy when health 0 or less"] = () => {
 
             // when
             entity.ReplaceHealth(0);
@@ -20,12 +25,7 @@ class describe_CheckHealthSystem : nspec {
             entity.flagDestroy.should_be_true();
         };
 
-        it["doesn't flag entities destroy when health greater "] = () => {
-
-            // given
-            var pool = new Pool(CoreComponentIds.TotalComponents);
-            var entity = pool.CreateEntity().AddHealth(1);
-            var system = (IExecuteSystem)pool.CreateSystem<CheckHealthSystem>();
+        it["doesn't flag entities destroy when health greater 0"] = () => {
 
             // when
             entity.ReplaceHealth(2);

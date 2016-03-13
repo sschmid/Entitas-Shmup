@@ -8,9 +8,9 @@ public class RenderPositionSystemsTests {
     public void UpdatesView()
     {
         // given
+        var pool = TestHelper.CreateCorePool();
         var view = new GameObject();
         var controller = view.AddComponent<ViewController>();
-        var pool = new Pool(CoreComponentIds.TotalComponents);
         var entity = pool.CreateEntity()
             .AddPosition(Vector3.one)
             .AddView(controller);

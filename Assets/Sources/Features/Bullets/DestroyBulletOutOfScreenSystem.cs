@@ -10,7 +10,7 @@ public class DestroyBulletOutOfScreenSystem : IExecuteSystem, ISetPool {
 
     public void Execute() {
         foreach (var e in _bullets.GetEntities()) {
-            if (e.position.value.y > 10f) {
+            if (e.position.value.y > 20f) {
                 e.flagDestroy = true;
             }
         }

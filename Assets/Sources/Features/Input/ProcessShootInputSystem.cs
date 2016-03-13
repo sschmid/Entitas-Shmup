@@ -25,9 +25,11 @@ public class ProcessShootInputSystem : IReactiveSystem, ISetPool {
         var input = entities[entities.Count - 1];
         var ownerId = input.inputOwner.playerId;
 
+
+        // TODO Implement own random
         foreach (var e in _players.GetEntities()) {
             if (e.player.id == ownerId) {
-                _bulletsPool.CreateBullet(e.position.value, new Vector3(0, 0.7f, 0), _bulletsObjectPool);
+                _bulletsPool.CreateBullet(e.position.value, new Vector3(-0.05f + Random.value * 0.1f, 0.5f, 0), _bulletsObjectPool);
             }
         }
 

@@ -9,9 +9,9 @@ public class describe_ProcessShootInputSystem : nspec {
         it["create a bullet at player's position"] = () => {
 
             // given
-            var inputPool = new Pool(InputComponentIds.TotalComponents);
-            var corePool = new Pool(CoreComponentIds.TotalComponents);
-            var bulletsPool = new Pool(BulletsComponentIds.TotalComponents);
+            var inputPool = TestHelper.CreateInputPool();
+            var corePool = TestHelper.CreateCorePool();
+            var bulletsPool = TestHelper.CreateBulletPool();
 
             var inputSystem = new ProcessShootInputSystem(corePool, bulletsPool);
 

@@ -4,9 +4,9 @@
 public class BulletController : ViewController, IBulletController {
 
     public override void Despawn() {
-        var link = entityLink;
+        var link = gameObject.GetEntityLink();
         link.entity.gameObjectObjectPool.pool.Push(gameObject);
-        link.Unlink();
+        gameObject.Unlink();
         gameObject.SetActive(false);
     }
 }

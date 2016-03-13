@@ -11,9 +11,9 @@ class describe_ProcessCollisionSystem : nspec {
         IExecuteSystem system = null;
 
         before = () => {
-            corePool = new Pool(CoreComponentIds.TotalComponents);
-            inputPool = new Pool(InputComponentIds.TotalComponents);
-            bulletPool = new Pool(BulletsComponentIds.TotalComponents);
+            corePool = TestHelper.CreateCorePool();
+            inputPool = TestHelper.CreateInputPool();
+            bulletPool = TestHelper.CreateBulletPool();
             system = (IExecuteSystem)inputPool.CreateSystem<ProcessCollisionSystem>();
         };
 

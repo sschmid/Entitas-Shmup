@@ -9,7 +9,7 @@ class describle_PoolExtensions : nspec {
         it["creates bullet"] = () => {
 
             // given
-            var pool = new Pool(BulletsComponentIds.TotalComponents);
+            var pool = TestHelper.CreateBulletPool();
             var pos = Vector3.zero;
             var vel = Vector3.one;
             ObjectPool<GameObject> objectPool = null;
@@ -28,7 +28,7 @@ class describle_PoolExtensions : nspec {
         it["creates enemy0"] = () => {
 
             // given
-            var pool = new Pool(CoreComponentIds.TotalComponents);
+            var pool = TestHelper.CreateCorePool();
 
             // when
             var entity = pool.CreateEnemy0();

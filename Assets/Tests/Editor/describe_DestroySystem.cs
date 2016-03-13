@@ -8,7 +8,7 @@ class describe_DestroySystem : nspec {
         it["destroy flagged entities"] = () => {
 
             // given
-            var pool = new Pool(CoreComponentIds.TotalComponents);
+            var pool = TestHelper.CreateCorePool();
             var system = (IExecuteSystem)pool.CreateSystem<DestroySystem>();
             var entity = pool.CreateEntity();
 

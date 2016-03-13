@@ -21,10 +21,8 @@ public class AddViewFromObjectPoolSystem : IReactiveSystem, ISetPool, IEnsureCom
             var gameObject = e.gameObjectObjectPool.pool.Get();
             gameObject.SetActive(true);
             gameObject.transform.SetParent(_container, false);
-
-            var controller = gameObject.GetComponent<ViewController>();
-            controller.Link(e, _pool);
-            e.AddView(controller);
+            gameObject.Link(e, _pool);
+            e.AddView(gameObject.GetComponent<ViewController>());
         }
     }
 }

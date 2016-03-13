@@ -23,8 +23,10 @@ public class GameController : MonoBehaviour {
         return new Feature("Systems")
 
             // Initialize
+            .Add(inputPool.CreateSystem<IncrementTickSystem>())
+
             .Add(corePool.CreateSystem<CreatePlayerSystem>())
-            .Add(corePool.CreateSystem<CreateEnemySystem>())
+            .Add(corePool.CreateSystem(new CreateEnemySystem(inputPool)))
             .Add(corePool.CreateSystem<AddViewSystem>())
             .Add(bulletsPool.CreateSystem<AddViewFromObjectPoolSystem>())
 

@@ -9,8 +9,8 @@ public class describe_ProcessMoveInputSystem : nspec {
         it["only changes the player position of an entity accroding to move input"] = () => {
 
             // given
-            var inputPool = new Pool(InputComponentIds.TotalComponents);
-            var corePool = new Pool(CoreComponentIds.TotalComponents);
+            var inputPool = TestHelper.CreateInputPool();
+            var corePool = TestHelper.CreateCorePool();
             var inputSystem = new ProcessMoveInputSystem(corePool);
             var system = (IExecuteSystem)inputPool.CreateSystem(inputSystem);
 

@@ -9,7 +9,7 @@ class describe_MoveSystem : nspec {
         it["adds move to position"] = () => {
 
             // given
-            var pool = new Pool(CoreComponentIds.TotalComponents);
+            var pool = TestHelper.CreateCorePool();
             var entity = pool.CreateEntity()
                 .AddPosition(Vector3.one)
                 .AddVelocity(Vector3.one);
