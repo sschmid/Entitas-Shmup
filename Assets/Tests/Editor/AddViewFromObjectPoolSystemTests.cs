@@ -1,14 +1,8 @@
 ﻿using Entitas;
 using NUnit.Framework;
 using UnityEngine;
-#if !ENTITAS_FAST_AND_UNSAFE
+
 public class AddViewFromObjectPoolSystemTests {
-
-
-    [SetUp]
-    public void Before() {
-        
-    }
 
     [Test]
     public void AddsView() {
@@ -17,6 +11,8 @@ public class AddViewFromObjectPoolSystemTests {
         var pool = new Pool(BulletsComponentIds.TotalComponents);
         var system = (IExecuteSystem)pool.CreateSystem<AddViewFromObjectPoolSystem>();
         var gameObject = new GameObject();
+        var controller = gameObject.AddComponent<ViewController>();
+
         gameObject.SetActive(false);
         var objectPool = new ObjectPool<GameObject>(() => gameObject);
         var entity = pool.CreateEntity().AddGameObjectObjectPool(objectPool);
@@ -25,15 +21,17 @@ public class AddViewFromObjectPoolSystemTests {
         system.Execute();
 
         // then
-        Assert.AreSame(gameObject, entity.view.gameObject);
+        Assert.AreSame(controller, entity.view.controller);
         Assert.IsTrue(gameObject.activeSelf);
 
-        var link = entity.view.gameObject.GetComponent<EntityLink>();
+        var link = entity.view.controller.entityLink;
         Assert.AreSame(entity, link.entity);
         Assert.AreSame(pool, link.pool);
 
+        #if !ENTITAS_FAST_AND_UNSAFE
         Assert.AreEqual(3, entity.owners.Count); // Pool, GroupObserver, EntityLink
         Assert.IsTrue(entity.owners.Contains(link));
+        #endif
     }
 
     [Test]
@@ -45,30 +43,32 @@ public class AddViewFromObjectPoolSystemTests {
 
         var objectPool = new ObjectPool<GameObject>(() => null);
         var gameObject = new GameObject();
-        var link = gameObject.AddComponent<EntityLink>();
-        objectPool.Push(gameObject);
-        gameObject.SetActive(false);
+        var controller = gameObject.AddComponent<ViewController>();
 
         var entity = pool.CreateEntity().AddGameObjectObjectPool(objectPool);
-        link.Link(pool.CreateEntity(), new Pool(1));
-        link.Unlink();
+        var link = controller.Link(entity, new Pool(1));
+        controller.Unlink();
+
+        objectPool.Push(gameObject);
+        gameObject.SetActive(false);
 
         // when 
         system.Execute();
 
         // then
-        Assert.AreSame(gameObject, entity.view.gameObject);
+        Assert.AreSame(controller, entity.view.controller);
 
-        var links = entity.view.gameObject.GetComponents<EntityLink>();
+        var links = gameObject.GetComponents<EntityLink>();
         Assert.AreEqual(1, links.Length);
 
-        var newLink = entity.view.gameObject.GetComponent<EntityLink>();
+        var newLink = entity.view.controller.entityLink;
         Assert.AreSame(link, newLink);
         Assert.AreSame(entity, link.entity);
         Assert.AreSame(pool, link.pool);
 
+        #if !ENTITAS_FAST_AND_UNSAFE
         Assert.AreEqual(3, entity.owners.Count); // Pool, GroupObserver, EntityLink
         Assert.IsTrue(entity.owners.Contains(newLink));
+        #endif
     }
 }
-#endif

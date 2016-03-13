@@ -20,13 +20,9 @@ public class AddViewFromObjectPoolSystem : IReactiveSystem, ISetPool {
             gameObject.SetActive(true);
             gameObject.transform.SetParent(_container, false);
 
-            var entityLink = gameObject.GetComponent<EntityLink>();
-            if (entityLink == null) {
-                entityLink = gameObject.AddComponent<EntityLink>();
-            }
-            entityLink.Link(e, _pool);
-
-            e.AddView(gameObject);
+            var controller = gameObject.GetComponent<ViewController>();
+            controller.Link(e, _pool);
+            e.AddView(controller);
         }
     }
 }

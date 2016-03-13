@@ -26,7 +26,7 @@ class describe_ProcessCollisionSystem : nspec {
             var enemy = corePool.CreateEntity()
                 .AddHealth(10);
 
-            var collision = inputPool.CreateEntity()
+            inputPool.CreateEntity()
                 .AddCollision(bullet, enemy);
 
             // when
@@ -49,7 +49,7 @@ class describe_ProcessCollisionSystem : nspec {
             var enemy = corePool.CreateEntity()
                 .AddHealth(10);
 
-            var collision = inputPool.CreateEntity()
+            inputPool.CreateEntity()
                 .AddCollision(bullet, enemy);
 
             // when

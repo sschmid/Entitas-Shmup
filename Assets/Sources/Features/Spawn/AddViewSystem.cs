@@ -16,10 +16,11 @@ public class AddViewSystem : IReactiveSystem, ISetPool {
 
     public void Execute(List<Entity> entities) {
         foreach (var e in entities) {
-            var gameObject = Object.Instantiate(Resources.Load<GameObject>(e.resource.name));
+            var gameObject = Assets.Instantiate<GameObject>(e.resource.name);
             gameObject.transform.SetParent(_container, false);
-            gameObject.AddComponent<EntityLink>().Link(e, _pool);
-            e.AddView(gameObject);
+            var controller = gameObject.GetComponent<ViewController>();
+            controller.Link(e, _pool);
+            e.AddView(controller);
         }
     }
 }

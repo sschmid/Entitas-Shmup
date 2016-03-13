@@ -9,10 +9,11 @@ public class RenderPositionSystemsTests {
     {
         // given
         var view = new GameObject();
+        var controller = view.AddComponent<ViewController>();
         var pool = new Pool(CoreComponentIds.TotalComponents);
         var entity = pool.CreateEntity()
             .AddPosition(Vector3.one)
-            .AddView(view);
+            .AddView(controller);
 
         var system = (IExecuteSystem)pool.CreateSystem<RenderPositionSystem>();
 

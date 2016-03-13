@@ -1,5 +1,6 @@
-﻿using UnityEngine;
-using Entitas;
+﻿using Entitas;
+using Entitas.Unity.VisualDebugging;
+using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
@@ -26,6 +27,8 @@ public class GameController : MonoBehaviour {
             .Add(corePool.CreateSystem<CreateEnemySystem>())
             .Add(corePool.CreateSystem<AddViewSystem>())
             .Add(bulletsPool.CreateSystem<AddViewFromObjectPoolSystem>())
+
+            .Add(corePool.CreateSystem<StartEnemyWaveSystem>())
 
             // Input
             .Add(inputPool.CreateSystem(new ProcessMoveInputSystem(corePool)))

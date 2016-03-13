@@ -12,16 +12,16 @@ public static class PoolExtensions {
             .AddGameObjectObjectPool(gameObjectPool);
     }
 
-    public static Entity CreateEnemy0(this Pool pool, Vector3 position) {
+    public static Entity CreateEnemy0(this Pool pool) {
         return pool.CreateEntity()
-            .AddPosition(position)
+            .IsEnemy(true)
             .AddHealth(1)
             .AddResource(Res.Enemy0);
     }
 
-    public static Entity CreateEnemy1(this Pool pool, Vector3 position) {
+    public static Entity CreateEnemy1(this Pool pool) {
         return pool.CreateEntity()
-            .AddPosition(position)
+            .IsEnemy(true)
             .AddHealth(2)
             .AddResource(Res.Enemy1);
     }

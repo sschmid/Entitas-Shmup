@@ -29,13 +29,11 @@ class describle_PoolExtensions : nspec {
 
             // given
             var pool = new Pool(CoreComponentIds.TotalComponents);
-            var pos = Vector3.zero;
 
             // when
-            var entity = pool.CreateEnemy0(pos);
+            var entity = pool.CreateEnemy0();
 
             // then
-            entity.position.value.should_be(pos);
             entity.health.value.should_be(1);
             entity.resource.name.should_be(Res.Enemy0);
         };
