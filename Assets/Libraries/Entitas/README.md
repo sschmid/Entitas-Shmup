@@ -23,16 +23,16 @@
 </p>
 
 
-The Entity Component System for C# and Unity
-============================================
+Entitas - The Entity Component System Framework for C# and Unity
+================================================================
 
-Entitas is a super fast Entity Component System (ECS) specifically made for C# and Unity. Internal caching and blazing fast component access makes it second to none. Several design decisions have been made to work optimal in a garbage collected environment and to go easy on the garbage collector. Entitas comes with an optional code generator which radically reduces the amount of code you have to write and [makes your code read like well written prose.][clean-coders]
+Entitas is a super fast Entity Component System Framework (ECS) specifically made for C# and Unity. Internal caching and blazing fast component access makes it second to none. Several design decisions have been made to work optimal in a garbage collected environment and to go easy on the garbage collector. Entitas comes with an optional code generator which radically reduces the amount of code you have to write and [makes your code read like well written prose.][clean-coders]
 
 <p align="left">
     <a href="https://dev.windows.com">
         <img src="https://raw.githubusercontent.com/sschmid/Entitas-CSharp/develop/Readme/Images/csharp.png" alt="CSharp" height="64"></a>
     <a href="http://unity3d.com">
-        <img src="https://raw.githubusercontent.com/sschmid/Entitas-CSharp/develop/Readme/Images/WorksWithUnity.png" alt="Unity3d" height="64"></a>
+        <img src="https://raw.githubusercontent.com/sschmid/Entitas-CSharp/develop/Readme/Images/MadeForUnity.png" alt="Unity3d" height="64"></a>
     <a href="http://unity3d.com/unite/archive/2015">
         <img src="https://raw.githubusercontent.com/sschmid/Entitas-CSharp/develop/Readme/Images/UniteEurope2015.png" alt="Unite Europe 2015" height="64"></a>
     <a href="http://unity3d.com/unite/archive/2015">
@@ -127,15 +127,8 @@ Download Entitas
 Each release is published with zip files attached containing all source files you need.
 
 [**Entitas-CSharp.zip**][entitas-csharp-zip]
-- Entitas
-- Entitas.CodeGenerator
 
 [**Entitas-Unity.zip**][entitas-unity-zip]
-- Entitas
-- Entitas.CodeGenerator
-- Entitas.Unity
-- Entitas.Unity.CodeGenerator
-- Entitas.Unity.VisualDebugging
 
 [Show releases][releases]
 
@@ -173,13 +166,18 @@ Maintainer(s)
 Different language?
 ===================
 
-Entitas is also available in
+Entitas is available in
+- [C#](https://github.com/sschmid/Entitas-CSharp)
 - [Swift](https://github.com/mzaks/Entitas-Swift)
+- [C++](https://github.com/JuDelCo/Entitas-Cpp)
 - [Objective-C](https://github.com/wooga/entitas)
 - [Go](https://github.com/wooga/go-entitas)
-- [Clojure](https://github.com/mhaemmerle/entitas-clj)
+- [F#](https://github.com/darkoverlordofdata/Bosco.ECS)
+- [TypeScript](https://github.com/darkoverlordofdata/entitas-ts)
+- [Java](https://github.com/Rubentxu/entitas-java)
 - [Haskell](https://github.com/mhaemmerle/entitas-haskell)
 - [Erlang](https://github.com/mhaemmerle/entitas_erl)
+- [Clojure](https://github.com/mhaemmerle/entitas-clj)
 
 
 [clean-coders]: https://cleancoders.com "Clean Coders"
