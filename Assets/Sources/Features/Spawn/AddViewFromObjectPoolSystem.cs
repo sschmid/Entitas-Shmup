@@ -2,9 +2,11 @@
 using Entitas;
 using UnityEngine;
 
-public class AddViewFromObjectPoolSystem : IReactiveSystem, ISetPool {
+public class AddViewFromObjectPoolSystem : IReactiveSystem, ISetPool, IEnsureComponents {
 
     public TriggerOnEvent trigger { get { return BulletsMatcher.GameObjectObjectPool.OnEntityAdded(); } }
+
+    public IMatcher ensureComponents { get { return BulletsMatcher.GameObjectObjectPool; } }
 
     Pool _pool;
     Transform _container;
