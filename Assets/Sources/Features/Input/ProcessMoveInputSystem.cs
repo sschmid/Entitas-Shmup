@@ -20,7 +20,7 @@ public class ProcessMoveInputSystem : IReactiveSystem, ISetPool {
     }
 
     public void Execute(List<Entity> entities) {
-        var input = entities.SingleEntity();
+        var input = entities[entities.Count - 1];
         var ownerId = input.inputOwner.playerId;
         
         foreach (var e in _players.GetEntities()) {
