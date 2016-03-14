@@ -39,9 +39,7 @@ public class GameController : MonoBehaviour {
 
             // Update
             .Add(new VelocitySystem(corePool, bulletsPool))
-
-            .Add(corePool.CreateSystem<RenderPositionSystem>())
-            .Add(bulletsPool.CreateSystem<RenderPositionSystem>())
+            .Add(new ReactiveSystem(new RenderPositionSystem(corePool, bulletsPool)))
             
             .Add(corePool.CreateSystem<CheckHealthSystem>())
             .Add(bulletsPool.CreateSystem<DestroyBulletOutOfScreenSystem>())

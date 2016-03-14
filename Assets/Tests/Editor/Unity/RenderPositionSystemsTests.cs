@@ -15,7 +15,7 @@ public class RenderPositionSystemsTests {
             .AddPosition(Vector3.one)
             .AddView(controller);
 
-        var system = (IExecuteSystem)pool.CreateSystem<RenderPositionSystem>();
+        var system = new ReactiveSystem(new RenderPositionSystem(pool));
 
         // when 
         var newPos = new Vector3(2, 3, 4);
