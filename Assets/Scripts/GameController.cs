@@ -38,8 +38,8 @@ public class GameController : MonoBehaviour {
             .Add(inputPool.CreateSystem<ProcessCollisionSystem>())
 
             // Update
-            .Add(corePool.CreateSystem<VelocitySystem>())
-            .Add(bulletsPool.CreateSystem<VelocitySystem>())
+            .Add(new VelocitySystem(corePool, bulletsPool))
+
             .Add(corePool.CreateSystem<RenderPositionSystem>())
             .Add(bulletsPool.CreateSystem<RenderPositionSystem>())
             

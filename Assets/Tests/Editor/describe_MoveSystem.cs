@@ -6,21 +6,28 @@ class describe_MoveSystem : nspec {
 
     void when_executing() {
 
-        it["adds move to position"] = () => {
+        it["adds move to position in multiple pools"] = () => {
 
             // given
-            var pool = TestHelper.CreateCorePool();
-            var entity = pool.CreateEntity()
+            var corePool = TestHelper.CreateCorePool();
+            var bulletsPool = TestHelper.CreateBulletPool();
+
+            var entity1 = corePool.CreateEntity()
                 .AddPosition(Vector3.one)
                 .AddVelocity(Vector3.one);
 
-            var system = (IExecuteSystem)pool.CreateSystem<VelocitySystem>();
+            var entity2 = bulletsPool.CreateEntity()
+                .AddPosition(Vector3.one)
+                .AddVelocity(Vector3.one);
+
+            var system = new VelocitySystem(corePool, bulletsPool);
 
             // when
             system.Execute();
 
             // then
-            entity.position.value.should_be(new Vector3(2, 2, 2));
+            entity1.position.value.should_be(new Vector3(2, 2, 2));
+            entity2.position.value.should_be(new Vector3(2, 2, 2));
         };
     }
 }
