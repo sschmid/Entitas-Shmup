@@ -2,6 +2,7 @@
 
 public interface IViewController {
 
+    GameObject gameObject { get; }
     Vector3 position { get; set; }
 
     void Despawn();
