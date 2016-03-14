@@ -10,7 +10,7 @@ class describe_MoveSystem : nspec {
 
             // given
             var corePool = TestHelper.CreateCorePool();
-            var bulletsPool = TestHelper.CreateBulletPool();
+            var bulletsPool = TestHelper.CreateBulletsPool();
 
             var entity1 = corePool.CreateEntity()
                 .AddPosition(Vector3.one)

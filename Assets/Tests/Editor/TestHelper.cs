@@ -10,7 +10,7 @@ public static class TestHelper {
         return new Pool(InputComponentIds.TotalComponents, 0, new PoolMetaData("Input Pool", InputComponentIds.componentNames, InputComponentIds.componentTypes));
     }
 
-    public static Pool CreateBulletPool() {
+    public static Pool CreateBulletsPool() {
         return new Pool(BulletsComponentIds.TotalComponents, 0, new PoolMetaData("Bullets Pool", BulletsComponentIds.componentNames, BulletsComponentIds.componentTypes));
     }
 }

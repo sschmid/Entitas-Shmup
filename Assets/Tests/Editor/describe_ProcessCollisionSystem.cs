@@ -13,7 +13,7 @@ class describe_ProcessCollisionSystem : nspec {
         before = () => {
             corePool = TestHelper.CreateCorePool();
             inputPool = TestHelper.CreateInputPool();
-            bulletPool = TestHelper.CreateBulletPool();
+            bulletPool = TestHelper.CreateBulletsPool();
             system = (IExecuteSystem)inputPool.CreateSystem<ProcessCollisionSystem>();
         };
 

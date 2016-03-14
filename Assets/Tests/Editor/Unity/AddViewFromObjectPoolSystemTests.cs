@@ -8,7 +8,7 @@ public class AddViewFromObjectPoolSystemTests {
     public void AddsView() {
 
         // given
-        var pool = TestHelper.CreateBulletPool();
+        var pool = TestHelper.CreateBulletsPool();
         var system = (IExecuteSystem)pool.CreateSystem<AddViewFromObjectPoolSystem>();
 
         var gameObject = new GameObject();

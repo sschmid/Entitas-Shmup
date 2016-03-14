@@ -11,7 +11,7 @@ public class describe_ProcessShootInputSystem : nspec {
             // given
             var inputPool = TestHelper.CreateInputPool();
             var corePool = TestHelper.CreateCorePool();
-            var bulletsPool = TestHelper.CreateBulletPool();
+            var bulletsPool = TestHelper.CreateBulletsPool();
 
             var inputSystem = new ProcessShootInputSystem(corePool, bulletsPool);
 

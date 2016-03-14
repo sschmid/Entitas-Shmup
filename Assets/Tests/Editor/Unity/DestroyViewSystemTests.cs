@@ -7,7 +7,7 @@ public class DestroyViewSystemTests {
     [Test]
     public void DestroyView() {
         // given
-        var pool = TestHelper.CreateBulletPool();
+        var pool = TestHelper.CreateBulletsPool();
         var system = (IExecuteSystem)pool.CreateSystem<DestroyViewSystem>();
         var gameObject = new GameObject();
         var controller = gameObject.AddComponent<DespawnTestViewController>();

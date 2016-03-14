@@ -9,7 +9,7 @@ class describe_DestroyBulletsSystem : nspec {
         it["destroys bullet when out of screen"] = () => {
 
             // given
-            var pool = TestHelper.CreateBulletPool();
+            var pool = TestHelper.CreateBulletsPool();
             var bullet = pool.CreateEntity()
                 .IsBullet(true)
                 .AddPosition(Vector3.one);
