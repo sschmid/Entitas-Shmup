@@ -9,7 +9,7 @@ class describe_DestroySystem : nspec {
 
             // given
             var pool = TestHelper.CreateCorePool();
-            var system = (IExecuteSystem)pool.CreateSystem<DestroySystem>();
+            var system = new ReactiveSystem(new DestroySystem(pool));
             var entity = pool.CreateEntity();
 
             // when

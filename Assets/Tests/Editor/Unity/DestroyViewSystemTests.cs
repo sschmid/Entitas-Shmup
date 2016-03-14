@@ -7,11 +7,13 @@ public class DestroyViewSystemTests {
     [Test]
     public void DestroyView() {
         // given
-        var pool = TestHelper.CreateBulletsPool();
-        var system = (IExecuteSystem)pool.CreateSystem<DestroyViewSystem>();
+        var corePool = TestHelper.CreateBulletsPool();
+        var bulletsPool = TestHelper.CreateBulletsPool();
+        var system = new ReactiveSystem(new DestroyViewSystem(corePool));
+
         var gameObject = new GameObject();
         var controller = gameObject.AddComponent<DespawnTestViewController>();
-        pool.CreateEntity().AddView(controller).FlagDestroy(true);
+        corePool.CreateEntity().AddView(controller).FlagDestroy(true);
 
         // when 
         system.Execute();
@@ -19,7 +21,6 @@ public class DestroyViewSystemTests {
         // then
         Assert.IsTrue(controller.despawnCalled);
     }
-
 }
 
 class DespawnTestViewController : MonoBehaviour, IViewController {

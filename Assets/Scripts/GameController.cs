@@ -24,13 +24,10 @@ public class GameController : MonoBehaviour {
 
             // Initialize
             .Add(inputPool.CreateSystem<IncrementTickSystem>())
-
             .Add(corePool.CreateSystem<CreatePlayerSystem>())
             .Add(corePool.CreateSystem(new CreateEnemySystem(inputPool)))
             .Add(corePool.CreateSystem<AddViewSystem>())
             .Add(bulletsPool.CreateSystem<AddViewFromObjectPoolSystem>())
-
-            .Add(corePool.CreateSystem<StartEnemyWaveSystem>())
 
             // Input
             .Add(inputPool.CreateSystem(new ProcessMoveInputSystem(corePool)))
@@ -38,18 +35,15 @@ public class GameController : MonoBehaviour {
             .Add(inputPool.CreateSystem<ProcessCollisionSystem>())
 
             // Update
+            .Add(corePool.CreateSystem<StartEnemyWaveSystem>())
             .Add(new VelocitySystem(corePool, bulletsPool))
             .Add(new ReactiveSystem(new RenderPositionSystem(corePool, bulletsPool)))
-            
             .Add(corePool.CreateSystem<CheckHealthSystem>())
             .Add(bulletsPool.CreateSystem<DestroyBulletOutOfScreenSystem>())
 
             // Destroy
-            .Add(corePool.CreateSystem<DestroyViewSystem>())
-            .Add(bulletsPool.CreateSystem<DestroyViewSystem>())
-
-            .Add(corePool.CreateSystem<DestroySystem>())
-            .Add(bulletsPool.CreateSystem<DestroySystem>());
+            .Add(new ReactiveSystem(new DestroyViewSystem(corePool, bulletsPool)))
+            .Add(new ReactiveSystem(new DestroySystem(corePool, bulletsPool)));
     }
 }
 

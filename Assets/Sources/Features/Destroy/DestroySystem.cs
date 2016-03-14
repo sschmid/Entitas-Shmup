@@ -1,18 +1,25 @@
 ﻿using System.Collections.Generic;
 using Entitas;
 
-public class DestroySystem : IReactiveSystem, ISetPool {
-    public TriggerOnEvent trigger { get { return CoreMatcher.Destroy.OnEntityAdded(); } }
+public class DestroySystem : IGroupObserverSystem {
 
-    Pool _pool;
+    public GroupObserver groupObserver { get { return _groupObserver; } }
 
-    public void SetPool(Pool pool) {
-        _pool = pool;
+    readonly Pool[] _pools;
+    readonly GroupObserver _groupObserver;
+
+    public DestroySystem(params Pool[] pools) {
+        _pools = pools;
+        _groupObserver = pools.CreateGroupObserver(CoreMatcher.Destroy);
     }
 
     public void Execute(List<Entity> entities) {
         foreach (var e in entities) {
-            _pool.DestroyEntity(e);
+            foreach (var pool in _pools) {
+                if (pool.HasEntity(e)) {
+                    pool.DestroyEntity(e);
+                }
+            }
         }
     }
 }

@@ -1,8 +1,15 @@
 ﻿using System.Collections.Generic;
 using Entitas;
 
-public class DestroyViewSystem : IReactiveSystem {
-    public TriggerOnEvent trigger { get { return Matcher.AllOf(CoreMatcher.View, CoreMatcher.Destroy).OnEntityAdded(); } }
+public class DestroyViewSystem : IGroupObserverSystem {
+
+    public GroupObserver groupObserver { get { return _groupObserver; } }
+
+    readonly  GroupObserver _groupObserver;
+
+    public DestroyViewSystem(params Pool[] pools) {
+        _groupObserver = pools.CreateGroupObserver(Matcher.AllOf(CoreMatcher.View, CoreMatcher.Destroy));
+    }
 
     public void Execute(List<Entity> entities) {
         foreach (var e in entities) {

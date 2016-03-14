@@ -10,24 +10,17 @@ class describe_MoveSystem : nspec {
 
             // given
             var corePool = TestHelper.CreateCorePool();
-            var bulletsPool = TestHelper.CreateBulletsPool();
-
-            var entity1 = corePool.CreateEntity()
+            var entity = corePool.CreateEntity()
                 .AddPosition(Vector3.one)
                 .AddVelocity(Vector3.one);
 
-            var entity2 = bulletsPool.CreateEntity()
-                .AddPosition(Vector3.one)
-                .AddVelocity(Vector3.one);
-
-            var system = new VelocitySystem(corePool, bulletsPool);
+            var system = new VelocitySystem(corePool);
 
             // when
             system.Execute();
 
             // then
-            entity1.position.value.should_be(new Vector3(2, 2, 2));
-            entity2.position.value.should_be(new Vector3(2, 2, 2));
+            entity.position.value.should_be(new Vector3(2, 2, 2));
         };
     }
 }
