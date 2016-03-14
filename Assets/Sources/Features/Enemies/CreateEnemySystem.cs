@@ -1,15 +1,12 @@
 ﻿using Entitas;
 
-public class CreateEnemySystem : IExecuteSystem, ISetPool {
+public class CreateEnemySystem : IExecuteSystem {
 
-    Pool _inputPool;
-    Pool _pool;
+    readonly Pool _corePool;
+    readonly Pool _inputPool;
 
-    public void SetPool(Pool pool) {
-        _pool = pool;
-    }
-
-    public CreateEnemySystem(Pool inputPool) {
+    public CreateEnemySystem(Pool corePool, Pool inputPool) {
+        _corePool = corePool;
         _inputPool = inputPool;
     }
 
@@ -17,7 +14,7 @@ public class CreateEnemySystem : IExecuteSystem, ISetPool {
 
         // TODO Interval should be configurable
         if (_inputPool.tick.value % 10 == 0) {
-            _pool.CreateEnemy0();
+            _corePool.CreateEnemy0();
         }
     }
 }

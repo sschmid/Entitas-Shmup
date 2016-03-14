@@ -1,5 +1,4 @@
 ﻿using Entitas;
-using Entitas.Unity.VisualDebugging;
 using UnityEngine;
 
 public class GameController : MonoBehaviour {
@@ -25,7 +24,7 @@ public class GameController : MonoBehaviour {
             // Initialize
             .Add(inputPool.CreateSystem<IncrementTickSystem>())
             .Add(corePool.CreateSystem<CreatePlayerSystem>())
-            .Add(corePool.CreateSystem(new CreateEnemySystem(inputPool)))
+            .Add(new CreateEnemySystem(corePool, inputPool))
             .Add(corePool.CreateSystem<AddViewSystem>())
             .Add(bulletsPool.CreateSystem<AddViewFromObjectPoolSystem>())
 

@@ -8,7 +8,6 @@ public class DestroyViewSystemTests {
     public void DestroyView() {
         // given
         var corePool = TestHelper.CreateBulletsPool();
-        var bulletsPool = TestHelper.CreateBulletsPool();
         var system = new ReactiveSystem(new DestroyViewSystem(corePool));
 
         var gameObject = new GameObject();
