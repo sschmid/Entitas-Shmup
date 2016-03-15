@@ -6,7 +6,7 @@ public class describe_ProcessMoveInputSystem : nspec {
 
     void when_input_emmited() {
 
-        it["only changes the player position of an entity accroding to move input"] = () => {
+        it["only changes the specified player position of an entity accroding to move input"] = () => {
 
             // given
             var inputPool = TestHelper.CreateInputPool();

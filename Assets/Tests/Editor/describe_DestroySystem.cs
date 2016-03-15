@@ -5,7 +5,7 @@ class describe_DestroySystem : nspec {
 
     void when_executing() {
 
-        it["destroy flagged entities"] = () => {
+        it["destroys flagged entities"] = () => {
 
             // given
             var pool = TestHelper.CreateCorePool();

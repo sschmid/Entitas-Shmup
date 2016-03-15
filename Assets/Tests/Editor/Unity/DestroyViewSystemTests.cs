@@ -5,7 +5,7 @@ using UnityEngine;
 public class DestroyViewSystemTests {
 
     [Test]
-    public void DestroyView() {
+    public void DespawnsView() {
         // given
         var corePool = TestHelper.CreateBulletsPool();
         var system = new ReactiveSystem(new DestroyViewSystem(corePool));

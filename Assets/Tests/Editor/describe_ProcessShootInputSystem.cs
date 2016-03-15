@@ -6,7 +6,7 @@ public class describe_ProcessShootInputSystem : nspec {
 
     void when_input_emmited() {
 
-        it["create a bullet at player's position"] = () => {
+        it["creates a bullet at player's position"] = () => {
 
             // given
             var inputPool = TestHelper.CreateInputPool();

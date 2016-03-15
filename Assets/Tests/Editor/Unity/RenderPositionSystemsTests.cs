@@ -9,8 +9,8 @@ public class RenderPositionSystemsTests {
     {
         // given
         var pool = TestHelper.CreateCorePool();
-        var view = new GameObject();
-        var controller = view.AddComponent<ViewController>();
+        var gameObject = new GameObject();
+        var controller = gameObject.AddComponent<ViewController>();
         var entity = pool.CreateEntity()
             .AddPosition(Vector3.one)
             .AddView(controller);
@@ -23,6 +23,7 @@ public class RenderPositionSystemsTests {
         system.Execute();
 
         // then
-        Assert.AreEqual(newPos, view.transform.position);
+        Assert.AreEqual(newPos, gameObject.transform.position);
+        Assert.AreEqual(newPos, controller.position);
     }
 }

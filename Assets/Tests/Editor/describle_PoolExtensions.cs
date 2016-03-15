@@ -34,7 +34,8 @@ class describle_PoolExtensions : nspec {
             var entity = pool.CreateEnemy0();
 
             // then
-            entity.health.value.should_be(1);
+            entity.isEnemy.should_be_true();
+            entity.hasHealth.should_be_true();
             entity.resource.name.should_be(Res.Enemy0);
         };
     }

@@ -16,6 +16,7 @@ class describe_DestroyBulletsSystem : nspec {
 
             var system = (IExecuteSystem)pool.CreateSystem<DestroyBulletOutOfScreenSystem>();
 
+            // when bullet is in screen
             system.Execute();
             bullet.flagDestroy.should_be_false();
 
