@@ -2,7 +2,7 @@
 using Entitas;
 using UnityEngine;
 
-class describe_DestroyBulletsSystem : nspec {
+class describe_DestroyBulletOutOfScreenSystem : nspec {
 
     void when_executing() {
 
@@ -25,6 +25,7 @@ class describe_DestroyBulletsSystem : nspec {
             system.Execute();
 
             bullet.flagDestroy.should_be_true();
+            bullet.isOutOfScreen.should_be_true();
         };
     }
 }

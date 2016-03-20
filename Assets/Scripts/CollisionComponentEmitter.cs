@@ -2,10 +2,10 @@
 
 public class CollisionComponentEmitter : MonoBehaviour {
 
-    void OnTriggerEnter(Collider other) {
-        if (other.CompareTag(Tags.Enemy)) {
+    void OnCollisionEnter(Collision collision) {
+        if (collision.gameObject.CompareTag(Tags.Enemy)) {
             var bulletLink = GetComponent<EntityLink>();
-            var targetLink = other.GetComponent<EntityLink>();
+            var targetLink = collision.gameObject.GetComponent<EntityLink>();
             Pools.input.CreateEntity()
                 .AddCollision(bulletLink.entity, targetLink.entity);
         }

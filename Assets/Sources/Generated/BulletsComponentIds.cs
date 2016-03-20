@@ -15,8 +15,9 @@ public static class BulletsComponentIds {
     public const int View = 5;
     public const int Bullet = 6;
     public const int Damage = 7;
+    public const int OutOfScreen = 8;
 
-    public const int TotalComponents = 8;
+    public const int TotalComponents = 9;
 
     public static readonly string[] componentNames = {
         "Destroy",
@@ -26,7 +27,8 @@ public static class BulletsComponentIds {
         "Velocity",
         "View",
         "Bullet",
-        "Damage"
+        "Damage",
+        "OutOfScreen"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -37,6 +39,7 @@ public static class BulletsComponentIds {
         typeof(VelocityComponent),
         typeof(ViewComponent),
         typeof(BulletComponent),
-        typeof(DamageComponent)
+        typeof(DamageComponent),
+        typeof(OutOfScreenComponent)
     };
 }

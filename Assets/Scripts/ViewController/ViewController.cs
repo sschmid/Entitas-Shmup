@@ -8,6 +8,10 @@ public interface IViewController {
     void Despawn();
 }
 
+public interface IPooledViewController : IViewController {
+    void Deactivate();
+}
+
 public class ViewController : MonoBehaviour, IViewController {
 
     public Vector3 position {

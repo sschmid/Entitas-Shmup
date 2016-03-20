@@ -29,8 +29,10 @@ public class ProcessShootInputSystem : IReactiveSystem, ISetPool {
         foreach (var e in _players.GetEntities()) {
             if (e.player.id == ownerId) {
                 // TODO Remove, just for testing
-                // var velocity = new Vector3(-0.05f + Random.value * 0.1f, 0.5f, 0);
-                var velocity = new Vector3(0, 0.5f, 0);
+                var velX = -0.02f + Random.value * 0.04f;
+                var velY = 0.3f + Random.value * 0.2f;
+                 var velocity = new Vector3(velX, velY, 0);
+//                var velocity = new Vector3(0, 0.5f, 0);
                 _bulletsPool.CreateBullet(e.position.value, velocity, _bulletsObjectPool);
             }
         }
