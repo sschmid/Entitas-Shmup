@@ -14,7 +14,7 @@ public class DestroyViewSystem : IGroupObserverSystem {
     public void Execute(List<Entity> entities) {
         foreach (var e in entities) {
             if (e.isOutOfScreen) {
-                ((IPooledViewController)e.view.controller).Deactivate();
+                e.view.controller.Deactivate();
             } else {
                 e.view.controller.Despawn();
             }

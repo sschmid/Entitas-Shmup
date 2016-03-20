@@ -15,14 +15,7 @@ public static class PoolExtensions {
     public static Entity CreateEnemy0(this Pool pool) {
         return pool.CreateEntity()
             .IsEnemy(true)
-            .AddHealth(5)
+            .AddHealth(3)
             .AddResource(Res.Enemy0);
-    }
-
-    public static Entity CreateEnemy1(this Pool pool) {
-        return pool.CreateEntity()
-            .IsEnemy(true)
-            .AddHealth(10)
-            .AddResource(Res.Enemy1);
     }
 }

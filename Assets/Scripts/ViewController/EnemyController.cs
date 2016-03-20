@@ -8,6 +8,8 @@ public class EnemyController : ViewController, IEnemyController {
 
     [SerializeField] Animator _animator;
 
+    [SerializeField] EffectPlayer _despawnEffects;
+
     int _wave;
 
     public void Init(int wave) {
@@ -16,6 +18,11 @@ public class EnemyController : ViewController, IEnemyController {
 
     void Start() {
         _animator.SetInteger("Wave", _wave);
+    }
+
+    public override void Despawn() {
+        _despawnEffects.Play(transform.position);
+        base.Despawn();
     }
 }
 

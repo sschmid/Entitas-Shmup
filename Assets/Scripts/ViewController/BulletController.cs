@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public interface IBulletController : IPooledViewController {
+public interface IBulletController : IViewController {
 }
 
 public class BulletController : ViewController, IBulletController {
@@ -9,7 +9,7 @@ public class BulletController : ViewController, IBulletController {
     [SerializeField] Vector3 _baseRotation;
     [SerializeField] float _randomRotationFactor;
 
-    [SerializeField] ParticleSystem _despawnPfx;
+    [SerializeField] EffectPlayer _despawnEffects;
 
     Vector3 _rotation;
 
@@ -19,16 +19,11 @@ public class BulletController : ViewController, IBulletController {
     }
 
     public override void Despawn() {
-
-        var pfx = Assets.Clone<ParticleSystem>(_despawnPfx);
-        pfx.transform.position = transform.position;
-        var totalDuration = pfx.startDelay + pfx.startLifetime + pfx.duration;
-        Assets.Destroy(pfx.gameObject, totalDuration);
-
+        _despawnEffects.Play(transform.position);
         Deactivate();
     }
 
-    public void Deactivate() {
+    public override void Deactivate() {
         var link = gameObject.GetEntityLink();
         link.entity.gameObjectObjectPool.pool.Push(gameObject);
         gameObject.Unlink();

@@ -25,6 +25,9 @@ public class ProcessShootInputSystem : IReactiveSystem, ISetPool {
         var input = entities[entities.Count - 1];
         var ownerId = input.inputOwner.playerId;
 
+        if (Pools.input.tick.value % 5 == 0)  {
+            
+
 
         foreach (var e in _players.GetEntities()) {
             if (e.player.id == ownerId) {
@@ -35,6 +38,7 @@ public class ProcessShootInputSystem : IReactiveSystem, ISetPool {
 //                var velocity = new Vector3(0, 0.5f, 0);
                 _bulletsPool.CreateBullet(e.position.value, velocity, _bulletsObjectPool);
             }
+        }
         }
 
         _inputPool.DestroyEntity(input);
