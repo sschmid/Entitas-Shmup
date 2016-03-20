@@ -6,9 +6,6 @@ public interface IViewController {
     Vector3 position { get; set; }
 
     void Despawn();
-}
-
-public interface IPooledViewController : IViewController {
     void Deactivate();
 }
 
@@ -20,6 +17,11 @@ public class ViewController : MonoBehaviour, IViewController {
     }
 
     public virtual void Despawn() {
+        gameObject.Unlink();
+        Assets.Destroy(gameObject);
+    }
+
+    public virtual void Deactivate() {
         gameObject.Unlink();
         Assets.Destroy(gameObject);
     }

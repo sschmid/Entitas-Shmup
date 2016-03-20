@@ -40,7 +40,7 @@ public class DestroyViewSystemTests {
     }
 }
 
-class DespawnTestViewController : MonoBehaviour, IPooledViewController {
+class DespawnTestViewController : MonoBehaviour, IViewController {
 
     public bool despawnCalled = false;
     public bool deactiveCalled = false;
