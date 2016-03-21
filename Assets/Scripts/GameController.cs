@@ -40,9 +40,11 @@ public class GameController : MonoBehaviour {
             .Add(corePool.CreateSystem<CheckHealthSystem>())
             .Add(bulletsPool.CreateSystem<BulletOutOfScreenSystem>())
 
-            // Destroy
+            // Animate Destroy
             .Add(new ReactiveSystem(new AnimateOutOfScreenViewSystem(corePool, bulletsPool)))
             .Add(new ReactiveSystem(new AnimateDestroyViewSystem(corePool, bulletsPool)))
+
+            // Destroy
             .Add(new ReactiveSystem(new DestroyEntitySystem(corePool, bulletsPool)));
     }
 }
