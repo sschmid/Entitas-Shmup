@@ -8,24 +8,26 @@
 //------------------------------------------------------------------------------
 public static class CoreComponentIds {
     public const int Destroy = 0;
-    public const int GameObjectObjectPool = 1;
+    public const int OutOfScreen = 1;
     public const int Position = 2;
     public const int Resource = 3;
     public const int Velocity = 4;
     public const int View = 5;
-    public const int Enemy = 6;
-    public const int Health = 7;
-    public const int Player = 8;
+    public const int ViewObjectPool = 6;
+    public const int Enemy = 7;
+    public const int Health = 8;
+    public const int Player = 9;
 
-    public const int TotalComponents = 9;
+    public const int TotalComponents = 10;
 
     public static readonly string[] componentNames = {
         "Destroy",
-        "GameObjectObjectPool",
+        "OutOfScreen",
         "Position",
         "Resource",
         "Velocity",
         "View",
+        "ViewObjectPool",
         "Enemy",
         "Health",
         "Player"
@@ -33,11 +35,12 @@ public static class CoreComponentIds {
 
     public static readonly System.Type[] componentTypes = {
         typeof(DestroyComponent),
-        typeof(GameObjectObjectPoolComponent),
+        typeof(OutOfScreenComponent),
         typeof(PositionComponent),
         typeof(ResourceComponent),
         typeof(VelocityComponent),
         typeof(ViewComponent),
+        typeof(ViewObjectPoolComponent),
         typeof(EnemyComponent),
         typeof(HealthComponent),
         typeof(PlayerComponent)

@@ -1,6 +1,6 @@
 ﻿using Entitas;
 
-[Bullets]
+[Core, Bullets]
 public class OutOfScreenComponent : IComponent {
 }
 

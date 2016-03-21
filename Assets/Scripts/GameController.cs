@@ -38,11 +38,12 @@ public class GameController : MonoBehaviour {
             .Add(new VelocitySystem(corePool, bulletsPool))
             .Add(new ReactiveSystem(new RenderPositionSystem(corePool, bulletsPool)))
             .Add(corePool.CreateSystem<CheckHealthSystem>())
-            .Add(bulletsPool.CreateSystem<DestroyBulletOutOfScreenSystem>())
+            .Add(bulletsPool.CreateSystem<BulletOutOfScreenSystem>())
 
             // Destroy
-            .Add(new ReactiveSystem(new DestroyViewSystem(corePool, bulletsPool)))
-            .Add(new ReactiveSystem(new DestroySystem(corePool, bulletsPool)));
+            .Add(new ReactiveSystem(new AnimateOutOfScreenViewSystem(corePool, bulletsPool)))
+            .Add(new ReactiveSystem(new AnimateDestroyViewSystem(corePool, bulletsPool)))
+            .Add(new ReactiveSystem(new DestroyEntitySystem(corePool, bulletsPool)));
     }
 }
 

@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using Entitas;
 
-public class DestroySystem : IGroupObserverSystem {
+public class DestroyEntitySystem : IGroupObserverSystem {
 
     public GroupObserver groupObserver { get { return _groupObserver; } }
 
     readonly Pool[] _pools;
     readonly GroupObserver _groupObserver;
 
-    public DestroySystem(params Pool[] pools) {
+    public DestroyEntitySystem(params Pool[] pools) {
         _pools = pools;
-        _groupObserver = pools.CreateGroupObserver(CoreMatcher.Destroy);
+        _groupObserver = pools.CreateGroupObserver(Matcher.AnyOf(CoreMatcher.Destroy, CoreMatcher.OutOfScreen));
     }
 
     public void Execute(List<Entity> entities) {

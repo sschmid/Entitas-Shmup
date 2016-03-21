@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [Core, Bullets]
-public class GameObjectObjectPoolComponent : IComponent {
+public class ViewObjectPoolComponent : IComponent {
     public ObjectPool<GameObject> pool;
 }
 

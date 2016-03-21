@@ -14,9 +14,9 @@ public class ProcessCollisionSystem : IReactiveSystem, ISetPool {
 
     public void Execute(List<Entity> entities) {
         foreach (var e in entities) {
-            e.collision.bullet.flagDestroy = true;
-            var newHealth = Math.Max(0, e.collision.target.health.value - e.collision.bullet.damage.value);
-            e.collision.target.ReplaceHealth(newHealth);
+            e.collision.self.flagDestroy = true;
+            var newHealth = Math.Max(0, e.collision.other.health.value - e.collision.self.damage.value);
+            e.collision.other.ReplaceHealth(newHealth);
             _pool.DestroyEntity(e);
         }
     }

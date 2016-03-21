@@ -9,7 +9,7 @@ public static class PoolExtensions {
             .AddPosition(position)
             .AddVelocity(velocity)
             .AddDamage(1)
-            .AddGameObjectObjectPool(gameObjectPool);
+            .AddViewObjectPool(gameObjectPool);
     }
 
     public static Entity CreateEnemy0(this Pool pool) {

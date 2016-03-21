@@ -6,8 +6,8 @@ public class CollisionEmitter : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.CompareTag(targetTag)) {
-            var link = GetComponent<EntityLink>();
-            var targetLink = collision.gameObject.GetComponent<EntityLink>();
+            var link = gameObject.GetEntityLink();
+            var targetLink = collision.gameObject.GetEntityLink();
             Pools.input.CreateEntity().AddCollision(link.entity, targetLink.entity);
         }
     }

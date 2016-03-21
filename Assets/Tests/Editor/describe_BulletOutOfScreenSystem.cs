@@ -2,7 +2,7 @@
 using Entitas;
 using UnityEngine;
 
-class describe_DestroyBulletOutOfScreenSystem : nspec {
+class describe_BulletOutOfScreenSystem : nspec {
 
     void when_executing() {
 
@@ -14,17 +14,18 @@ class describe_DestroyBulletOutOfScreenSystem : nspec {
                 .IsBullet(true)
                 .AddPosition(Vector3.one);
 
-            var system = (IExecuteSystem)pool.CreateSystem<DestroyBulletOutOfScreenSystem>();
+            var system = (IExecuteSystem)pool.CreateSystem<BulletOutOfScreenSystem>();
 
             // when bullet is in screen
             system.Execute();
+            bullet.isOutOfScreen.should_be_false();
             bullet.flagDestroy.should_be_false();
 
             // when bullet out of screen
             bullet.ReplacePosition(new Vector3(1, 100f, 0));
             system.Execute();
 
-            bullet.flagDestroy.should_be_true();
+            bullet.flagDestroy.should_be_false();
             bullet.isOutOfScreen.should_be_true();
         };
     }

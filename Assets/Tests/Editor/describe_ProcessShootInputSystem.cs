@@ -36,8 +36,8 @@ public class describe_ProcessShootInputSystem : nspec {
             var bullet = bulletsPool.GetEntities(BulletsMatcher.Bullet).SingleEntity();
             bullet.should_not_be_null();
             bullet.position.value.should_be(player1.position.value);
-            bullet.gameObjectObjectPool.pool.should_not_be_null();
             bullet.hasVelocity.should_be_true();
+            bullet.viewObjectPool.pool.should_not_be_null();
 
             inputPool.GetEntities(InputMatcher.ShootInput).Length.should_be(0);
         };

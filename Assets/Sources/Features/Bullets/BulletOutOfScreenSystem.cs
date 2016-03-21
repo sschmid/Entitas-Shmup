@@ -1,6 +1,6 @@
 ﻿using Entitas;
 
-public class DestroyBulletOutOfScreenSystem : IExecuteSystem, ISetPool {
+public class BulletOutOfScreenSystem : IExecuteSystem, ISetPool {
 
     Group _bullets;
 
@@ -10,9 +10,12 @@ public class DestroyBulletOutOfScreenSystem : IExecuteSystem, ISetPool {
 
     public void Execute() {
         foreach (var e in _bullets.GetEntities()) {
+
+            // TODO Define OutOfScreen Y position
+            // TODO When OutOfScreen at the bottom
+
             if (e.position.value.y > 20f) {
                 e.isOutOfScreen = true;
-                e.flagDestroy = true;
             }
         }
     }

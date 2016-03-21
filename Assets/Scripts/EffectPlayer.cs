@@ -3,7 +3,7 @@ using System;
 
 public class EffectPlayer : MonoBehaviour {
 
-    public string name;
+    public string description;
     public GameObject[] effects;
 }
 
