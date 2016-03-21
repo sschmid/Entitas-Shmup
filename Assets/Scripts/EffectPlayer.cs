@@ -3,8 +3,16 @@ using System;
 
 public class EffectPlayer : MonoBehaviour {
 
+    public static Transform viewContainer;
+
     public string description;
     public GameObject[] effects;
+
+    void Awake() {
+        if (viewContainer == null) {
+            EffectPlayer.viewContainer = new GameObject("Effect Views").transform;
+        }
+    }
 }
 
 public static class EffectPlayerExtension {
@@ -17,6 +25,7 @@ public static class EffectPlayerExtension {
         var newEffects = new GameObject[effectPlayer.effects.Length];
         foreach (var effect in effectPlayer.effects) {
             var newEffect = Assets.Clone(effect);
+            newEffect.transform.SetParent(EffectPlayer.viewContainer, false);
             newEffect.transform.position = position;
 
             var pfxs = newEffect.GetComponentsInChildren<ParticleSystem>();
