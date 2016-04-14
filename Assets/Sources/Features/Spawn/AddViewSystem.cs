@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AddViewSystem : IReactiveSystem, ISetPool {
 
-    public TriggerOnEvent trigger { get { return CoreMatcher.Resource.OnEntityAdded(); } }
+    public TriggerOnEvent trigger { get { return CoreMatcher.Asset.OnEntityAdded(); } }
 
     Pool _pool;
     Transform _container;
@@ -16,7 +16,7 @@ public class AddViewSystem : IReactiveSystem, ISetPool {
 
     public void Execute(List<Entity> entities) {
         foreach (var e in entities) {
-            var gameObject = Assets.Instantiate<GameObject>(e.resource.name);
+            var gameObject = Assets.Instantiate<GameObject>(e.asset.name);
             gameObject.transform.SetParent(_container, false);
             gameObject.Link(e, _pool);
             e.AddView(gameObject.GetComponent<ViewController>());

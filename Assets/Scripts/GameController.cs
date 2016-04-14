@@ -1,7 +1,10 @@
 ﻿using Entitas;
 using UnityEngine;
+using Entitas.Unity.Serialization.Blueprints;
 
 public class GameController : MonoBehaviour {
+
+    public Blueprints blueprints;
 
     Systems _systems;
 
@@ -24,13 +27,13 @@ public class GameController : MonoBehaviour {
             // Initialize
             .Add(inputPool.CreateSystem<IncrementTickSystem>())
             .Add(corePool.CreateSystem<CreatePlayerSystem>())
-            .Add(new CreateEnemySystem(corePool, inputPool))
+            .Add(new CreateEnemySystem(corePool, inputPool, blueprints))
             .Add(corePool.CreateSystem<AddViewSystem>())
             .Add(bulletsPool.CreateSystem<AddViewFromObjectPoolSystem>())
 
             // Input
             .Add(inputPool.CreateSystem(new ProcessMoveInputSystem(corePool)))
-            .Add(inputPool.CreateSystem(new ProcessShootInputSystem(corePool, bulletsPool)))
+                .Add(inputPool.CreateSystem(new ProcessShootInputSystem(corePool, bulletsPool, blueprints)))
             .Add(inputPool.CreateSystem<ProcessCollisionSystem>())
 
             // Update

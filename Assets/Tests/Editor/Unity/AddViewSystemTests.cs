@@ -12,7 +12,7 @@ public class AddViewSystemTests {
         var system = (IExecuteSystem)pool.CreateSystem<AddViewSystem>();
 
         var resourceName = Res.Spaceship;
-        var entity = pool.CreateEntity().AddResource(resourceName);
+        var entity = pool.CreateEntity().AddAsset(resourceName);
 
         // when 
         system.Execute();

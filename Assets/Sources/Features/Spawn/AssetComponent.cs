@@ -1,6 +1,6 @@
 ﻿using Entitas;
 
 [Core, Bullets]
-public class ResourceComponent : IComponent {
+public class AssetComponent : IComponent {
     public string name;
 }
