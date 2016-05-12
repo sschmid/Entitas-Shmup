@@ -5,9 +5,6 @@ using Entitas.Serialization;
 
 namespace Entitas.CodeGenerator {
 
-    [Obsolete("Deprecated since 0.30.0. Use ComponentExtensionsGenerator")]
-    public class ComponentsGenerator : ComponentExtensionsGenerator {}
-
     public class ComponentExtensionsGenerator : IComponentCodeGenerator {
 
         const string CLASS_SUFFIX = "GeneratedExtension";
@@ -24,36 +21,52 @@ namespace Entitas.CodeGenerator {
         }
 
         static string generateComponentExtension(ComponentInfo componentInfo) {
-            return componentInfo.pools.Length == 0
-                        ? addDefaultPoolCode(componentInfo)
-                        : addCustomPoolCode(componentInfo);
-        }
-
-        static string addDefaultPoolCode(ComponentInfo componentInfo) {
             var code = addNamespace();
             code += addEntityMethods(componentInfo);
             if (componentInfo.isSingleEntity) {
                 code += addPoolMethods(componentInfo);
             }
-            code += addMatcher(componentInfo);
-            code += closeNamespace();
-            return code;
-        }
 
-        static string addCustomPoolCode(ComponentInfo componentInfo) {
-            var code = addUsings();
-            code += addNamespace();
-            code += addEntityMethods(componentInfo);
-            if (componentInfo.isSingleEntity) {
-                code += addPoolMethods(componentInfo);
+            if (componentInfo.generateComponent) {
+                // Add default matcher
+                code += addMatcher(componentInfo, true);
+                code += closeNamespace();
+                // Add custom matchers
+                code += addMatcher(componentInfo);
+                return addUsings("Entitas")
+                    + generateComponent(componentInfo)
+                    + code;
             }
-            code += closeNamespace();
-            code += addMatcher(componentInfo);
+
+            if (componentInfo.pools.Length == 0) {
+                code += addMatcher(componentInfo);
+                code += closeNamespace();
+            } else {
+                // Add default matcher
+                code += addMatcher(componentInfo, true);
+                code += closeNamespace();
+                // Add custom matchers
+                code += addMatcher(componentInfo);
+                code = addUsings("Entitas") + code;
+            }
+
             return code;
         }
 
-        static string addUsings() {
-            return "using Entitas;\n\n";
+        static string generateComponent(ComponentInfo componentInfo) {
+            const string componentFormat = @"public class {0} : IComponent {{
+    public {1} {2};
+}}
+
+";
+            var memberInfo = componentInfo.memberInfos[0];
+            return string.Format(componentFormat, componentInfo.fullTypeName, memberInfo.type, memberInfo.name);
+        }
+
+        static string addUsings(params string[] usings) {
+            return string.Join("\n", usings
+                .Select(name => "using " + name + ";")
+                .ToArray()) + "\n\n";
         }
 
         static string addNamespace() {
@@ -241,7 +254,7 @@ $assign
         *
         */
 
-        static string addMatcher(ComponentInfo componentInfo) {
+       static string addMatcher(ComponentInfo componentInfo, bool onlyDefault = false) {
             const string matcherFormat = @"
     public partial class $TagMatcher {
         static IMatcher _matcher$Name;
@@ -259,16 +272,29 @@ $assign
         }
     }
 ";
-            if (componentInfo.pools.Length == 0) {
-                return buildString(componentInfo, matcherFormat);
+            if (onlyDefault) {
+                if (componentInfo.pools.Length == 0 || componentInfo.pools.Contains(string.Empty)) {
+                    return buildString(componentInfo, matcherFormat);
+                } else {
+                    return string.Empty;
+                }
+            } else {
+                if (componentInfo.pools.Length == 0) {
+                    return buildString(componentInfo, matcherFormat);
+                }
+
+                var poolIndex = 0;
+                var matchers = componentInfo.pools.Aggregate(string.Empty, (acc, poolName) => {
+                    if (poolName != string.Empty) {
+                        return acc + buildString(componentInfo, matcherFormat, poolIndex++);
+                    } else {
+                        poolIndex += 1;
+                        return acc;
+                    }
+                });
+
+                return buildString(componentInfo, matchers);
             }
-
-            var poolIndex = 0;
-            var matchers = componentInfo.pools.Aggregate(string.Empty, (acc, poolName) => {
-                return acc + buildString(componentInfo, matcherFormat, poolIndex++);
-            });
-
-            return buildString(componentInfo, matchers);
         }
 
         /*

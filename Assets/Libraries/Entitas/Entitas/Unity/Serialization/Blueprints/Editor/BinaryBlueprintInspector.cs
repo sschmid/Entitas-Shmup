@@ -14,6 +14,13 @@ namespace Entitas.Unity.Serialization.Blueprints {
     [CustomEditor(typeof(BinaryBlueprint))]
     public class BinaryBlueprintInspector : Editor {
 
+        public static BinaryBlueprint[] FindAllBlueprints() {
+            return AssetDatabase.FindAssets("l:" + BinaryBlueprintPostprocessor.ASSET_LABEL)
+                .Select(guid => AssetDatabase.GUIDToAssetPath(guid))
+                .Select(path => AssetDatabase.LoadAssetAtPath<BinaryBlueprint>(path))
+                .ToArray();
+        }
+
         [DidReloadScripts, MenuItem("Entitas/Blueprints/Update all Blueprints", false, 300)]
         public static void UpdateAllBinaryBlueprints() {
             if (!EditorApplication.isPlayingOrWillChangePlaymode) {
@@ -22,7 +29,7 @@ namespace Entitas.Unity.Serialization.Blueprints {
                     return;
                 }
 
-                var binaryBlueprints = Resources.FindObjectsOfTypeAll<BinaryBlueprint>();
+                var binaryBlueprints = FindAllBlueprints();
                 var allPoolNames = allPools.Select(pool => pool.metaData.poolName).ToArray();
                 var updated = 0;
                 foreach (var binaryBlueprint in binaryBlueprints) {
@@ -124,6 +131,12 @@ namespace Entitas.Unity.Serialization.Blueprints {
             EntityDrawer.Initialize();
         }
 
+        void OnDisable() {
+            if (_pool != null) {
+                _pool.Reset();
+            }
+        }
+
         public override void OnInspectorGUI() {
             var binaryBlueprint = ((BinaryBlueprint)target);
 
@@ -156,7 +169,8 @@ namespace Entitas.Unity.Serialization.Blueprints {
             if (_pool != null) {
                 _pool.Reset();
             }
-            _pool = _allPools[_poolIndex];
+            var targetPool = _allPools[_poolIndex];
+            _pool = new Pool(targetPool.totalComponents, 0, targetPool.metaData);
             _entity = _pool.CreateEntity();
         }
     }

@@ -2,11 +2,11 @@
 using NSpec;
 using UnityEngine;
 
-class describe_MoveSystem : nspec {
+class describe_VelocitySystem : nspec {
 
     void when_executing() {
 
-        it["adds move to position in multiple pools"] = () => {
+        it["adds velocity to position in multiple pools"] = () => {
 
             // given
             var corePool = TestHelper.CreateCorePool();
