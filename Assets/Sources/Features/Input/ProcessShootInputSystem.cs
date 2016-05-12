@@ -30,6 +30,7 @@ public class ProcessShootInputSystem : IReactiveSystem, ISetPool {
         var ownerId = input.inputOwner.playerId;
 
         // TODO Remove, just for testing
+        // TODO Add cool-down component
         if (Pools.input.tick.value % 5 == 0) {
 
             foreach (var e in _players.GetEntities()) {

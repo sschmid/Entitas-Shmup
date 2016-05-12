@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour {
 
             // Input
             .Add(inputPool.CreateSystem(new ProcessMoveInputSystem(corePool)))
-                .Add(inputPool.CreateSystem(new ProcessShootInputSystem(corePool, bulletsPool, blueprints)))
+            .Add(inputPool.CreateSystem(new ProcessShootInputSystem(corePool, bulletsPool, blueprints)))
             .Add(inputPool.CreateSystem<ProcessCollisionSystem>())
 
             // Update

@@ -16,6 +16,7 @@ public class CreateEnemySystem : IExecuteSystem {
     public void Execute() {
 
         // TODO Interval should be configurable
+        // WaveInfo?
         if (_inputPool.tick.value % 10 == 0) {
             _blueprints.ApplyEnemy0(_corePool.CreateEntity());
         }
