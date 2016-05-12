@@ -6,9 +6,11 @@ using UnityEngine;
 [CustomEditor(typeof(EntityLink))]
 public class EntityLinkInspector : Editor {
 
-    public override void OnInspectorGUI() {
-        DrawDefaultInspector();
+    void Awake() {
+        EntityDrawer.Initialize();
+    }
 
+    public override void OnInspectorGUI() {
         var link = (EntityLink)target;
         EditorGUILayout.LabelField(link.entity.ToString());
 
@@ -16,5 +18,9 @@ public class EntityLinkInspector : Editor {
             Selection.activeGameObject = Object.FindObjectsOfType<EntityBehaviour>()
                 .Single(e => e.entity == link.entity).gameObject;
         }
+
+        EditorGUILayout.Space();
+
+        EntityDrawer.DrawEntity(link.pool, link.entity);
     }
 }
