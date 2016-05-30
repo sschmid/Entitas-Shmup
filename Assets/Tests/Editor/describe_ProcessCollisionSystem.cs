@@ -17,7 +17,7 @@ class describe_ProcessCollisionSystem : nspec {
             system = (IExecuteSystem)inputPool.CreateSystem<ProcessCollisionSystem>();
         };
 
-        it["destroys bullet and damages target in CollisionComponent"] = () => {
+        it["destroys bullet and damages other in CollisionComponent"] = () => {
             
             // given
             var bullet = bulletPool.CreateEntity().AddDamage(5);
@@ -35,7 +35,7 @@ class describe_ProcessCollisionSystem : nspec {
             inputPool.GetEntities(InputMatcher.Collision).Length.should_be(0);
         };
 
-        it["doesn't set target health less than 0"] = () => {
+        it["doesn't set other's health less than 0"] = () => {
             
             // given
             var bullet = bulletPool.CreateEntity().AddDamage(20);

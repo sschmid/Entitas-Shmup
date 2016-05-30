@@ -9,7 +9,6 @@ public class StartEnemyWaveSystem : IReactiveSystem {
         foreach (var e in entities) {
             var enemyViewController = (IEnemyController)e.view.controller;
 
-
             // TODO Implement own random
             enemyViewController.Init(Random.Range(1, 3));
         }

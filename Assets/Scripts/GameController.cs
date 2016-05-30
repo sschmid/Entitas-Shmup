@@ -1,7 +1,10 @@
 ﻿using Entitas;
 using UnityEngine;
+using Entitas.Unity.Serialization.Blueprints;
 
 public class GameController : MonoBehaviour {
+
+    public Blueprints blueprints;
 
     Systems _systems;
 
@@ -24,13 +27,13 @@ public class GameController : MonoBehaviour {
             // Initialize
             .Add(inputPool.CreateSystem<IncrementTickSystem>())
             .Add(corePool.CreateSystem<CreatePlayerSystem>())
-            .Add(new CreateEnemySystem(corePool, inputPool))
+            .Add(new CreateEnemySystem(corePool, inputPool, blueprints))
             .Add(corePool.CreateSystem<AddViewSystem>())
             .Add(bulletsPool.CreateSystem<AddViewFromObjectPoolSystem>())
 
             // Input
             .Add(inputPool.CreateSystem(new ProcessMoveInputSystem(corePool)))
-            .Add(inputPool.CreateSystem(new ProcessShootInputSystem(corePool, bulletsPool)))
+            .Add(inputPool.CreateSystem(new ProcessShootInputSystem(corePool, bulletsPool, blueprints)))
             .Add(inputPool.CreateSystem<ProcessCollisionSystem>())
 
             // Update
@@ -38,11 +41,14 @@ public class GameController : MonoBehaviour {
             .Add(new VelocitySystem(corePool, bulletsPool))
             .Add(new ReactiveSystem(new RenderPositionSystem(corePool, bulletsPool)))
             .Add(corePool.CreateSystem<CheckHealthSystem>())
-            .Add(bulletsPool.CreateSystem<DestroyBulletOutOfScreenSystem>())
+            .Add(bulletsPool.CreateSystem<BulletOutOfScreenSystem>())
+
+            // Animate Destroy
+            .Add(new ReactiveSystem(new AnimateOutOfScreenViewSystem(corePool, bulletsPool)))
+            .Add(new ReactiveSystem(new AnimateDestroyViewSystem(corePool, bulletsPool)))
 
             // Destroy
-            .Add(new ReactiveSystem(new DestroyViewSystem(corePool, bulletsPool)))
-            .Add(new ReactiveSystem(new DestroySystem(corePool, bulletsPool)));
+            .Add(new ReactiveSystem(new DestroyEntitySystem(corePool, bulletsPool)));
     }
 }
 

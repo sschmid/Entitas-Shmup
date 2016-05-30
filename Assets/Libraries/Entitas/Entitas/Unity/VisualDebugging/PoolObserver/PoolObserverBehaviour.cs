@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 
 namespace Entitas.Unity.VisualDebugging {
+
+    [ExecuteInEditMode]
     public class PoolObserverBehaviour : MonoBehaviour {
         public PoolObserver poolObserver { get { return _poolObserver; } }
 
@@ -12,9 +14,15 @@ namespace Entitas.Unity.VisualDebugging {
         }
 
         void Update() {
-            if (_poolObserver.entitiesContainer != null) {
+            if (_poolObserver == null) {
+                gameObject.DestroyGameObject();
+            } else if (_poolObserver.entitiesContainer != null) {
                 _poolObserver.entitiesContainer.name = _poolObserver.ToString();
             }
+        }
+
+        void OnDestroy() {
+            _poolObserver.Deactivate();
         }
     }
 }

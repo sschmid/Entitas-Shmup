@@ -29,8 +29,10 @@ public static class Pools {
             if (_core == null) {
                 _core = new Pool(CoreComponentIds.TotalComponents, 0, new PoolMetaData("Core Pool", CoreComponentIds.componentNames, CoreComponentIds.componentTypes));
                 #if (!ENTITAS_DISABLE_VISUAL_DEBUGGING && UNITY_EDITOR)
-                var poolObserver = new Entitas.Unity.VisualDebugging.PoolObserver(_core);
-                UnityEngine.Object.DontDestroyOnLoad(poolObserver.entitiesContainer);
+                if (UnityEngine.Application.isPlaying) {
+                    var poolObserver = new Entitas.Unity.VisualDebugging.PoolObserver(_core);
+                    UnityEngine.Object.DontDestroyOnLoad(poolObserver.entitiesContainer);
+                }
                 #endif
             }
 
@@ -45,8 +47,10 @@ public static class Pools {
             if (_input == null) {
                 _input = new Pool(InputComponentIds.TotalComponents, 0, new PoolMetaData("Input Pool", InputComponentIds.componentNames, InputComponentIds.componentTypes));
                 #if (!ENTITAS_DISABLE_VISUAL_DEBUGGING && UNITY_EDITOR)
-                var poolObserver = new Entitas.Unity.VisualDebugging.PoolObserver(_input);
-                UnityEngine.Object.DontDestroyOnLoad(poolObserver.entitiesContainer);
+                if (UnityEngine.Application.isPlaying) {
+                    var poolObserver = new Entitas.Unity.VisualDebugging.PoolObserver(_input);
+                    UnityEngine.Object.DontDestroyOnLoad(poolObserver.entitiesContainer);
+                }
                 #endif
             }
 
@@ -61,8 +65,10 @@ public static class Pools {
             if (_bullets == null) {
                 _bullets = new Pool(BulletsComponentIds.TotalComponents, 0, new PoolMetaData("Bullets Pool", BulletsComponentIds.componentNames, BulletsComponentIds.componentTypes));
                 #if (!ENTITAS_DISABLE_VISUAL_DEBUGGING && UNITY_EDITOR)
-                var poolObserver = new Entitas.Unity.VisualDebugging.PoolObserver(_bullets);
-                UnityEngine.Object.DontDestroyOnLoad(poolObserver.entitiesContainer);
+                if (UnityEngine.Application.isPlaying) {
+                    var poolObserver = new Entitas.Unity.VisualDebugging.PoolObserver(_bullets);
+                    UnityEngine.Object.DontDestroyOnLoad(poolObserver.entitiesContainer);
+                }
                 #endif
             }
 

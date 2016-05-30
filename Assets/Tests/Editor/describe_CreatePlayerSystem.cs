@@ -15,11 +15,12 @@ class describe_CreatePlayerSystem : nspec {
             system.Initialize();
 
             // then
-            var entity = pool.GetEntities(CoreMatcher.Resource).SingleEntity();
+            var entity = pool.GetEntities(CoreMatcher.Asset).SingleEntity();
+            entity.GetComponents().Length.should_be(3);
             entity.should_not_be_null();
             entity.hasPlayer.should_be_true();
             entity.hasPosition.should_be_true();
-            entity.resource.name.should_not_be_null();
+            entity.asset.name.should_not_be_null();
         };
     }
 }

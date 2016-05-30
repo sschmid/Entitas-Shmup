@@ -9,13 +9,13 @@ public static class PoolExtensions {
             .AddPosition(position)
             .AddVelocity(velocity)
             .AddDamage(1)
-            .AddGameObjectObjectPool(gameObjectPool);
+            .AddViewObjectPool(gameObjectPool);
     }
 
     public static Entity CreateEnemy0(this Pool pool) {
         return pool.CreateEntity()
             .IsEnemy(true)
             .AddHealth(3)
-            .AddResource(Res.Enemy0);
+            .AddAsset(Res.Enemy);
     }
 }

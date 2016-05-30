@@ -12,7 +12,7 @@ public class AddViewSystemTests {
         var system = (IExecuteSystem)pool.CreateSystem<AddViewSystem>();
 
         var resourceName = Res.Spaceship;
-        var entity = pool.CreateEntity().AddResource(resourceName);
+        var entity = pool.CreateEntity().AddAsset(resourceName);
 
         // when 
         system.Execute();
@@ -21,10 +21,7 @@ public class AddViewSystemTests {
         Assert.IsTrue(entity.hasView);
         Assert.IsNotNull(entity.view.controller);
 
-        var gameObject = Object.FindObjectOfType<GameObject>();
-        Assert.AreEqual(resourceName + "(Clone)", gameObject.name);
-
-        var link = gameObject.GetEntityLink();
+        var link = Object.FindObjectOfType<ViewController>().gameObject.GetEntityLink();
         Assert.AreSame(entity, link.entity);
         Assert.AreSame(pool, link.pool);
     }

@@ -2,6 +2,6 @@
 
 [Input]
 public class CollisionComponent : IComponent {
-    public Entity bullet;
-    public Entity target;
+    public Entity self;
+    public Entity other;
 }

@@ -7,7 +7,6 @@ public class describe_ProcessMoveInputSystem : nspec {
     void when_input_emmited() {
 
         it["only changes the specified player position of an entity accroding to move input"] = () => {
-
             // given
             var inputPool = TestHelper.CreateInputPool();
             var corePool = TestHelper.CreateCorePool();
@@ -21,7 +20,7 @@ public class describe_ProcessMoveInputSystem : nspec {
 
             var player2 = corePool.CreateEntity()
                 .AddPosition(Vector3.one)
-                .AddVelocity(new Vector3(2, 2, 2))
+                .AddVelocity(new Vector3(2f, 2f, 2f))
                 .AddPlayer("Player2");
 
             var inputVelocity = new Vector3(3f, 4f, 5f);
@@ -38,7 +37,7 @@ public class describe_ProcessMoveInputSystem : nspec {
             player1.velocity.value.should_be(expectedVelocity);
 
             player2.position.value.should_be(Vector3.one);
-            player2.velocity.value.should_be(new Vector3(2, 2, 2));
+            player2.velocity.value.should_be(new Vector3(2f, 2f, 2f));
 
             inputPool.GetEntities(InputMatcher.MoveInput).Length.should_be(0);
         };

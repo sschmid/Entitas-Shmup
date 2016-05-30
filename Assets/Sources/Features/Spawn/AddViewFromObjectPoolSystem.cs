@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class AddViewFromObjectPoolSystem : IReactiveSystem, ISetPool, IEnsureComponents {
 
-    public TriggerOnEvent trigger { get { return BulletsMatcher.GameObjectObjectPool.OnEntityAdded(); } }
+    public TriggerOnEvent trigger { get { return BulletsMatcher.ViewObjectPool.OnEntityAdded(); } }
 
-    public IMatcher ensureComponents { get { return BulletsMatcher.GameObjectObjectPool; } }
+    public IMatcher ensureComponents { get { return BulletsMatcher.ViewObjectPool; } }
 
     Pool _pool;
     Transform _container;
@@ -18,7 +18,7 @@ public class AddViewFromObjectPoolSystem : IReactiveSystem, ISetPool, IEnsureCom
 
     public void Execute(List<Entity> entities) {
         foreach (var e in entities) {
-            var gameObject = e.gameObjectObjectPool.pool.Get();
+            var gameObject = e.viewObjectPool.pool.Get();
             gameObject.SetActive(true);
             gameObject.transform.SetParent(_container, false);
             gameObject.Link(e, _pool);

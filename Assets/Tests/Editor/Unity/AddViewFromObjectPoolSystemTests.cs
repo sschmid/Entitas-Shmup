@@ -17,7 +17,7 @@ public class AddViewFromObjectPoolSystemTests {
         var objectPool = new ObjectPool<GameObject>(() => gameObject);
         gameObject.SetActive(false);
 
-        var entity = pool.CreateEntity().AddGameObjectObjectPool(objectPool);
+        var entity = pool.CreateEntity().AddViewObjectPool(objectPool);
 
         // when 
         system.Execute();

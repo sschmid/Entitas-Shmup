@@ -26,6 +26,9 @@ namespace Entitas {
         /// Each entity has its own unique creationIndex which will be set by the pool when you create the entity.
         public int creationIndex { get { return _creationIndex; } }
 
+        /// The pool manages the state of an entity. Active entities are enabled, destroyed entities are disabled.
+        public bool isEnabled { get { return _isEnabled; } }
+
         /// componentPools is set by the pool which created the entity and is used to reuse removed components.
         /// Removed components will be pushed to the componentPool.
         /// Use entity.CreateComponent(index, type) to get a new or reusable component from the componentPool.
@@ -425,6 +428,12 @@ namespace Entitas {
 
     public static class EntityExtension {
         public const string COMPONENT_SUFFIX = "Component";
+
+        public static string AddComponentSuffix(this string componentName) {
+            return componentName.EndsWith(COMPONENT_SUFFIX)
+                    ? componentName
+                    : componentName + COMPONENT_SUFFIX;
+        }
 
         public static string RemoveComponentSuffix(this string componentName) {
             return componentName.EndsWith(COMPONENT_SUFFIX)

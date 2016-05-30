@@ -14,17 +14,17 @@ namespace Entitas {
 
         public bool hasCollision { get { return HasComponent(InputComponentIds.Collision); } }
 
-        public Entity AddCollision(Entitas.Entity newBullet, Entitas.Entity newTarget) {
+        public Entity AddCollision(Entitas.Entity newSelf, Entitas.Entity newOther) {
             var component = CreateComponent<CollisionComponent>(InputComponentIds.Collision);
-            component.bullet = newBullet;
-            component.target = newTarget;
+            component.self = newSelf;
+            component.other = newOther;
             return AddComponent(InputComponentIds.Collision, component);
         }
 
-        public Entity ReplaceCollision(Entitas.Entity newBullet, Entitas.Entity newTarget) {
+        public Entity ReplaceCollision(Entitas.Entity newSelf, Entitas.Entity newOther) {
             var component = CreateComponent<CollisionComponent>(InputComponentIds.Collision);
-            component.bullet = newBullet;
-            component.target = newTarget;
+            component.self = newSelf;
+            component.other = newOther;
             ReplaceComponent(InputComponentIds.Collision, component);
             return this;
         }

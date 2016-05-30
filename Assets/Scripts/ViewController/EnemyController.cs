@@ -16,6 +16,7 @@ public class EnemyController : ViewController, IEnemyController {
         _wave = wave;
     }
 
+    // Has to be in Start to work
     void Start() {
         _animator.SetInteger("Wave", _wave);
     }

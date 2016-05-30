@@ -5,6 +5,5 @@ public static class Res {
     public static string Bullet = "Bullet/Bullet";
 
     // Enemies
-    public static string Enemy0 = "Enemies/Enemy0";
-    public static string Enemy1 = "Enemies/Enemy1";
+    public static string Enemy = "Enemies/Enemy";
 }

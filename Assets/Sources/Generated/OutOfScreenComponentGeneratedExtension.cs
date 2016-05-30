@@ -47,3 +47,19 @@ namespace Entitas {
             }
         }
     }
+
+    public partial class CoreMatcher {
+        static IMatcher _matcherOutOfScreen;
+
+        public static IMatcher OutOfScreen {
+            get {
+                if (_matcherOutOfScreen == null) {
+                    var matcher = (Matcher)Matcher.AllOf(CoreComponentIds.OutOfScreen);
+                    matcher.componentNames = CoreComponentIds.componentNames;
+                    _matcherOutOfScreen = matcher;
+                }
+
+                return _matcherOutOfScreen;
+            }
+        }
+    }

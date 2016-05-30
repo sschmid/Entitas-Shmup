@@ -25,7 +25,7 @@ public class BulletController : ViewController, IBulletController {
 
     public override void Deactivate() {
         var link = gameObject.GetEntityLink();
-        link.entity.gameObjectObjectPool.pool.Push(gameObject);
+        link.entity.viewObjectPool.pool.Push(gameObject);
         gameObject.Unlink();
         gameObject.SetActive(false);
     }
