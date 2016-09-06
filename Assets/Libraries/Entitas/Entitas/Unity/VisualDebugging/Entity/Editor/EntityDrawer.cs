@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Entitas;
 using Entitas.Serialization;
-using Entitas.Unity;
-using Entitas.Unity.VisualDebugging;
+using Entitas.Serialization.Configuration;
 using UnityEditor;
 using UnityEngine;
 
 namespace Entitas.Unity.VisualDebugging {
+
     public static class EntityDrawer {
 
         static Dictionary<Pool, bool[]> _poolToUnfoldedComponents;
@@ -223,7 +222,7 @@ namespace Entitas.Unity.VisualDebugging {
                         if (memberInfos.Count == 0) {
                             EditorGUILayout.LabelField(componentName, EditorStyles.boldLabel);
                         } else {
-                            unfoldedComponents[index] = EditorGUILayout.Foldout(unfoldedComponents[index], componentName, _foldoutStyle);
+                            unfoldedComponents[index] = EntitasEditorLayout.Foldout(unfoldedComponents[index], componentName, _foldoutStyle);
                         }
                         if (GUILayout.Button("-", GUILayout.Width(19), GUILayout.Height(14))) {
                             entity.RemoveComponent(index);

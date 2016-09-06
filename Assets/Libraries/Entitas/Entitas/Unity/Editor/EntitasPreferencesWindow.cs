@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using Entitas.Serialization.Configuration;
 using UnityEditor;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ namespace Entitas.Unity {
 
     public class EntitasPreferencesWindow : EditorWindow {
 
-        [MenuItem("Entitas/Preferences... #%e", false, 1)]
+        [MenuItem("Entitas/Preferences... #%e", false, EntitasMenuItemPriorities.preferences)]
         public static void OpenPreferences() {
             EntitasEditorLayout.ShowWindow<EntitasPreferencesWindow>("Entitas Preferences");
         }
