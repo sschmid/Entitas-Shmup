@@ -1,4 +1,4 @@
-﻿using NSpec;
+using NSpec;
 using Entitas;
 
 class describe_ProcessCollisionSystem : nspec {
@@ -14,7 +14,7 @@ class describe_ProcessCollisionSystem : nspec {
             corePool = TestHelper.CreateCorePool();
             inputPool = TestHelper.CreateInputPool();
             bulletPool = TestHelper.CreateBulletsPool();
-            system = (IExecuteSystem)inputPool.CreateSystem<ProcessCollisionSystem>();
+            system = (IExecuteSystem)inputPool.CreateSystem(new ProcessCollisionSystem());
         };
 
         it["destroys bullet and damages other in CollisionComponent"] = () => {

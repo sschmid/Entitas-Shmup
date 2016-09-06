@@ -1,4 +1,4 @@
-﻿using Entitas;
+using Entitas;
 using NSpec;
 
 class describe_CreatePlayerSystem : nspec {
@@ -9,7 +9,7 @@ class describe_CreatePlayerSystem : nspec {
 
             // given
             var pool = TestHelper.CreateCorePool();
-            var system = (IInitializeSystem)pool.CreateSystem<CreatePlayerSystem>();
+            var system = (IInitializeSystem)pool.CreateSystem(new CreatePlayerSystem());
 
             // when
             system.Initialize();

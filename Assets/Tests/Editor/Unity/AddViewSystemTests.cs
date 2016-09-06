@@ -1,4 +1,4 @@
-﻿using Entitas;
+using Entitas;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ public class AddViewSystemTests {
     {
         // given
         var pool = TestHelper.CreateCorePool();
-        var system = (IExecuteSystem)pool.CreateSystem<AddViewSystem>();
+        var system = (IExecuteSystem)pool.CreateSystem(new AddViewSystem());
 
         var resourceName = Res.Spaceship;
         var entity = pool.CreateEntity().AddAsset(resourceName);

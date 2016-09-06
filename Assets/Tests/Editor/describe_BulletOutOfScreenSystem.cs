@@ -1,4 +1,4 @@
-﻿using NSpec;
+using NSpec;
 using Entitas;
 using UnityEngine;
 
@@ -14,7 +14,7 @@ class describe_BulletOutOfScreenSystem : nspec {
                 .IsBullet(true)
                 .AddPosition(Vector3.one);
 
-            var system = (IExecuteSystem)pool.CreateSystem<BulletOutOfScreenSystem>();
+            var system = (IExecuteSystem)pool.CreateSystem(new BulletOutOfScreenSystem());
 
             // when bullet is in screen
             system.Execute();

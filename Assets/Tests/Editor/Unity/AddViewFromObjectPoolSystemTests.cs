@@ -1,4 +1,4 @@
-﻿using Entitas;
+using Entitas;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ public class AddViewFromObjectPoolSystemTests {
 
         // given
         var pool = TestHelper.CreateBulletsPool();
-        var system = (IExecuteSystem)pool.CreateSystem<AddViewFromObjectPoolSystem>();
+        var system = (IExecuteSystem)pool.CreateSystem(new AddViewFromObjectPoolSystem());
 
         var gameObject = new GameObject();
         var controller = gameObject.AddComponent<ViewController>();

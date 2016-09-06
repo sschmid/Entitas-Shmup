@@ -1,4 +1,4 @@
-﻿using NSpec;
+using NSpec;
 using Entitas;
 
 class describe_CheckHealthSystem : nspec {
@@ -12,7 +12,7 @@ class describe_CheckHealthSystem : nspec {
         before = () => {
             pool = TestHelper.CreateCorePool();
             entity = pool.CreateEntity().AddHealth(1);
-            system = (IExecuteSystem)pool.CreateSystem<CheckHealthSystem>();
+            system = (IExecuteSystem)pool.CreateSystem(new CheckHealthSystem());
         };
 
         it["flags entities destroy when health 0 or less"] = () => {
