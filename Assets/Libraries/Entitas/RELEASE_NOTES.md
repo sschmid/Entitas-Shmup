@@ -4,6 +4,9 @@ Summer break is over! Entitas development is back on track!
 Thanks all of you guys for using and contributing to Entitas.
 This release is packed with improvements from all of you, thanks for that!
 
+##### Breaking changes
+Please follow the [Entitas upgrade guide](https://github.com/sschmid/Entitas-CSharp/blob/master/EntitasUpgradeGuide.md)
+
 ##### General
 - Lots of maintenance, refactoring, documentation and cleanup. Checked every class and every test ;)
 - Removed unused usings (#134 @thematthopkins )
@@ -13,8 +16,8 @@ This release is packed with improvements from all of you, thanks for that!
 
 ##### Entitas
 - Added new Pools class. There is no static Pools anymore but an instance.
-- Added ISetPools to inject the pools instance
-- Removed pool.CreateSystem<T>() and pool.CreateSystem(Type type)
+- Added ISetPools to inject the shared pools instance
+- Removed pool.CreateSystem<T>() and pool.CreateSystem(Type type) (Apply migration 0.32.0)
 - Fixed pool.CreateSystem() not creating a ReactiveSystem for IGroupObserverSystem
 - Added EntityIndex (#154)
 - pool.Reset() removes all event handlers
