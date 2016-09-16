@@ -58,6 +58,7 @@ public class GameController : MonoBehaviour {
             .Add(pools.input.CreateSystem(new ProcessMoveInputSystem()))
             .Add(pools.input.CreateSystem(new ProcessShootInputSystem()))
             .Add(pools.input.CreateSystem(new ProcessCollisionSystem()))
+            .Add(pools.input.CreateSystem(new SlowMotionSystem()))
 
             // Update
             .Add(pools.core.CreateSystem(new StartEnemyWaveSystem()))

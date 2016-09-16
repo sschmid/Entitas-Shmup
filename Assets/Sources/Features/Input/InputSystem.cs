@@ -23,13 +23,13 @@ public sealed class InputSystem : ISetPools, IExecuteSystem, ICleanupSystem {
                  .AddMoveInput(new Vector3(moveX, moveY))
                  .AddInputOwner(PLAYER1_ID);
 
-        var fire = Input.GetAxisRaw("Fire1");
-
-        if(fire != 0) {
+        if(Input.GetAxisRaw("Fire1") != 0) {
             _pools.input.CreateEntity()
                      .IsShootInput(true)
                      .AddInputOwner(PLAYER1_ID);
         }
+
+        _pools.input.isSlowMotion = Input.GetAxisRaw("Fire2") != 0;
     }
 
     public void Cleanup() {
