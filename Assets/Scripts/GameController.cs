@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour {
 
         var pools = Pools.sharedInstance;
         pools.SetAllPools();
+        pools.AddEntityIndices();
 
         pools.blueprints.SetBlueprints(blueprints);
 

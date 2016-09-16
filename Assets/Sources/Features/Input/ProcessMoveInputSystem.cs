@@ -7,23 +7,17 @@ public sealed class ProcessMoveInputSystem : ISetPools, IReactiveSystem {
 
     public const float SPEED = 0.3f;
 
-    Group _players;
+    Pools _pools;
 
     public void SetPools(Pools pools) {
-        _players = pools.core.GetGroup(Matcher.AllOf(CoreMatcher.Player, CoreMatcher.Position));
+        _pools = pools;
     }
 
     public void Execute(List<Entity> entities) {
         var input = entities[entities.Count - 1];
         var ownerId = input.inputOwner.playerId;
 
-        // TODO Use EntityIndex
-        foreach(var e in _players.GetEntities()) {
-            if(e.player.id == ownerId) {
-
-                // TODO Player speed should be configurable
-                e.ReplaceVelocity(input.moveInput.direction.normalized * SPEED);
-            }
-        }
+        var e = _pools.core.GetEntityWithPlayerId(ownerId);
+        e.ReplaceVelocity(input.moveInput.direction.normalized * SPEED);
     }
 }
