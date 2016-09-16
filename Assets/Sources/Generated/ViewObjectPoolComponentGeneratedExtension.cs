@@ -14,13 +14,13 @@ namespace Entitas {
 
         public bool hasViewObjectPool { get { return HasComponent(BulletsComponentIds.ViewObjectPool); } }
 
-        public Entity AddViewObjectPool(ObjectPool<UnityEngine.GameObject> newPool) {
+        public Entity AddViewObjectPool(Entitas.ObjectPool<UnityEngine.GameObject> newPool) {
             var component = CreateComponent<ViewObjectPoolComponent>(BulletsComponentIds.ViewObjectPool);
             component.pool = newPool;
             return AddComponent(BulletsComponentIds.ViewObjectPool, component);
         }
 
-        public Entity ReplaceViewObjectPool(ObjectPool<UnityEngine.GameObject> newPool) {
+        public Entity ReplaceViewObjectPool(Entitas.ObjectPool<UnityEngine.GameObject> newPool) {
             var component = CreateComponent<ViewObjectPoolComponent>(BulletsComponentIds.ViewObjectPool);
             component.pool = newPool;
             ReplaceComponent(BulletsComponentIds.ViewObjectPool, component);

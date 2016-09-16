@@ -1,6 +1,5 @@
 ﻿using Entitas;
 
 [Core, Bullets]
-public class OutOfScreenComponent : IComponent {
+public sealed class OutOfScreenComponent : IComponent {
 }
-

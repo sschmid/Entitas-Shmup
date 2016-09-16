@@ -1,6 +1,5 @@
 ﻿using Entitas;
 
 [Core]
-public class EnemyComponent : IComponent {
+public sealed class EnemyComponent : IComponent {
 }
-

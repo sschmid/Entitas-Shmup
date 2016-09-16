@@ -1,25 +1,19 @@
 ﻿using Entitas;
-using Entitas.Unity.Serialization.Blueprints;
 
-public class CreateEnemySystem : IExecuteSystem {
+public sealed class CreateEnemySystem : ISetPools, IExecuteSystem {
 
-    readonly Pool _corePool;
-    readonly Pool _inputPool;
-    readonly Blueprints _blueprints;
+    Pools _pools;
 
-    public CreateEnemySystem(Pool corePool, Pool inputPool, Blueprints blueprints) {
-        _corePool = corePool;
-        _inputPool = inputPool;
-        _blueprints = blueprints;
+    public void SetPools(Pools pools) {
+        _pools = pools;
     }
 
     public void Execute() {
 
         // TODO Interval should be configurable
         // WaveInfo?
-        if (_inputPool.tick.value % 10 == 0) {
-            _blueprints.ApplyEnemy(_corePool.CreateEntity());
+        if(_pools.input.tick.value % 100 == 0) {
+            _pools.blueprints.blueprints.blueprints.ApplyEnemy(_pools.core.CreateEntity());
         }
     }
 }
-

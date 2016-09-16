@@ -1,7 +1,7 @@
 ﻿using Entitas;
 
 [Bullets]
-public class DamageComponent : IComponent {
+public sealed class DamageComponent : IComponent {
+
     public int value;
 }
-

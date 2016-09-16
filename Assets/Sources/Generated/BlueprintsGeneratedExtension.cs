@@ -9,7 +9,9 @@
 using Entitas.Serialization.Blueprints;
 
 namespace Entitas.Unity.Serialization.Blueprints {
+
     public partial class Blueprints {
+
         public Blueprint Bullet { get { return GetBlueprint("Bullet"); } }
         public Blueprint Enemy { get { return GetBlueprint("Enemy"); } }
     }

@@ -1,6 +1,5 @@
 ﻿using Entitas;
 
 [Input]
-public class ShootInputComponent : IComponent {
+public sealed class ShootInputComponent : IComponent {
 }
-

@@ -2,7 +2,7 @@
 using Entitas.CodeGenerator;
 
 [Input, SingleEntity]
-public class TickComponent : IComponent {
+public sealed class TickComponent : IComponent {
+
     public ulong value;
 }
-

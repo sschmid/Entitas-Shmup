@@ -1,19 +1,21 @@
 ﻿using System.Collections.Generic;
 using Entitas;
 
-public class AnimateOutOfScreenViewSystem : IGroupObserverSystem {
+public sealed class AnimateOutOfScreenViewSystem : ISetPools, IGroupObserverSystem {
 
     public GroupObserver groupObserver { get { return _groupObserver; } }
 
-    readonly GroupObserver _groupObserver;
+    GroupObserver _groupObserver;
 
-    public AnimateOutOfScreenViewSystem(params Pool[] pools) {
-        _groupObserver = pools.CreateGroupObserver(Matcher.AllOf(CoreMatcher.View, CoreMatcher.OutOfScreen));
+    public void SetPools(Pools pools) {
+        _groupObserver = new [] { pools.core, pools.bullets }
+            .CreateGroupObserver(Matcher.AllOf(CoreMatcher.View, CoreMatcher.OutOfScreen));
     }
 
     public void Execute(List<Entity> entities) {
-        foreach (var e in entities) {
-            e.view.controller.Deactivate();
+        foreach(var e in entities) {
+            var controller = e.view.controller;
+            controller.Hide(false);
         }
     }
 }

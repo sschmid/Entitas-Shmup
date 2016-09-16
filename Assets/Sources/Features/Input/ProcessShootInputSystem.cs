@@ -1,27 +1,20 @@
 ﻿using System.Collections.Generic;
 using Entitas;
-using Entitas.Unity.Serialization.Blueprints;
 using UnityEngine;
 
-public class ProcessShootInputSystem : IReactiveSystem, ISetPool {
+public sealed class ProcessShootInputSystem : ISetPools, IReactiveSystem {
 
     public TriggerOnEvent trigger { get { return InputMatcher.ShootInput.OnEntityAdded(); } }
 
-    Pool _inputPool;
-    readonly Group _players;
-    readonly Pool _bulletsPool;
-    readonly Blueprints _blueprints;
+    Pools _pools;
+    Group _players;
+    ObjectPool<GameObject> _bulletsObjectPool;
 
-    readonly ObjectPool<GameObject> _bulletsObjectPool;
+    public void SetPools(Pools pools) {
+        _pools = pools;
+        _players = pools.core.GetGroup(Matcher.AllOf(CoreMatcher.Player, CoreMatcher.Position));
 
-    public void SetPool(Pool pool) {
-        _inputPool = pool;
-    }
-
-    public ProcessShootInputSystem(Pool corePool, Pool bulletsPool, Blueprints blueprints) {
-        _players = corePool.GetGroup(Matcher.AllOf(CoreMatcher.Player, CoreMatcher.Position));
-        _bulletsPool = bulletsPool;
-        _blueprints = blueprints;
+        // TODO Put on a component
         _bulletsObjectPool = new ObjectPool<GameObject>(() => Assets.Instantiate<GameObject>(Res.Bullet));
     }
 
@@ -29,22 +22,20 @@ public class ProcessShootInputSystem : IReactiveSystem, ISetPool {
         var input = entities[entities.Count - 1];
         var ownerId = input.inputOwner.playerId;
 
-        // TODO Remove, just for testing
-        // TODO Add cool-down component
-        if (Pools.input.tick.value % 5 == 0) {
+        // TODO Add cool-down component instead
+        if(_pools.input.tick.value % 5 == 0) {
 
-            foreach (var e in _players.GetEntities()) {
-                if (e.player.id == ownerId) {
-                    // TODO Remove, just for testing
-                    var velX = -0.02f + Random.value * 0.04f;
-                    var velY = 0.3f + Random.value * 0.2f;
+            // TODO Use EntityIndex
+            foreach(var e in _players.GetEntities()) {
+                if(e.player.id == ownerId) {
+                    var velX = GameRandom.core.RandomFloat(-0.02f, 0.02f);
+                    var velY = GameRandom.core.RandomFloat(0.3f, 0.5f);
                     var velocity = new Vector3(velX, velY, 0);
-//                var velocity = new Vector3(0, 0.5f, 0);
-                    _blueprints.ApplyBullet(_bulletsPool.CreateEntity(), e.position.value, velocity, _bulletsObjectPool);
+                    _pools.blueprints.blueprints.blueprints.ApplyBullet(
+                        _pools.bullets.CreateEntity(), e.position.value, velocity, _bulletsObjectPool
+                    );
                 }
             }
         }
-
-        _inputPool.DestroyEntity(input);
     }
 }

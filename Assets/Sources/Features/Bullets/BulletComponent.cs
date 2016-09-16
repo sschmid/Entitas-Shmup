@@ -1,6 +1,5 @@
 ﻿using Entitas;
 
 [Bullets]
-public class BulletComponent : IComponent {
+public sealed class BulletComponent : IComponent {
 }
-

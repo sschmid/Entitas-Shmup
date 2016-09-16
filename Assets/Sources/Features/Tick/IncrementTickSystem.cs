@@ -1,19 +1,22 @@
 ﻿using Entitas;
 
-public class IncrementTickSystem : IInitializeSystem, IExecuteSystem, ISetPool {
-    
-    Pool _pool;
+public sealed class IncrementTickSystem : ISetPools, IInitializeSystem, IExecuteSystem, ITearDownSystem {
 
-    public void SetPool(Pool pool) {
-        _pool = pool;
+    Pools _pools;
+
+    public void SetPools(Pools pools) {
+        _pools = pools;
     }
 
     public void Initialize() {
-        _pool.SetTick(0);
+        _pools.input.SetTick(0);
     }
 
     public void Execute() {
-        _pool.ReplaceTick(_pool.tick.value + 1);
+        _pools.input.ReplaceTick(_pools.input.tick.value + 1);
+    }
+
+    public void TearDown() {
+        _pools.input.RemoveTick();
     }
 }
-

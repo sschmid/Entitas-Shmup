@@ -1,6 +1,6 @@
 using Entitas;
-using UnityEngine;
 using Entitas.Unity.Serialization.Blueprints;
+using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
@@ -13,42 +13,64 @@ public class GameController : MonoBehaviour {
     }
 
     void Start() {
-        _systems = createSystems(Pools.core, Pools.input, Pools.bullets);
+
+        GameRandom.core = new Rand(0);
+        GameRandom.view = new Rand(0);
+
+        var pools = Pools.sharedInstance;
+        pools.SetAllPools();
+
+        pools.blueprints.SetBlueprints(blueprints);
+
+        _systems = createSystems(pools);
+
+        // Suggested systems lifecycle:
+        // systems.Initialize() on Start
+        // systems.Execute() on Update
+        // systems.Cleanup() on Update after systems.Execute()
+        // systems.TearDown() on OnDestroy
+
         _systems.Initialize();
     }
 
     void Update() {
         _systems.Execute();
+        _systems.Cleanup();
     }
 
-    Systems createSystems(Pool corePool, Pool inputPool, Pool bulletsPool) {
+    void OnDestroy() {
+        _systems.TearDown();
+    }
+
+    Systems createSystems(Pools pools) {
         return new Feature("Systems")
 
             // Initialize
-            .Add(inputPool.CreateSystem(new IncrementTickSystem()))
-            .Add(corePool.CreateSystem(new CreatePlayerSystem()))
-            .Add(new CreateEnemySystem(corePool, inputPool, blueprints))
-            .Add(corePool.CreateSystem(new AddViewSystem()))
-            .Add(bulletsPool.CreateSystem(new AddViewFromObjectPoolSystem()))
+            .Add(pools.CreateSystem(new IncrementTickSystem()))
+            .Add(pools.CreateSystem(new CreatePlayerSystem()))
+            .Add(pools.CreateSystem(new CreateEnemySystem()))
+
+            .Add(pools.core.CreateSystem(new AddViewSystem()))
+            .Add(pools.bullets.CreateSystem(new AddViewFromObjectPoolSystem()))
 
             // Input
-            .Add(inputPool.CreateSystem(new ProcessMoveInputSystem(corePool)))
-            .Add(inputPool.CreateSystem(new ProcessShootInputSystem(corePool, bulletsPool, blueprints)))
-            .Add(inputPool.CreateSystem(new ProcessCollisionSystem()))
+            .Add(pools.CreateSystem(new InputSystem()))
+            .Add(pools.input.CreateSystem(new ProcessMoveInputSystem()))
+            .Add(pools.input.CreateSystem(new ProcessShootInputSystem()))
+            .Add(pools.input.CreateSystem(new ProcessCollisionSystem()))
 
             // Update
-            .Add(corePool.CreateSystem(new StartEnemyWaveSystem()))
-            .Add(new VelocitySystem(corePool, bulletsPool))
-            .Add(new ReactiveSystem(new RenderPositionSystem(corePool, bulletsPool)))
-            .Add(corePool.CreateSystem(new CheckHealthSystem()))
-            .Add(bulletsPool.CreateSystem(new BulletOutOfScreenSystem()))
+            .Add(pools.core.CreateSystem(new StartEnemyWaveSystem()))
+            .Add(pools.CreateSystem(new VelocitySystem()))
+            .Add(pools.CreateSystem(new RenderPositionSystem()))
+            .Add(pools.core.CreateSystem(new CheckHealthSystem()))
+            .Add(pools.bullets.CreateSystem(new BulletOutOfScreenSystem()))
 
             // Animate Destroy
-            .Add(new ReactiveSystem(new AnimateOutOfScreenViewSystem(corePool, bulletsPool)))
-            .Add(new ReactiveSystem(new AnimateDestroyViewSystem(corePool, bulletsPool)))
+            .Add(pools.CreateSystem(new AnimateOutOfScreenViewSystem()))
+            .Add(pools.CreateSystem(new AnimateDestroyViewSystem()))
 
             // Destroy
-            .Add(new ReactiveSystem(new DestroyEntitySystem(corePool, bulletsPool)));
+            .Add(pools.CreateSystem(new DestroyEntitySystem()));
     }
 }
-

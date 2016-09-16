@@ -2,6 +2,5 @@
 using Entitas.CodeGenerator;
 
 [Core, Bullets, CustomPrefix("flag")]
-public class DestroyComponent : IComponent {
+public sealed class DestroyComponent : IComponent {
 }
-

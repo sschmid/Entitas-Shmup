@@ -1,19 +1,21 @@
 ﻿using System.Collections.Generic;
 using Entitas;
 
-public class AnimateDestroyViewSystem : IGroupObserverSystem {
+public sealed class AnimateDestroyViewSystem : ISetPools, IGroupObserverSystem {
 
     public GroupObserver groupObserver { get { return _groupObserver; } }
 
-    readonly GroupObserver _groupObserver;
+    GroupObserver _groupObserver;
 
-    public AnimateDestroyViewSystem(params Pool[] pools) {
-        _groupObserver = pools.CreateGroupObserver(Matcher.AllOf(CoreMatcher.View, CoreMatcher.Destroy));
+    public void SetPools(Pools pools) {
+        _groupObserver = new [] { pools.core, pools.bullets }
+            .CreateGroupObserver(Matcher.AllOf(CoreMatcher.View, CoreMatcher.Destroy));
     }
 
     public void Execute(List<Entity> entities) {
-        foreach (var e in entities) {
-            e.view.controller.Despawn();
+        foreach(var e in entities) {
+            var controller = e.view.controller;
+            controller.Hide(true);
         }
     }
 }

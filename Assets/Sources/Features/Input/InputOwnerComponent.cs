@@ -1,7 +1,7 @@
 ﻿using Entitas;
 
 [Input]
-public class InputOwnerComponent : IComponent {
+public sealed  class InputOwnerComponent : IComponent {
+
     public string playerId;
 }
-
