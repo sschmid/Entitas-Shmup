@@ -4,18 +4,17 @@ public interface IEnemyController : IViewController {
     void InitWithWave(int wave);
 }
 
-public class EnemyViewController : ViewController, IEnemyController {
-
-    [SerializeField]
-    Animator _animator;
+public class EnemyViewController : AnimatorViewController, IEnemyController {
 
     [SerializeField]
     EffectPlayer _despawnEffects;
 
     int _wave;
+    CameraShake _camerShake;
 
     public void InitWithWave(int wave) {
         _wave = wave;
+        _camerShake = Camera.main.GetComponent<CameraShake>();
     }
 
     // Has to be in Start to work
@@ -26,6 +25,7 @@ public class EnemyViewController : ViewController, IEnemyController {
     public override void Hide(bool animated) {
         if(animated) {
             _despawnEffects.Play(transform.position);
+            _camerShake.Shake();
         }
 
         Reset();
