@@ -3,7 +3,7 @@
 public interface IBulletController : IPoolableViewController {
 }
 
-public class BulletViewController : ViewController, IBulletController {
+public class BulletViewController : PoolableViewController, IBulletController {
 
     [SerializeField]
     Vector3 _minRotation;
