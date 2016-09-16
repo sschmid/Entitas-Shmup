@@ -12,7 +12,7 @@ public sealed class CreateEnemySystem : ISetPools, IExecuteSystem {
 
         // TODO Interval should be configurable
         // WaveInfo?
-        if(_pools.input.tick.value % 10 == 0) {
+        if(_pools.input.tick.value % 60 == 0) {
             _pools.blueprints.blueprints.blueprints.ApplyEnemy(_pools.core.CreateEntity());
         }
     }
