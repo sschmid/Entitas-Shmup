@@ -8,10 +8,14 @@ Thumbs.db
 Library
 Temp
 *.unitypackage
+
 *-CSharp-vs.csproj
 *-CSharp.csproj
+
 *-CSharp-Editor.csproj
 *-CSharp-Editor-vs.csproj
+
+*-CSharp-firstpass.csproj
 
 # Xamarin
 obj
