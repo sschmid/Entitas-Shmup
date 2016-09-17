@@ -14,11 +14,12 @@ public static class CoreComponentIds {
     public const int Velocity = 4;
     public const int View = 5;
     public const int ViewObjectPool = 6;
-    public const int Enemy = 7;
-    public const int Health = 8;
-    public const int Player = 9;
+    public const int BulletCoolDown = 7;
+    public const int Enemy = 8;
+    public const int Health = 9;
+    public const int Player = 10;
 
-    public const int TotalComponents = 10;
+    public const int TotalComponents = 11;
 
     public static readonly string[] componentNames = {
         "Asset",
@@ -28,6 +29,7 @@ public static class CoreComponentIds {
         "Velocity",
         "View",
         "ViewObjectPool",
+        "BulletCoolDown",
         "Enemy",
         "Health",
         "Player"
@@ -41,6 +43,7 @@ public static class CoreComponentIds {
         typeof(VelocityComponent),
         typeof(ViewComponent),
         typeof(ViewObjectPoolComponent),
+        typeof(BulletCoolDownComponent),
         typeof(EnemyComponent),
         typeof(HealthComponent),
         typeof(PlayerComponent)
