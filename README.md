@@ -12,7 +12,7 @@ Entitas-Shmup shows
 - systems list in GameController
 - how you can use reactive system to only process changed entities
 - the usage of EntityIndex for super fast entity access
-- how you can use multiple pools to reduce the memory footprint of each entity (Input, Core, Score)
+- how you can use multiple pools to reduce the memory footprint of each entity
 - how you can use external logic like Unity Physics and Input
 - how you can do GameObject object pooling
 - that Entitas is perfect for TDD (Test Driven Development)
