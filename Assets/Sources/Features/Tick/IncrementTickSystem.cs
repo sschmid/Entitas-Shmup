@@ -1,6 +1,6 @@
 ﻿using Entitas;
 
-public sealed class IncrementTickSystem : ISetPools, IInitializeSystem, IExecuteSystem, ITearDownSystem {
+public sealed class IncrementTickSystem : ISetPools, IInitializeSystem, IExecuteSystem {
 
     Pools _pools;
 
@@ -14,9 +14,5 @@ public sealed class IncrementTickSystem : ISetPools, IInitializeSystem, IExecute
 
     public void Execute() {
         _pools.input.ReplaceTick(_pools.input.tick.value + 1);
-    }
-
-    public void TearDown() {
-        _pools.input.RemoveTick();
     }
 }

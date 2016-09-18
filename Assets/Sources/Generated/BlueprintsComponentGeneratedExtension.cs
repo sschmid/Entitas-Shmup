@@ -14,15 +14,15 @@ namespace Entitas {
 
         public bool hasBlueprints { get { return HasComponent(BlueprintsComponentIds.Blueprints); } }
 
-        public Entity AddBlueprints(Entitas.Unity.Serialization.Blueprints.Blueprints newBlueprints) {
+        public Entity AddBlueprints(Entitas.Unity.Serialization.Blueprints.Blueprints newInstance) {
             var component = CreateComponent<BlueprintsComponent>(BlueprintsComponentIds.Blueprints);
-            component.blueprints = newBlueprints;
+            component.instance = newInstance;
             return AddComponent(BlueprintsComponentIds.Blueprints, component);
         }
 
-        public Entity ReplaceBlueprints(Entitas.Unity.Serialization.Blueprints.Blueprints newBlueprints) {
+        public Entity ReplaceBlueprints(Entitas.Unity.Serialization.Blueprints.Blueprints newInstance) {
             var component = CreateComponent<BlueprintsComponent>(BlueprintsComponentIds.Blueprints);
-            component.blueprints = newBlueprints;
+            component.instance = newInstance;
             ReplaceComponent(BlueprintsComponentIds.Blueprints, component);
             return this;
         }
@@ -39,22 +39,22 @@ namespace Entitas {
 
         public bool hasBlueprints { get { return blueprintsEntity != null; } }
 
-        public Entity SetBlueprints(Entitas.Unity.Serialization.Blueprints.Blueprints newBlueprints) {
+        public Entity SetBlueprints(Entitas.Unity.Serialization.Blueprints.Blueprints newInstance) {
             if (hasBlueprints) {
                 throw new EntitasException("Could not set blueprints!\n" + this + " already has an entity with BlueprintsComponent!",
                     "You should check if the pool already has a blueprintsEntity before setting it or use pool.ReplaceBlueprints().");
             }
             var entity = CreateEntity();
-            entity.AddBlueprints(newBlueprints);
+            entity.AddBlueprints(newInstance);
             return entity;
         }
 
-        public Entity ReplaceBlueprints(Entitas.Unity.Serialization.Blueprints.Blueprints newBlueprints) {
+        public Entity ReplaceBlueprints(Entitas.Unity.Serialization.Blueprints.Blueprints newInstance) {
             var entity = blueprintsEntity;
             if (entity == null) {
-                entity = SetBlueprints(newBlueprints);
+                entity = SetBlueprints(newInstance);
             } else {
-                entity.ReplaceBlueprints(newBlueprints);
+                entity.ReplaceBlueprints(newInstance);
             }
 
             return entity;

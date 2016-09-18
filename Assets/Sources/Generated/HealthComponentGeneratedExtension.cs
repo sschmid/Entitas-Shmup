@@ -10,28 +10,44 @@ using Entitas;
 
 namespace Entitas {
     public partial class Entity {
-        public HealthComponent health { get { return (HealthComponent)GetComponent(CoreComponentIds.Health); } }
+        public HealthComponent health { get { return (HealthComponent)GetComponent(BulletsComponentIds.Health); } }
 
-        public bool hasHealth { get { return HasComponent(CoreComponentIds.Health); } }
+        public bool hasHealth { get { return HasComponent(BulletsComponentIds.Health); } }
 
         public Entity AddHealth(int newValue) {
-            var component = CreateComponent<HealthComponent>(CoreComponentIds.Health);
+            var component = CreateComponent<HealthComponent>(BulletsComponentIds.Health);
             component.value = newValue;
-            return AddComponent(CoreComponentIds.Health, component);
+            return AddComponent(BulletsComponentIds.Health, component);
         }
 
         public Entity ReplaceHealth(int newValue) {
-            var component = CreateComponent<HealthComponent>(CoreComponentIds.Health);
+            var component = CreateComponent<HealthComponent>(BulletsComponentIds.Health);
             component.value = newValue;
-            ReplaceComponent(CoreComponentIds.Health, component);
+            ReplaceComponent(BulletsComponentIds.Health, component);
             return this;
         }
 
         public Entity RemoveHealth() {
-            return RemoveComponent(CoreComponentIds.Health);
+            return RemoveComponent(BulletsComponentIds.Health);
         }
     }
 }
+
+    public partial class BulletsMatcher {
+        static IMatcher _matcherHealth;
+
+        public static IMatcher Health {
+            get {
+                if (_matcherHealth == null) {
+                    var matcher = (Matcher)Matcher.AllOf(BulletsComponentIds.Health);
+                    matcher.componentNames = BulletsComponentIds.componentNames;
+                    _matcherHealth = matcher;
+                }
+
+                return _matcherHealth;
+            }
+        }
+    }
 
     public partial class CoreMatcher {
         static IMatcher _matcherHealth;

@@ -5,7 +5,6 @@ public sealed class ProcessMoveInputSystem : ISetPools, IReactiveSystem {
 
     public TriggerOnEvent trigger { get { return InputMatcher.MoveInput.OnEntityAdded(); } }
 
-    public const float SPEED = 0.3f;
 
     Pools _pools;
 
@@ -18,6 +17,8 @@ public sealed class ProcessMoveInputSystem : ISetPools, IReactiveSystem {
         var ownerId = input.inputOwner.playerId;
 
         var e = _pools.core.GetEntityWithPlayerId(ownerId);
-        e.ReplaceVelocity(input.moveInput.direction.normalized * SPEED);
+
+        // TODO Speed Shoud be configurable
+        e.ReplaceVelocity(input.moveInput.direction.normalized * 0.3f);
     }
 }

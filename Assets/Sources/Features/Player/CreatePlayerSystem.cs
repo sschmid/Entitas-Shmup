@@ -10,9 +10,7 @@ public sealed class CreatePlayerSystem : ISetPools, IInitializeSystem {
     }
 
     public void Initialize() {
-        _pools.core.CreateEntity()
-            .AddPlayer("Player1")
-            .AddPosition(Vector3.zero)
-            .AddAsset(Res.Spaceship);
+        _pools.blueprints.blueprints.instance
+              .ApplyPlayer1(_pools.core.CreateEntity(), Vector3.zero);
     }
 }

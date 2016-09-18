@@ -14,5 +14,6 @@ namespace Entitas.Unity.Serialization.Blueprints {
 
         public Blueprint Bullet { get { return GetBlueprint("Bullet"); } }
         public Blueprint Enemy { get { return GetBlueprint("Enemy"); } }
+        public Blueprint Player1 { get { return GetBlueprint("Player1"); } }
     }
 }

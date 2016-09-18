@@ -1,9 +1,17 @@
 ﻿using System.Collections.Generic;
 using Entitas;
 
-public sealed class CheckHealthSystem : IReactiveSystem {
+public sealed class CheckHealthSystem : ISetPools, IGroupObserverSystem {
 
-    public TriggerOnEvent trigger { get { return CoreMatcher.Health.OnEntityAdded(); } }
+    public GroupObserver groupObserver { get { return _groupObserver; } }
+
+    GroupObserver _groupObserver;
+
+    public void SetPools(Pools pools) {
+        _groupObserver = new [] { pools .core, pools.bullets }
+            .CreateGroupObserver(CoreMatcher.Health);
+    }
+
 
     public void Execute(List<Entity> entities) {
         foreach(var e in entities) {
