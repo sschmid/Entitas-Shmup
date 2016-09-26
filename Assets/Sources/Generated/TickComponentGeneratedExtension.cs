@@ -40,7 +40,7 @@ namespace Entitas {
         public bool hasTick { get { return tickEntity != null; } }
 
         public Entity SetTick(ulong newValue) {
-            if (hasTick) {
+            if(hasTick) {
                 throw new EntitasException("Could not set tick!\n" + this + " already has an entity with TickComponent!",
                     "You should check if the pool already has a tickEntity before setting it or use pool.ReplaceTick().");
             }
@@ -51,7 +51,7 @@ namespace Entitas {
 
         public Entity ReplaceTick(ulong newValue) {
             var entity = tickEntity;
-            if (entity == null) {
+            if(entity == null) {
                 entity = SetTick(newValue);
             } else {
                 entity.ReplaceTick(newValue);
@@ -71,7 +71,7 @@ namespace Entitas {
 
         public static IMatcher Tick {
             get {
-                if (_matcherTick == null) {
+                if(_matcherTick == null) {
                     var matcher = (Matcher)Matcher.AllOf(InputComponentIds.Tick);
                     matcher.componentNames = InputComponentIds.componentNames;
                     _matcherTick = matcher;

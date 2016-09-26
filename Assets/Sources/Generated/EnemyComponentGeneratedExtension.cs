@@ -15,8 +15,8 @@ namespace Entitas {
         public bool isEnemy {
             get { return HasComponent(CoreComponentIds.Enemy); }
             set {
-                if (value != isEnemy) {
-                    if (value) {
+                if(value != isEnemy) {
+                    if(value) {
                         AddComponent(CoreComponentIds.Enemy, enemyComponent);
                     } else {
                         RemoveComponent(CoreComponentIds.Enemy);
@@ -37,7 +37,7 @@ namespace Entitas {
 
         public static IMatcher Enemy {
             get {
-                if (_matcherEnemy == null) {
+                if(_matcherEnemy == null) {
                     var matcher = (Matcher)Matcher.AllOf(CoreComponentIds.Enemy);
                     matcher.componentNames = CoreComponentIds.componentNames;
                     _matcherEnemy = matcher;

@@ -100,7 +100,7 @@ Entitas is fast, light and gets rid of unnecessary complexity. There are less th
 - Entity
 - Pool
 - Group
-- Group Observer
+- Entity Collector
 
 [Read more...][wiki-overview]
 
@@ -130,7 +130,7 @@ The optional Unity module integrates Entitas nicely into Unity and provides powe
 Entitas deep dive
 =================
 
-[Read the wiki][wiki] or checkout the awesome [example projects][wiki-example-projects] to see Entitas in action. These example projects illustrate how systems, groups, observers and entities all play together seamlessly.
+[Read the wiki][wiki] or checkout the awesome [example projects][wiki-example-projects] to see Entitas in action. These example projects illustrate how systems, groups, collectors and entities all play together seamlessly.
 
 
 Download Entitas
@@ -150,9 +150,9 @@ Contributing to Entitas
 
 The project is hosted on [GitHub][github-entitas] where you can [report issues][issues], fork the project and [submit pull requests][pulls].
 
-Entitas.sln contains all projects and tests in one solution. Run Build/build.sh to copy all required Entitas source files to all Unity projects.
+Entitas.sln contains all projects and tests in one solution. Run Scripts/build.sh to copy all required Entitas source files to all Unity projects.
 
-To run the tests, navigate to the project root folder and execute Build/runTests.sh.
+To run the tests, navigate to the project root folder and execute Scripts/runTests.sh.
 
 - Check the [issues][issues] to make sure nobody hasn't already requested it and/or contributed it
 - Fork the project

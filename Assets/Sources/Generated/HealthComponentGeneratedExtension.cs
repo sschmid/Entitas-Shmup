@@ -38,7 +38,7 @@ namespace Entitas {
 
         public static IMatcher Health {
             get {
-                if (_matcherHealth == null) {
+                if(_matcherHealth == null) {
                     var matcher = (Matcher)Matcher.AllOf(BulletsComponentIds.Health);
                     matcher.componentNames = BulletsComponentIds.componentNames;
                     _matcherHealth = matcher;
@@ -54,7 +54,7 @@ namespace Entitas {
 
         public static IMatcher Health {
             get {
-                if (_matcherHealth == null) {
+                if(_matcherHealth == null) {
                     var matcher = (Matcher)Matcher.AllOf(CoreComponentIds.Health);
                     matcher.componentNames = CoreComponentIds.componentNames;
                     _matcherHealth = matcher;

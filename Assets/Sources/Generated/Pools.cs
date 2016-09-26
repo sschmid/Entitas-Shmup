@@ -26,7 +26,7 @@ namespace Entitas {
             return CreatePool("Input", InputComponentIds.TotalComponents, InputComponentIds.componentNames, InputComponentIds.componentTypes);
         }
 
-        public Pool[] allPools { get { return new[] { blueprints, bullets, core, input }; } }
+        public Pool[] allPools { get { return new [] { blueprints, bullets, core, input }; } }
 
         public Pool blueprints;
         public Pool bullets;

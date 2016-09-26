@@ -40,7 +40,7 @@ namespace Entitas {
 
         public static IMatcher Collision {
             get {
-                if (_matcherCollision == null) {
+                if(_matcherCollision == null) {
                     var matcher = (Matcher)Matcher.AllOf(InputComponentIds.Collision);
                     matcher.componentNames = InputComponentIds.componentNames;
                     _matcherCollision = matcher;

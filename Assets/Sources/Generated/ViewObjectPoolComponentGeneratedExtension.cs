@@ -38,7 +38,7 @@ namespace Entitas {
 
         public static IMatcher ViewObjectPool {
             get {
-                if (_matcherViewObjectPool == null) {
+                if(_matcherViewObjectPool == null) {
                     var matcher = (Matcher)Matcher.AllOf(BulletsComponentIds.ViewObjectPool);
                     matcher.componentNames = BulletsComponentIds.componentNames;
                     _matcherViewObjectPool = matcher;
@@ -54,7 +54,7 @@ namespace Entitas {
 
         public static IMatcher ViewObjectPool {
             get {
-                if (_matcherViewObjectPool == null) {
+                if(_matcherViewObjectPool == null) {
                     var matcher = (Matcher)Matcher.AllOf(CoreComponentIds.ViewObjectPool);
                     matcher.componentNames = CoreComponentIds.componentNames;
                     _matcherViewObjectPool = matcher;

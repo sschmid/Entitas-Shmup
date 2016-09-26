@@ -15,8 +15,8 @@ namespace Entitas {
         public bool isBullet {
             get { return HasComponent(BulletsComponentIds.Bullet); }
             set {
-                if (value != isBullet) {
-                    if (value) {
+                if(value != isBullet) {
+                    if(value) {
                         AddComponent(BulletsComponentIds.Bullet, bulletComponent);
                     } else {
                         RemoveComponent(BulletsComponentIds.Bullet);
@@ -37,7 +37,7 @@ namespace Entitas {
 
         public static IMatcher Bullet {
             get {
-                if (_matcherBullet == null) {
+                if(_matcherBullet == null) {
                     var matcher = (Matcher)Matcher.AllOf(BulletsComponentIds.Bullet);
                     matcher.componentNames = BulletsComponentIds.componentNames;
                     _matcherBullet = matcher;

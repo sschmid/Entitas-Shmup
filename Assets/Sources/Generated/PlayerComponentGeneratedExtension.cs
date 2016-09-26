@@ -38,7 +38,7 @@ namespace Entitas {
 
         public static IMatcher Player {
             get {
-                if (_matcherPlayer == null) {
+                if(_matcherPlayer == null) {
                     var matcher = (Matcher)Matcher.AllOf(CoreComponentIds.Player);
                     matcher.componentNames = CoreComponentIds.componentNames;
                     _matcherPlayer = matcher;

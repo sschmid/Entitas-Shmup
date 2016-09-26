@@ -20,14 +20,6 @@ $ mono MigrationAssistant.exe -l
   - Migrates IReactiveSystem.Execute to accept List<Entity>
   - Use on folder, where all systems are located
 ========================================
-0.22.0
-  - Migrates IReactiveSystem to combine trigger and eventTypes to TriggerOnEvent
-  - Use on folder, where all systems are located
-========================================
-0.26.0
-  - Deactivates code to prevent compile erros
-  - Use on folder, where generated files are located
-========================================
 etc...
 
 
@@ -35,23 +27,73 @@ etc...
 $ mono MigrationAssistant.exe 0.26.0 /Path/To/Project/Generated/
 ```
 
-# Entitas 0.32.0 upgrade guide
+Entitas 0.35.0 upgrade guide
+============================
+
+#### Info
+`IMatcher.Where()` has been removed. See #194
+
+#### Before you install
+- You're fine - nothing to do for you :heart:
+
+#### After you intalled
+- Fix all the errors where you used `matcher.Where()`
+
+
+Entitas 0.34.0 upgrade guide
+============================
+
+#### Info
+`GroupObserver` has been renamed to `EntityCollector`. See #168 
+
+#### Before you install
+- Rename `GroupObserver` to `EntityCollector`
+- Rename `.CreateGroupObserver()` to `.CreateEntityCollector()`
+- Rename `IGroupObserverSystem` to `IEntityCollectorSystem`
+- Find & Replace `public EntityCollector groupObserver` with `public EntityCollector entityCollector`
+
+#### After you intalled
+- You're fine - nothing to do for you :heart:
+
+
+Entitas 0.33.0 upgrade guide
+============================
+
+#### Info
+`IDeinitializeSystem` has been renamed to `ITearDownSystem`. See #164 
+
+#### Before you install
+- Manually rename `IDeinitializeSystem` to `ITearDownSystem`
+
+#### After you intalled
+- You're fine - nothing to do for you :heart:
+
+
+Entitas 0.32.0 upgrade guide
+============================
+
 Use the command line tool `MigrationAssistant.exe` to automatically fix compile errors.
 Entitas 0.32.0 introduces a new Pools class. Using the new PoolsGenerator will require
 to update your existing project manually. You can still use the old Pools class in your
 existing project if you want. If so, please use the OldPoolsGenerator instead of the new one.
 
 
-# Entitas 0.30.0 upgrade guide
+Entitas 0.30.0 upgrade guide
+============================
+
 Some code generators got renamed. Apply Migration 0.30.0
 
 
-# Entitas 0.29.0 upgrade guide
+Entitas 0.29.0 upgrade guide
+============================
+
 Marked old PoolMetaData constructor obsolete. If you encounter compile errors
 please apply Migration 0.26.0, open C# project and generate again.
 
 
-# Entitas 0.28.0 upgrade guide
+Entitas 0.28.0 upgrade guide
+============================
+
 If you're using Entitas with Unity, please open the Entitas preferences and make
 sure that all your desired code generators are activated.
 Due to some code generator renamings the ComponentIndicesGenerators inactive.
@@ -59,14 +101,18 @@ Due to some code generator renamings the ComponentIndicesGenerators inactive.
 The SystemsGenerator has been removed. Please use `pool.CreateSystem<MySystem>()` instead.
 
 
-# Entitas 0.27.0 upgrade guide
+Entitas 0.27.0 upgrade guide
+============================
+
 If you're using Entitas with Unity, please open the Entitas preferences and make
 sure that all your desired code generators are activated.
 Due to some code generator renamings the ComponentLookupGenerator and
 the ComponentsGenerator are inactive. Activate them (if desired) and generate.
 
 
-# Entitas 0.26.0 upgrade guide
+Entitas 0.26.0 upgrade guide
+============================
+
 Use the command line tool `MigrationAssistant.exe` to automatically fix compile errors.
 After that generate again.
 
@@ -87,7 +133,9 @@ $ mono MigrationAssistant.exe 0.26.0 /Path/To/Project/Generated/
 ```
 
 
-# Entitas 0.24.0 upgrade guide
+Entitas 0.24.0 upgrade guide
+============================
+
 To fix the compile errors after updating to Entitas 0.24.0, delete in `Pools.cs`
 
 ```csharp
@@ -100,7 +148,9 @@ UnityEngine.Object.DontDestroyOnLoad(poolObserver.entitiesContainer);
 and generate again.
 
 
-# Entitas 0.23.0 upgrade guide
+Entitas 0.23.0 upgrade guide
+============================
+
 Entitas 0.23.0 changed and applied naming conventions.
 Before updating to this version, follow these steps to prepare your project:
 
@@ -133,7 +183,9 @@ In generated ...ComponentIds
         }
     }
 
-# Entitas 0.22.0 upgrade guide
+Entitas 0.22.0 upgrade guide
+============================
+
 Entitas 0.22.0 changed IReactiveSystem and IMultiReactiveSystem and renamed IStartSystem.Start to IInitializeSystem.Initialize.
 
 Use the command line tool `MigrationAssistant.exe` to automatically migrate IReactiveSystem.
@@ -154,7 +206,9 @@ $ mono MigrationAssistant.exe 0.22.0 /Path/To/Project/Assets/Sources/Features
 ```
 
 
-# Entitas 0.19.0 upgrade guide
+Entitas 0.19.0 upgrade guide
+============================
+
 Entitas 0.19.0 introduces a few breaking changes:
 
 Added new e.OnComponentReplaced and removed all *WillBeRemoved events.
@@ -187,7 +241,9 @@ $ mono MigrationAssistant.exe 0.19.0 /Path/To/Project/Assets/Sources/Features
 ```
 
 
-# Entitas 0.18.0 upgrade guide
+Entitas 0.18.0 upgrade guide
+============================
+
 Entitas 0.18.0 changes IReactiveSystem. To upgrade your source files, follow these steps
 - Install Entitas 0.18.0 (which will result in compiler errors)
 - Use the command line tool `MigrationAssistant.exe` to automatically migrate
@@ -206,7 +262,8 @@ $ mono MigrationAssistant.exe 0.18.0 /Path/To/Project/Assets/Sources/Features
 ```
 
 
-# Entitas 0.12.0 upgrade guide
+Entitas 0.12.0 upgrade guide
+============================
 
 Entitas 0.12.0 generates prefixed matchers based on the PoolAttribute and introduces some
 API changes. In your existing project with a Entitas version < 0.12.0 manually rename the
@@ -260,7 +317,8 @@ public class CoreGameAttribute : PoolAttribute {
     Delete all custom PoolAttributes
 
 
-# Entitas 0.10.0 upgrade guide
+Entitas 0.10.0 upgrade guide
+============================
 
 Beside features, Entitas 0.10.0 includes lots of renaming. If your current Entitas
 version is < 0.10.0, you might want to follow the next few simple renaming steps,

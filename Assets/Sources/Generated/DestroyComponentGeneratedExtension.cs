@@ -15,8 +15,8 @@ namespace Entitas {
         public bool flagDestroy {
             get { return HasComponent(BulletsComponentIds.Destroy); }
             set {
-                if (value != flagDestroy) {
-                    if (value) {
+                if(value != flagDestroy) {
+                    if(value) {
                         AddComponent(BulletsComponentIds.Destroy, destroyComponent);
                     } else {
                         RemoveComponent(BulletsComponentIds.Destroy);
@@ -37,7 +37,7 @@ namespace Entitas {
 
         public static IMatcher Destroy {
             get {
-                if (_matcherDestroy == null) {
+                if(_matcherDestroy == null) {
                     var matcher = (Matcher)Matcher.AllOf(BulletsComponentIds.Destroy);
                     matcher.componentNames = BulletsComponentIds.componentNames;
                     _matcherDestroy = matcher;
@@ -53,7 +53,7 @@ namespace Entitas {
 
         public static IMatcher Destroy {
             get {
-                if (_matcherDestroy == null) {
+                if(_matcherDestroy == null) {
                     var matcher = (Matcher)Matcher.AllOf(CoreComponentIds.Destroy);
                     matcher.componentNames = CoreComponentIds.componentNames;
                     _matcherDestroy = matcher;

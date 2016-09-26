@@ -40,7 +40,7 @@ namespace Entitas {
         public bool hasBlueprints { get { return blueprintsEntity != null; } }
 
         public Entity SetBlueprints(Entitas.Unity.Serialization.Blueprints.Blueprints newInstance) {
-            if (hasBlueprints) {
+            if(hasBlueprints) {
                 throw new EntitasException("Could not set blueprints!\n" + this + " already has an entity with BlueprintsComponent!",
                     "You should check if the pool already has a blueprintsEntity before setting it or use pool.ReplaceBlueprints().");
             }
@@ -51,7 +51,7 @@ namespace Entitas {
 
         public Entity ReplaceBlueprints(Entitas.Unity.Serialization.Blueprints.Blueprints newInstance) {
             var entity = blueprintsEntity;
-            if (entity == null) {
+            if(entity == null) {
                 entity = SetBlueprints(newInstance);
             } else {
                 entity.ReplaceBlueprints(newInstance);
@@ -71,7 +71,7 @@ namespace Entitas {
 
         public static IMatcher Blueprints {
             get {
-                if (_matcherBlueprints == null) {
+                if(_matcherBlueprints == null) {
                     var matcher = (Matcher)Matcher.AllOf(BlueprintsComponentIds.Blueprints);
                     matcher.componentNames = BlueprintsComponentIds.componentNames;
                     _matcherBlueprints = matcher;

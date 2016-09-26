@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Entitas;
 
-public sealed class RenderPositionSystem : ISetPools, IGroupObserverSystem {
+public sealed class RenderPositionSystem : ISetPools, IEntityCollectorSystem {
 
-    public GroupObserver groupObserver { get { return _groupObserver; } }
+    public EntityCollector entityCollector { get { return _groupObserver; } }
 
-    GroupObserver _groupObserver;
+    EntityCollector _groupObserver;
 
     public void SetPools(Pools pools) {
         _groupObserver = new [] { pools.core, pools.bullets }
-            .CreateGroupObserver(Matcher.AllOf(CoreMatcher.View, CoreMatcher.Position));
+            .CreateEntityCollector(Matcher.AllOf(CoreMatcher.View, CoreMatcher.Position));
     }
 
     public void Execute(List<Entity> entities) {

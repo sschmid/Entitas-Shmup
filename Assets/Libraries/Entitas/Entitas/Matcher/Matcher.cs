@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Entitas {
@@ -7,7 +7,7 @@ namespace Entitas {
 
         public int[] indices {
             get {
-                if (_indices == null) {
+                if(_indices == null) {
                     _indices = mergeIndices();
                 }
                 return _indices;
@@ -47,10 +47,9 @@ namespace Entitas {
         }
 
         public bool Matches(Entity entity) {
-            var matchesAllOf = _allOfIndices == null || entity.HasComponents(_allOfIndices);
-            var matchesAnyOf = _anyOfIndices == null || entity.HasAnyComponent(_anyOfIndices);
-            var matchesNoneOf = _noneOfIndices == null || !entity.HasAnyComponent(_noneOfIndices);
-            return matchesAllOf && matchesAnyOf && matchesNoneOf;
+            return (_allOfIndices == null || entity.HasComponents(_allOfIndices))
+                && (_anyOfIndices == null || entity.HasAnyComponent(_anyOfIndices))
+                && (_noneOfIndices == null || !entity.HasAnyComponent(_noneOfIndices));
         }
 
         int[] mergeIndices() {
@@ -77,7 +76,7 @@ namespace Entitas {
             var indices = new int[matchers.Length];
             for (int i = 0; i < matchers.Length; i++) {
                 var matcher = matchers[i];
-                if (matcher.indices.Length != 1) {
+                if(matcher.indices.Length != 1) {
                     throw new MatcherException(matcher);
                 }
                 indices[i] = matcher.indices[0];
@@ -89,7 +88,7 @@ namespace Entitas {
         static string[] getComponentNames(IMatcher[] matchers) {
             for (int i = 0; i < matchers.Length; i++) {
                 var matcher = matchers[i] as Matcher;
-                if (matcher != null && matcher.componentNames != null) {
+                if(matcher != null && matcher.componentNames != null) {
                     return matcher.componentNames;
                 }
             }
@@ -99,7 +98,7 @@ namespace Entitas {
 
         static void setComponentNames(Matcher matcher, IMatcher[] matchers) {
             var componentNames = getComponentNames(matchers);
-            if (componentNames != null) {
+            if(componentNames != null) {
                 matcher.componentNames = componentNames;
             }
         }
@@ -121,8 +120,8 @@ namespace Entitas {
     }
 
     public class MatcherException : Exception {
-        public MatcherException(IMatcher matcher) : base("matcher.indices.Length must be 1 but was " + matcher.indices.Length) {
+        public MatcherException(IMatcher matcher) : base(
+            "matcher.indices.Length must be 1 but was " + matcher.indices.Length) {
         }
     }
 }
-

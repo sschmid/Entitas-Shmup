@@ -38,7 +38,7 @@ namespace Entitas {
 
         public static IMatcher MoveInput {
             get {
-                if (_matcherMoveInput == null) {
+                if(_matcherMoveInput == null) {
                     var matcher = (Matcher)Matcher.AllOf(InputComponentIds.MoveInput);
                     matcher.componentNames = InputComponentIds.componentNames;
                     _matcherMoveInput = matcher;

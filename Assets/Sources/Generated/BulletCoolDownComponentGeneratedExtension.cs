@@ -38,7 +38,7 @@ namespace Entitas {
 
         public static IMatcher BulletCoolDown {
             get {
-                if (_matcherBulletCoolDown == null) {
+                if(_matcherBulletCoolDown == null) {
                     var matcher = (Matcher)Matcher.AllOf(CoreComponentIds.BulletCoolDown);
                     matcher.componentNames = CoreComponentIds.componentNames;
                     _matcherBulletCoolDown = matcher;

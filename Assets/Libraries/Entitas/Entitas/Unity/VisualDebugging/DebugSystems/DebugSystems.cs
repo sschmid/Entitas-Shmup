@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
@@ -20,9 +20,9 @@ namespace Entitas.Unity.VisualDebugging {
         public int totalInitializeSystemsCount {
             get {
                 var total = 0;
-                foreach (var system in _initializeSystems) {
+                foreach(var system in _initializeSystems) {
                     var debugSystems = system as DebugSystems;
-                    if (debugSystems != null) {
+                    if(debugSystems != null) {
                         total += debugSystems.totalInitializeSystemsCount;
                     } else {
                         total += 1;
@@ -35,9 +35,9 @@ namespace Entitas.Unity.VisualDebugging {
         public int totalExecuteSystemsCount {
             get {
                 var total = 0;
-                foreach (var system in _executeSystems) {
+                foreach(var system in _executeSystems) {
                     var debugSystems = system as DebugSystems;
-                    if (debugSystems != null) {
+                    if(debugSystems != null) {
                         total += debugSystems.totalExecuteSystemsCount;
                     } else {
                         total += 1;
@@ -82,15 +82,15 @@ namespace Entitas.Unity.VisualDebugging {
         public override Systems Add(ISystem system) {
             _systems.Add(system);
             var debugSystems = system as DebugSystems;
-            if (debugSystems != null) {
+            if(debugSystems != null) {
                 debugSystems.container.transform.SetParent(_container.transform, false);
             }
 
             var systemInfo = new SystemInfo(system);
-            if (systemInfo.isInitializeSystems) {
+            if(systemInfo.isInitializeSystems) {
                 _initializeSystemInfos.Add(systemInfo);
             }
-            if (systemInfo.isExecuteSystems || systemInfo.isReactiveSystems) {
+            if(systemInfo.isExecuteSystems || systemInfo.isReactiveSystems) {
                 _executeSystemInfos.Add(systemInfo);
             }
 
@@ -98,13 +98,13 @@ namespace Entitas.Unity.VisualDebugging {
         }
 
         public void ResetDurations() {
-            foreach (var systemInfo in _initializeSystemInfos) {
+            foreach(var systemInfo in _initializeSystemInfos) {
                 systemInfo.ResetDurations();
             }
-            foreach (var systemInfo in _executeSystemInfos) {
+            foreach(var systemInfo in _executeSystemInfos) {
                 systemInfo.ResetDurations();
                 var debugSystems = systemInfo.system as DebugSystems;
-                if (debugSystems != null) {
+                if(debugSystems != null) {
                     debugSystems.ResetDurations();
                 }
             }
@@ -115,7 +115,7 @@ namespace Entitas.Unity.VisualDebugging {
             for (int i = 0; i < _initializeSystems.Count; i++) {
                 var system = _initializeSystems[i];
                 var systemInfo = _initializeSystemInfos[i];
-                if (systemInfo.isActive) {
+                if(systemInfo.isActive) {
                     var duration = monitorSystemInitializeDuration(system);
                     _totalDuration += duration;
                     systemInfo.AddExecutionDuration(duration);
@@ -126,20 +126,20 @@ namespace Entitas.Unity.VisualDebugging {
         }
 
         public override void Execute() {
-            if (!paused) {
+            if(!paused) {
                 Step();
             }
         }
 
         public void Step() {
             _totalDuration = 0;
-            if (Time.frameCount % (int)avgResetInterval == 0) {
+            if(Time.frameCount % (int)avgResetInterval == 0) {
                 ResetDurations();
             }
             for (int i = 0; i < _executeSystems.Count; i++) {
                 var system = _executeSystems[i];
                 var systemInfo = _executeSystemInfos[i];
-                if (systemInfo.isActive) {
+                if(systemInfo.isActive) {
                     var duration = monitorSystemExecutionDuration(system);
                     _totalDuration += duration;
                     systemInfo.AddExecutionDuration(duration);
@@ -166,7 +166,7 @@ namespace Entitas.Unity.VisualDebugging {
         }
 
         void updateName() {
-            if (_container != null) {
+            if(_container != null) {
                 _container.name = string.Format("{0} ({1} init, {2} exe, {3:0.###} ms)",
                     _name, _initializeSystems.Count, _executeSystems.Count, _totalDuration);
             }

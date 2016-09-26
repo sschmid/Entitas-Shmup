@@ -15,8 +15,8 @@ namespace Entitas {
         public bool isOutOfScreen {
             get { return HasComponent(BulletsComponentIds.OutOfScreen); }
             set {
-                if (value != isOutOfScreen) {
-                    if (value) {
+                if(value != isOutOfScreen) {
+                    if(value) {
                         AddComponent(BulletsComponentIds.OutOfScreen, outOfScreenComponent);
                     } else {
                         RemoveComponent(BulletsComponentIds.OutOfScreen);
@@ -37,7 +37,7 @@ namespace Entitas {
 
         public static IMatcher OutOfScreen {
             get {
-                if (_matcherOutOfScreen == null) {
+                if(_matcherOutOfScreen == null) {
                     var matcher = (Matcher)Matcher.AllOf(BulletsComponentIds.OutOfScreen);
                     matcher.componentNames = BulletsComponentIds.componentNames;
                     _matcherOutOfScreen = matcher;
@@ -53,7 +53,7 @@ namespace Entitas {
 
         public static IMatcher OutOfScreen {
             get {
-                if (_matcherOutOfScreen == null) {
+                if(_matcherOutOfScreen == null) {
                     var matcher = (Matcher)Matcher.AllOf(CoreComponentIds.OutOfScreen);
                     matcher.componentNames = CoreComponentIds.componentNames;
                     _matcherOutOfScreen = matcher;

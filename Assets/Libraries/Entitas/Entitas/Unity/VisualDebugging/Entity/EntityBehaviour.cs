@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Entitas.Unity.VisualDebugging {
 
@@ -24,13 +24,13 @@ namespace Entitas.Unity.VisualDebugging {
         }
 
         void Update() {
-            if (_entity != null && _cachedName != _entity.ToString()) {
+            if(_entity != null && _cachedName != _entity.ToString()) {
                 name = _cachedName = _entity.ToString();
             }
         }
 
         void OnDestroy() {
-            if (_entity != null) {
+            if(_entity != null) {
                 _entity.OnEntityReleased -= onEntityReleased;
             }
         }

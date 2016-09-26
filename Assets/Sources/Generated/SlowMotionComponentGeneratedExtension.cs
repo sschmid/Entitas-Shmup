@@ -15,8 +15,8 @@ namespace Entitas {
         public bool isSlowMotion {
             get { return HasComponent(InputComponentIds.SlowMotion); }
             set {
-                if (value != isSlowMotion) {
-                    if (value) {
+                if(value != isSlowMotion) {
+                    if(value) {
                         AddComponent(InputComponentIds.SlowMotion, slowMotionComponent);
                     } else {
                         RemoveComponent(InputComponentIds.SlowMotion);
@@ -38,8 +38,8 @@ namespace Entitas {
             get { return slowMotionEntity != null; }
             set {
                 var entity = slowMotionEntity;
-                if (value != (entity != null)) {
-                    if (value) {
+                if(value != (entity != null)) {
+                    if(value) {
                         CreateEntity().isSlowMotion = true;
                     } else {
                         DestroyEntity(entity);
@@ -55,7 +55,7 @@ namespace Entitas {
 
         public static IMatcher SlowMotion {
             get {
-                if (_matcherSlowMotion == null) {
+                if(_matcherSlowMotion == null) {
                     var matcher = (Matcher)Matcher.AllOf(InputComponentIds.SlowMotion);
                     matcher.componentNames = InputComponentIds.componentNames;
                     _matcherSlowMotion = matcher;

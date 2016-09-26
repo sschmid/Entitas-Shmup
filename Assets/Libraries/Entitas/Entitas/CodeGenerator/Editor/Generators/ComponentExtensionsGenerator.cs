@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Entitas.Serialization;
 
@@ -20,11 +20,11 @@ namespace Entitas.CodeGenerator {
         static string generateComponentExtension(ComponentInfo componentInfo) {
             var code = addNamespace();
             code += addEntityMethods(componentInfo);
-            if (componentInfo.isSingleEntity) {
+            if(componentInfo.isSingleEntity) {
                 code += addPoolMethods(componentInfo);
             }
 
-            if (componentInfo.generateComponent) {
+            if(componentInfo.generateComponent) {
                 // Add default matcher
                 code += addMatcher(componentInfo, true);
                 code += closeNamespace();
@@ -39,7 +39,7 @@ namespace Entitas.CodeGenerator {
             code += closeNamespace();
 
             var hasCustomPools = componentInfo.pools.Length > 1 || !componentInfo.pools[0].IsDefaultPoolName();
-            if (hasCustomPools) {
+            if(hasCustomPools) {
                 code += addMatcher(componentInfo);
                 code = addUsings("Entitas") + code;
             }
@@ -48,13 +48,18 @@ namespace Entitas.CodeGenerator {
         }
 
         static string generateComponent(ComponentInfo componentInfo) {
+            const string hideInBlueprintInspector = "[Entitas.Serialization.Blueprints.HideInBlueprintInspectorAttribute]\n";
             const string componentFormat = @"public class {0} : IComponent {{
+
     public {1} {2};
 }}
 
 ";
             var memberInfo = componentInfo.memberInfos[0];
-            return string.Format(componentFormat, componentInfo.fullTypeName, memberInfo.type, memberInfo.name);
+            var code = string.Format(componentFormat, componentInfo.fullTypeName, memberInfo.type, memberInfo.name);
+            return componentInfo.hideInBlueprintInspector
+                        ? hideInBlueprintInspector + code
+                        : code;
         }
 
         static string addUsings(params string[] usings) {
@@ -64,7 +69,7 @@ namespace Entitas.CodeGenerator {
         }
 
         static string addNamespace() {
-            return @"namespace Entitas {";
+            return "namespace Entitas {\n";
         }
 
         static string closeNamespace() {
@@ -88,7 +93,7 @@ namespace Entitas.CodeGenerator {
         }
 
         static string addEntityClassHeader() {
-            return "\n    public partial class Entity {";
+            return "\n    public partial class Entity {\n";
         }
 
         static string addGetMethods(ComponentInfo componentInfo) {
@@ -104,8 +109,8 @@ namespace Entitas.CodeGenerator {
         public bool $prefix$Name {
             get { return HasComponent($Ids.$Name); }
             set {
-                if (value != $prefix$Name) {
-                    if (value) {
+                if(value != $prefix$Name) {
+                    if(value) {
                         AddComponent($Ids.$Name, $nameComponent);
                     } else {
                         RemoveComponent($Ids.$Name);
@@ -118,8 +123,7 @@ namespace Entitas.CodeGenerator {
             $prefix$Name = value;
             return this;
         }
-" : @"
-        public bool has$Name { get { return HasComponent($Ids.$Name); } }
+" : @"        public bool has$Name { get { return HasComponent($Ids.$Name); } }
 ";
             return buildString(componentInfo, hasMethod);
         }
@@ -170,7 +174,7 @@ $assign
         }
 
         static string addPoolClassHeader() {
-            return "\n    public partial class Pool {";
+            return "\n    public partial class Pool {\n";
         }
 
         static string addPoolGetMethods(ComponentInfo componentInfo) {
@@ -178,7 +182,6 @@ $assign
         public Entity $nameEntity { get { return GetGroup($TagMatcher.$Name).GetSingleEntity(); } }
 " : @"
         public Entity $nameEntity { get { return GetGroup($TagMatcher.$Name).GetSingleEntity(); } }
-
         public $Type $name { get { return $nameEntity.$name; } }
 ";
             return buildString(componentInfo, getMehod);
@@ -190,8 +193,8 @@ $assign
             get { return $nameEntity != null; }
             set {
                 var entity = $nameEntity;
-                if (value != (entity != null)) {
-                    if (value) {
+                if(value != (entity != null)) {
+                    if(value) {
                         CreateEntity().$prefix$Name = true;
                     } else {
                         DestroyEntity(entity);
@@ -199,8 +202,7 @@ $assign
                 }
             }
         }
-" : @"
-        public bool has$Name { get { return $nameEntity != null; } }
+" : @"        public bool has$Name { get { return $nameEntity != null; } }
 ";
             return buildString(componentInfo, hasMethod);
         }
@@ -208,7 +210,7 @@ $assign
         static object addPoolAddMethods(ComponentInfo componentInfo) {
             return componentInfo.isSingletonComponent ? string.Empty : buildString(componentInfo, @"
         public Entity Set$Name($typedArgs) {
-            if (has$Name) {
+            if(has$Name) {
                 throw new EntitasException(""Could not set $name!\n"" + this + "" already has an entity with $Type!"",
                     ""You should check if the pool already has a $nameEntity before setting it or use pool.Replace$Name()."");
             }
@@ -223,7 +225,7 @@ $assign
             return componentInfo.isSingletonComponent ? string.Empty : buildString(componentInfo, @"
         public Entity Replace$Name($typedArgs) {
             var entity = $nameEntity;
-            if (entity == null) {
+            if(entity == null) {
                 entity = Set$Name($args);
             } else {
                 entity.Replace$Name($args);
@@ -251,11 +253,12 @@ $assign
        static string addMatcher(ComponentInfo componentInfo, bool onlyDefault = false) {
             const string matcherFormat = @"
     public partial class $TagMatcher {
+
         static IMatcher _matcher$Name;
 
         public static IMatcher $Name {
             get {
-                if (_matcher$Name == null) {
+                if(_matcher$Name == null) {
                     var matcher = (Matcher)Matcher.AllOf($Ids.$Name);
                     matcher.componentNames = $Ids.componentNames;
                     _matcher$Name = matcher;
@@ -267,8 +270,8 @@ $assign
     }
 ";
 
-            if (onlyDefault) {
-                if (componentInfo.pools.Contains(CodeGenerator.DEFAULT_POOL_NAME)) {
+            if(onlyDefault) {
+                if(componentInfo.pools.Contains(CodeGenerator.DEFAULT_POOL_NAME)) {
                     return buildString(componentInfo, matcherFormat);
                 } else {
                     return string.Empty;
@@ -276,7 +279,7 @@ $assign
             } else {
                 var poolIndex = 0;
                 var matchers = componentInfo.pools.Aggregate(string.Empty, (acc, poolName) => {
-                    if (!poolName.IsDefaultPoolName()) {
+                    if(!poolName.IsDefaultPoolName()) {
                         return acc + buildString(componentInfo, matcherFormat, poolIndex++);
                     } else {
                         poolIndex += 1;
@@ -359,4 +362,3 @@ $assign
         }
     }
 }
-

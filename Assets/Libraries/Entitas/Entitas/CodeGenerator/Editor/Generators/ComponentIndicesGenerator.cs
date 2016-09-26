@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Entitas.CodeGenerator {
@@ -115,6 +115,10 @@ namespace Entitas.CodeGenerator {
                 }
             }
 
+            if(code.Length != 0) {
+                code = "\n" + code;
+            }
+
             var totalComponents = string.Format(totalFormat, componentInfos.Length);
             return code + "\n" + totalComponents;
         }
@@ -164,7 +168,7 @@ namespace Entitas.CodeGenerator {
         }
 
         static string addCloseClass() {
-            return "\n}";
+            return "\n}\n";
         }
     }
 }

@@ -38,7 +38,7 @@ namespace Entitas {
 
         public static IMatcher View {
             get {
-                if (_matcherView == null) {
+                if(_matcherView == null) {
                     var matcher = (Matcher)Matcher.AllOf(BulletsComponentIds.View);
                     matcher.componentNames = BulletsComponentIds.componentNames;
                     _matcherView = matcher;
@@ -54,7 +54,7 @@ namespace Entitas {
 
         public static IMatcher View {
             get {
-                if (_matcherView == null) {
+                if(_matcherView == null) {
                     var matcher = (Matcher)Matcher.AllOf(CoreComponentIds.View);
                     matcher.componentNames = CoreComponentIds.componentNames;
                     _matcherView = matcher;

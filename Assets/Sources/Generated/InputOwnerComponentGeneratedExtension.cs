@@ -38,7 +38,7 @@ namespace Entitas {
 
         public static IMatcher InputOwner {
             get {
-                if (_matcherInputOwner == null) {
+                if(_matcherInputOwner == null) {
                     var matcher = (Matcher)Matcher.AllOf(InputComponentIds.InputOwner);
                     matcher.componentNames = InputComponentIds.componentNames;
                     _matcherInputOwner = matcher;
