@@ -1,4 +1,5 @@
 ﻿using Entitas;
+using UnityEngine;
 
 public sealed class CreateEnemySystem : ISetPools, IExecuteSystem {
 
@@ -11,7 +12,7 @@ public sealed class CreateEnemySystem : ISetPools, IExecuteSystem {
     public void Execute() {
 
         // TODO Interval should be configurable
-        if(_pools.input.tick.value % 60 == 0) {
+        if((int)(_pools.input.tick.value % (60 / Time.timeScale)) == 0) {
             _pools.blueprints.blueprints.instance
                   .ApplyEnemy(_pools.core.CreateEntity());
         }
