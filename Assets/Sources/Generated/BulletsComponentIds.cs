@@ -7,21 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 public static class BulletsComponentIds {
+
     public const int Asset = 0;
-    public const int Destroy = 1;
-    public const int Health = 2;
-    public const int OutOfScreen = 3;
-    public const int Position = 4;
-    public const int Velocity = 5;
-    public const int View = 6;
-    public const int ViewObjectPool = 7;
-    public const int Bullet = 8;
-    public const int Damage = 9;
+    public const int Damage = 1;
+    public const int Destroy = 2;
+    public const int Health = 3;
+    public const int OutOfScreen = 4;
+    public const int Position = 5;
+    public const int Velocity = 6;
+    public const int View = 7;
+    public const int ViewObjectPool = 8;
+    public const int Bullet = 9;
 
     public const int TotalComponents = 10;
 
     public static readonly string[] componentNames = {
         "Asset",
+        "Damage",
         "Destroy",
         "Health",
         "OutOfScreen",
@@ -29,12 +31,12 @@ public static class BulletsComponentIds {
         "Velocity",
         "View",
         "ViewObjectPool",
-        "Bullet",
-        "Damage"
+        "Bullet"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(AssetComponent),
+        typeof(DamageComponent),
         typeof(DestroyComponent),
         typeof(HealthComponent),
         typeof(OutOfScreenComponent),
@@ -42,7 +44,6 @@ public static class BulletsComponentIds {
         typeof(VelocityComponent),
         typeof(ViewComponent),
         typeof(ViewObjectPoolComponent),
-        typeof(BulletComponent),
-        typeof(DamageComponent)
+        typeof(BulletComponent)
     };
 }

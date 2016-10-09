@@ -9,9 +9,10 @@
 using Entitas;
 
 namespace Entitas {
-    public partial class Entity {
-        public InputOwnerComponent inputOwner { get { return (InputOwnerComponent)GetComponent(InputComponentIds.InputOwner); } }
 
+    public partial class Entity {
+
+        public InputOwnerComponent inputOwner { get { return (InputOwnerComponent)GetComponent(InputComponentIds.InputOwner); } }
         public bool hasInputOwner { get { return HasComponent(InputComponentIds.InputOwner); } }
 
         public Entity AddInputOwner(string newPlayerId) {
@@ -34,6 +35,7 @@ namespace Entitas {
 }
 
     public partial class InputMatcher {
+
         static IMatcher _matcherInputOwner;
 
         public static IMatcher InputOwner {

@@ -9,7 +9,9 @@
 using Entitas;
 
 namespace Entitas {
+
     public partial class Entity {
+
         static readonly EnemyComponent enemyComponent = new EnemyComponent();
 
         public bool isEnemy {
@@ -33,6 +35,7 @@ namespace Entitas {
 }
 
     public partial class CoreMatcher {
+
         static IMatcher _matcherEnemy;
 
         public static IMatcher Enemy {

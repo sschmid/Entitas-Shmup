@@ -9,9 +9,10 @@
 using Entitas;
 
 namespace Entitas {
-    public partial class Entity {
-        public TickComponent tick { get { return (TickComponent)GetComponent(InputComponentIds.Tick); } }
 
+    public partial class Entity {
+
+        public TickComponent tick { get { return (TickComponent)GetComponent(InputComponentIds.Tick); } }
         public bool hasTick { get { return HasComponent(InputComponentIds.Tick); } }
 
         public Entity AddTick(ulong newValue) {
@@ -33,10 +34,9 @@ namespace Entitas {
     }
 
     public partial class Pool {
+
         public Entity tickEntity { get { return GetGroup(InputMatcher.Tick).GetSingleEntity(); } }
-
         public TickComponent tick { get { return tickEntity.tick; } }
-
         public bool hasTick { get { return tickEntity != null; } }
 
         public Entity SetTick(ulong newValue) {
@@ -67,6 +67,7 @@ namespace Entitas {
 }
 
     public partial class InputMatcher {
+
         static IMatcher _matcherTick;
 
         public static IMatcher Tick {

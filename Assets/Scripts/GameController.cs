@@ -48,7 +48,7 @@ public class GameController : MonoBehaviour {
 
             // Initialize
             .Add(pools.CreateSystem(new IncrementTickSystem()))
-            .Add(pools.CreateSystem(new CreatePlayerSystem()))
+            .Add(pools.core.CreateSystem(new CreatePlayerSystem()))
             .Add(pools.CreateSystem(new CreateEnemySystem()))
 
             .Add(pools.core.CreateSystem(new AddViewSystem()))

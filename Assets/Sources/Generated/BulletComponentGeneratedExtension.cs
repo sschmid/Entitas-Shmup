@@ -9,7 +9,9 @@
 using Entitas;
 
 namespace Entitas {
+
     public partial class Entity {
+
         static readonly BulletComponent bulletComponent = new BulletComponent();
 
         public bool isBullet {
@@ -33,6 +35,7 @@ namespace Entitas {
 }
 
     public partial class BulletsMatcher {
+
         static IMatcher _matcherBullet;
 
         public static IMatcher Bullet {

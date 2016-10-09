@@ -9,9 +9,10 @@
 using Entitas;
 
 namespace Entitas {
-    public partial class Entity {
-        public ViewComponent view { get { return (ViewComponent)GetComponent(BulletsComponentIds.View); } }
 
+    public partial class Entity {
+
+        public ViewComponent view { get { return (ViewComponent)GetComponent(BulletsComponentIds.View); } }
         public bool hasView { get { return HasComponent(BulletsComponentIds.View); } }
 
         public Entity AddView(IViewController newController) {
@@ -34,6 +35,7 @@ namespace Entitas {
 }
 
     public partial class BulletsMatcher {
+
         static IMatcher _matcherView;
 
         public static IMatcher View {
@@ -50,6 +52,7 @@ namespace Entitas {
     }
 
     public partial class CoreMatcher {
+
         static IMatcher _matcherView;
 
         public static IMatcher View {

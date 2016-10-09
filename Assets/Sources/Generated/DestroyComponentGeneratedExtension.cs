@@ -9,7 +9,9 @@
 using Entitas;
 
 namespace Entitas {
+
     public partial class Entity {
+
         static readonly DestroyComponent destroyComponent = new DestroyComponent();
 
         public bool flagDestroy {
@@ -33,6 +35,7 @@ namespace Entitas {
 }
 
     public partial class BulletsMatcher {
+
         static IMatcher _matcherDestroy;
 
         public static IMatcher Destroy {
@@ -49,6 +52,7 @@ namespace Entitas {
     }
 
     public partial class CoreMatcher {
+
         static IMatcher _matcherDestroy;
 
         public static IMatcher Destroy {

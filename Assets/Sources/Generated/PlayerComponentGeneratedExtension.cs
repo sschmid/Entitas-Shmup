@@ -9,9 +9,10 @@
 using Entitas;
 
 namespace Entitas {
-    public partial class Entity {
-        public PlayerComponent player { get { return (PlayerComponent)GetComponent(CoreComponentIds.Player); } }
 
+    public partial class Entity {
+
+        public PlayerComponent player { get { return (PlayerComponent)GetComponent(CoreComponentIds.Player); } }
         public bool hasPlayer { get { return HasComponent(CoreComponentIds.Player); } }
 
         public Entity AddPlayer(string newId) {
@@ -34,6 +35,7 @@ namespace Entitas {
 }
 
     public partial class CoreMatcher {
+
         static IMatcher _matcherPlayer;
 
         public static IMatcher Player {

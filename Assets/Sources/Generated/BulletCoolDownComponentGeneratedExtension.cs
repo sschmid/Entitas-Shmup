@@ -9,9 +9,10 @@
 using Entitas;
 
 namespace Entitas {
-    public partial class Entity {
-        public BulletCoolDownComponent bulletCoolDown { get { return (BulletCoolDownComponent)GetComponent(CoreComponentIds.BulletCoolDown); } }
 
+    public partial class Entity {
+
+        public BulletCoolDownComponent bulletCoolDown { get { return (BulletCoolDownComponent)GetComponent(CoreComponentIds.BulletCoolDown); } }
         public bool hasBulletCoolDown { get { return HasComponent(CoreComponentIds.BulletCoolDown); } }
 
         public Entity AddBulletCoolDown(int newTicks) {
@@ -34,6 +35,7 @@ namespace Entitas {
 }
 
     public partial class CoreMatcher {
+
         static IMatcher _matcherBulletCoolDown;
 
         public static IMatcher BulletCoolDown {

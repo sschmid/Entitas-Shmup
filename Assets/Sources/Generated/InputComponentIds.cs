@@ -7,6 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 public static class InputComponentIds {
+
     public const int Collision = 0;
     public const int InputOwner = 1;
     public const int MoveInput = 2;

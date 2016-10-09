@@ -9,9 +9,10 @@
 using Entitas;
 
 namespace Entitas {
-    public partial class Entity {
-        public BlueprintsComponent blueprints { get { return (BlueprintsComponent)GetComponent(BlueprintsComponentIds.Blueprints); } }
 
+    public partial class Entity {
+
+        public BlueprintsComponent blueprints { get { return (BlueprintsComponent)GetComponent(BlueprintsComponentIds.Blueprints); } }
         public bool hasBlueprints { get { return HasComponent(BlueprintsComponentIds.Blueprints); } }
 
         public Entity AddBlueprints(Entitas.Unity.Serialization.Blueprints.Blueprints newInstance) {
@@ -33,10 +34,9 @@ namespace Entitas {
     }
 
     public partial class Pool {
+
         public Entity blueprintsEntity { get { return GetGroup(BlueprintsMatcher.Blueprints).GetSingleEntity(); } }
-
         public BlueprintsComponent blueprints { get { return blueprintsEntity.blueprints; } }
-
         public bool hasBlueprints { get { return blueprintsEntity != null; } }
 
         public Entity SetBlueprints(Entitas.Unity.Serialization.Blueprints.Blueprints newInstance) {
@@ -67,6 +67,7 @@ namespace Entitas {
 }
 
     public partial class BlueprintsMatcher {
+
         static IMatcher _matcherBlueprints;
 
         public static IMatcher Blueprints {
