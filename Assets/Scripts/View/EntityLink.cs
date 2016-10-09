@@ -48,6 +48,9 @@ public static class EntityLinkExtension {
     }
 
     public static void Unlink(this GameObject gameObject) {
-        gameObject.GetEntityLink().Unlink();
+        var link = gameObject.GetEntityLink();
+        if(link != null) {
+            link.Unlink();
+        }
     }
 }
