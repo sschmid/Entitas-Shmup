@@ -9,9 +9,10 @@
 using Entitas;
 
 namespace Entitas {
-    public partial class Entity {
-        public ViewObjectPoolComponent viewObjectPool { get { return (ViewObjectPoolComponent)GetComponent(BulletsComponentIds.ViewObjectPool); } }
 
+    public partial class Entity {
+
+        public ViewObjectPoolComponent viewObjectPool { get { return (ViewObjectPoolComponent)GetComponent(BulletsComponentIds.ViewObjectPool); } }
         public bool hasViewObjectPool { get { return HasComponent(BulletsComponentIds.ViewObjectPool); } }
 
         public Entity AddViewObjectPool(Entitas.ObjectPool<UnityEngine.GameObject> newPool) {
@@ -34,6 +35,7 @@ namespace Entitas {
 }
 
     public partial class BulletsMatcher {
+
         static IMatcher _matcherViewObjectPool;
 
         public static IMatcher ViewObjectPool {
@@ -50,6 +52,7 @@ namespace Entitas {
     }
 
     public partial class CoreMatcher {
+
         static IMatcher _matcherViewObjectPool;
 
         public static IMatcher ViewObjectPool {

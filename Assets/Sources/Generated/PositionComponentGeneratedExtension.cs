@@ -9,9 +9,10 @@
 using Entitas;
 
 namespace Entitas {
-    public partial class Entity {
-        public PositionComponent position { get { return (PositionComponent)GetComponent(BulletsComponentIds.Position); } }
 
+    public partial class Entity {
+
+        public PositionComponent position { get { return (PositionComponent)GetComponent(BulletsComponentIds.Position); } }
         public bool hasPosition { get { return HasComponent(BulletsComponentIds.Position); } }
 
         public Entity AddPosition(UnityEngine.Vector3 newValue) {
@@ -34,6 +35,7 @@ namespace Entitas {
 }
 
     public partial class BulletsMatcher {
+
         static IMatcher _matcherPosition;
 
         public static IMatcher Position {
@@ -50,6 +52,7 @@ namespace Entitas {
     }
 
     public partial class CoreMatcher {
+
         static IMatcher _matcherPosition;
 
         public static IMatcher Position {

@@ -9,9 +9,10 @@
 using Entitas;
 
 namespace Entitas {
-    public partial class Entity {
-        public DamageComponent damage { get { return (DamageComponent)GetComponent(BulletsComponentIds.Damage); } }
 
+    public partial class Entity {
+
+        public DamageComponent damage { get { return (DamageComponent)GetComponent(BulletsComponentIds.Damage); } }
         public bool hasDamage { get { return HasComponent(BulletsComponentIds.Damage); } }
 
         public Entity AddDamage(int newValue) {
@@ -34,6 +35,7 @@ namespace Entitas {
 }
 
     public partial class BulletsMatcher {
+
         static IMatcher _matcherDamage;
 
         public static IMatcher Damage {
@@ -41,6 +43,23 @@ namespace Entitas {
                 if(_matcherDamage == null) {
                     var matcher = (Matcher)Matcher.AllOf(BulletsComponentIds.Damage);
                     matcher.componentNames = BulletsComponentIds.componentNames;
+                    _matcherDamage = matcher;
+                }
+
+                return _matcherDamage;
+            }
+        }
+    }
+
+    public partial class CoreMatcher {
+
+        static IMatcher _matcherDamage;
+
+        public static IMatcher Damage {
+            get {
+                if(_matcherDamage == null) {
+                    var matcher = (Matcher)Matcher.AllOf(CoreComponentIds.Damage);
+                    matcher.componentNames = CoreComponentIds.componentNames;
                     _matcherDamage = matcher;
                 }
 

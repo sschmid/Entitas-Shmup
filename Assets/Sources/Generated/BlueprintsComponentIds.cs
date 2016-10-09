@@ -7,6 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 public static class BlueprintsComponentIds {
+
     public const int Blueprints = 0;
 
     public const int TotalComponents = 1;

@@ -9,7 +9,9 @@
 using Entitas;
 
 namespace Entitas {
+
     public partial class Entity {
+
         static readonly ShootInputComponent shootInputComponent = new ShootInputComponent();
 
         public bool isShootInput {
@@ -33,6 +35,7 @@ namespace Entitas {
 }
 
     public partial class InputMatcher {
+
         static IMatcher _matcherShootInput;
 
         public static IMatcher ShootInput {

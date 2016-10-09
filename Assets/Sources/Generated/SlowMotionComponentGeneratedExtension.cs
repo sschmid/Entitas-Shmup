@@ -9,7 +9,9 @@
 using Entitas;
 
 namespace Entitas {
+
     public partial class Entity {
+
         static readonly SlowMotionComponent slowMotionComponent = new SlowMotionComponent();
 
         public bool isSlowMotion {
@@ -32,6 +34,7 @@ namespace Entitas {
     }
 
     public partial class Pool {
+
         public Entity slowMotionEntity { get { return GetGroup(InputMatcher.SlowMotion).GetSingleEntity(); } }
 
         public bool isSlowMotion {
@@ -51,6 +54,7 @@ namespace Entitas {
 }
 
     public partial class InputMatcher {
+
         static IMatcher _matcherSlowMotion;
 
         public static IMatcher SlowMotion {
