@@ -65,6 +65,7 @@ public class GameController : MonoBehaviour {
             .Add(pools.core.CreateSystem(new BulletCoolDownSystem()))
             .Add(pools.core.CreateSystem(new StartEnemyWaveSystem()))
             .Add(pools.CreateSystem(new VelocitySystem()))
+            .Add(pools.core.CreateSystem(new ClampPlayerOutOfScreenPositionSystem()))
             .Add(pools.CreateSystem(new RenderPositionSystem()))
             .Add(pools.core.CreateSystem(new CheckHealthSystem()))
             .Add(pools.bullets.CreateSystem(new BulletOutOfScreenSystem()))
