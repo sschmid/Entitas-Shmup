@@ -9,9 +9,10 @@
 using Entitas;
 
 namespace Entitas {
-    public partial class Entity {
-        public CollisionComponent collision { get { return (CollisionComponent)GetComponent(InputComponentIds.Collision); } }
 
+    public partial class Entity {
+
+        public CollisionComponent collision { get { return (CollisionComponent)GetComponent(InputComponentIds.Collision); } }
         public bool hasCollision { get { return HasComponent(InputComponentIds.Collision); } }
 
         public Entity AddCollision(Entitas.Entity newSelf, Entitas.Entity newOther) {
@@ -36,6 +37,7 @@ namespace Entitas {
 }
 
     public partial class InputMatcher {
+
         static IMatcher _matcherCollision;
 
         public static IMatcher Collision {

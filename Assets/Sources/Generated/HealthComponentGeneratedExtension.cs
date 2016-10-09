@@ -9,9 +9,10 @@
 using Entitas;
 
 namespace Entitas {
-    public partial class Entity {
-        public HealthComponent health { get { return (HealthComponent)GetComponent(BulletsComponentIds.Health); } }
 
+    public partial class Entity {
+
+        public HealthComponent health { get { return (HealthComponent)GetComponent(BulletsComponentIds.Health); } }
         public bool hasHealth { get { return HasComponent(BulletsComponentIds.Health); } }
 
         public Entity AddHealth(int newValue) {
@@ -34,6 +35,7 @@ namespace Entitas {
 }
 
     public partial class BulletsMatcher {
+
         static IMatcher _matcherHealth;
 
         public static IMatcher Health {
@@ -50,6 +52,7 @@ namespace Entitas {
     }
 
     public partial class CoreMatcher {
+
         static IMatcher _matcherHealth;
 
         public static IMatcher Health {

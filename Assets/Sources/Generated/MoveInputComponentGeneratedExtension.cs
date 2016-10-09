@@ -9,9 +9,10 @@
 using Entitas;
 
 namespace Entitas {
-    public partial class Entity {
-        public MoveInputComponent moveInput { get { return (MoveInputComponent)GetComponent(InputComponentIds.MoveInput); } }
 
+    public partial class Entity {
+
+        public MoveInputComponent moveInput { get { return (MoveInputComponent)GetComponent(InputComponentIds.MoveInput); } }
         public bool hasMoveInput { get { return HasComponent(InputComponentIds.MoveInput); } }
 
         public Entity AddMoveInput(UnityEngine.Vector3 newDirection) {
@@ -34,6 +35,7 @@ namespace Entitas {
 }
 
     public partial class InputMatcher {
+
         static IMatcher _matcherMoveInput;
 
         public static IMatcher MoveInput {

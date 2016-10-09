@@ -9,9 +9,10 @@
 using Entitas;
 
 namespace Entitas {
-    public partial class Entity {
-        public AssetComponent asset { get { return (AssetComponent)GetComponent(BulletsComponentIds.Asset); } }
 
+    public partial class Entity {
+
+        public AssetComponent asset { get { return (AssetComponent)GetComponent(BulletsComponentIds.Asset); } }
         public bool hasAsset { get { return HasComponent(BulletsComponentIds.Asset); } }
 
         public Entity AddAsset(string newName) {
@@ -34,6 +35,7 @@ namespace Entitas {
 }
 
     public partial class BulletsMatcher {
+
         static IMatcher _matcherAsset;
 
         public static IMatcher Asset {
@@ -50,6 +52,7 @@ namespace Entitas {
     }
 
     public partial class CoreMatcher {
+
         static IMatcher _matcherAsset;
 
         public static IMatcher Asset {

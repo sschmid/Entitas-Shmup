@@ -9,7 +9,9 @@
 using Entitas;
 
 namespace Entitas {
+
     public partial class Entity {
+
         static readonly OutOfScreenComponent outOfScreenComponent = new OutOfScreenComponent();
 
         public bool isOutOfScreen {
@@ -33,6 +35,7 @@ namespace Entitas {
 }
 
     public partial class BulletsMatcher {
+
         static IMatcher _matcherOutOfScreen;
 
         public static IMatcher OutOfScreen {
@@ -49,6 +52,7 @@ namespace Entitas {
     }
 
     public partial class CoreMatcher {
+
         static IMatcher _matcherOutOfScreen;
 
         public static IMatcher OutOfScreen {
