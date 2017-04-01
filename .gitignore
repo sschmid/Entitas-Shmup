@@ -25,3 +25,8 @@ test-results
 # Custom
 Entitas Shmup.sln
 Build
+.vs/
+Entitas-Shmup-Update.Editor.csproj
+Entitas-Shmup-Update.Plugins.csproj
+Entitas-Shmup-Update.csproj
+Entitas-Shmup-Update.sln
