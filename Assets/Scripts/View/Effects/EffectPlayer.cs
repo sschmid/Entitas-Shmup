@@ -30,9 +30,12 @@ public static class EffectPlayerExtension {
             var pfxs = newEffect.GetComponentsInChildren<ParticleSystem>();
             var totalDuration = 0f;
             foreach(var pfx in pfxs) {
-                var duration = pfx.startDelay + pfx.startLifetime + pfx.duration;
-                if(duration > totalDuration) {
-                    totalDuration = duration;
+                var startDelay = pfx.main.startDelay;
+                var startLifetime = pfx.main.startLifetime;
+                var duration = pfx.main.duration;
+                var currentDuration = startDelay.constant + startLifetime.constant + duration;
+                if(currentDuration > totalDuration) {
+                    totalDuration = currentDuration;
                 }
             }
 
